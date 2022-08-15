@@ -1,7 +1,7 @@
 
 <!doctype html>
 <html lang="en">
-{% extends 'schoolua/base.html' %}
+{% extends 'school/base.html' %}
 {% load static %}
 
 <head>
@@ -16,8 +16,8 @@
     >
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'schoolua/styles/style.css' %}" >
-    <link rel="stylesheet" href="{% static 'schoolua/styles/home.css' %}" >
+    <link rel="stylesheet" href="{% static 'school/styles/style.css' %}" >
+    <link rel="stylesheet" href="{% static 'school/styles/home.css' %}" >
 </head>
 <body>
     {% block content %}
@@ -112,7 +112,7 @@
 
     <section class="find-city">
         <div class="find-background">
-            <img src="{% static 'products/map-ukraine.png' %}"
+            <img src="{% static 'school/map-ukraine.png' %}"
                  alt="Ukraine map"
                  width="915px" height="620px">
         </div>
@@ -227,7 +227,7 @@
         <div class="content-wrapper">
             <div class="catalog-content">
                 <span class="title">Каталог автошкіл по Україні </span>
-                    <img class="car-road" src="{% static 'schoolua/car-road.png' %}" alt="Not found">
+                    <img class="car-road" src="{% static 'school/car-road.png' %}" alt="Not found">
                 <span class="catalog-description">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Sed ornare, libero at mattis gravida, lacus libero maximus sem,
@@ -258,8 +258,8 @@
     </section>
 
 
-    <script src="{% static 'schoolua/js/home-search.js' %}"></script>
-    <script src="{% static 'schoolua/js/home-find.js' %}"></script>
+    <script src="{% static 'school/js/home-search.js' %}"></script>
+    <script src="{% static 'school/js/home-find.js' %}"></script>
 
     {% endblock %}
 </body>
