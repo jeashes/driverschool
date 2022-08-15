@@ -12,15 +12,15 @@ def home(request):
 def search_authoschool(request, searched):
     areas = Area.objects.all()
     if DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched):
-        city_authoschools = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched)
+        city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched)
         return render(request, 'school/search_schools.html',
-                      {'areas': areas, 'info': city_authoschools, 'count': len(city_authoschools),
-                       'name_city': city_authoschools[0].city_of_unit})
+                      {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
+                       'name_city': city_autoschools[0].city_of_unit, 'url_city': city_autoschools[0].city_of_unit.url})
     if DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched):
         city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
         return render(request, 'school/search_schools.html',
                       {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                       'name_city': city_autoschools[0].city_of_unit})
+                       'name_city': city_autoschools[0].city_of_unit, 'url_city': city_autoschools[0].city_of_unit.url})
     else:
         return render(request, 'school/error404.html')
 
@@ -30,15 +30,17 @@ def search(request):
         searched = request.GET['searched']
         areas = Area.objects.all()
         if DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched):
-            city_authoschools = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched)
+            city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched)
             return render(request, 'school/search_schools.html',
-                          {'areas': areas, 'info': city_authoschools, 'count': len(city_authoschools),
-                           'name_city': city_authoschools[0].city_of_unit})
+                          {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
+                           'name_city': city_autoschools[0].city_of_unit,
+                           'url_city': city_autoschools[0].city_of_unit.url})
         if DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched):
             city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
             return render(request, 'school/search_schools.html',
                           {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                           'name_city': city_autoschools[0].city_of_unit})
+                           'name_city': city_autoschools[0].city_of_unit,
+                           'url_city': city_autoschools[0].city_of_unit.url})
         else:
             return render(request, 'school/error404.html')
 
@@ -62,7 +64,8 @@ def filtered(request, city):
             filter_value_in_key[request.GET.get('filtered')])
 
         return render(request, 'school/filtered_schools.html',
-                      {'areas': areas, 'filtered_schools': ordered_schools, 'count': len(ordered_schools)})
+                      {'areas': areas, 'filtered_schools': ordered_schools, 'count': len(ordered_schools),
+                       'url_city': ordered_schools[0].city_of_unit.url})
 
     else:
         category_filtered = DriverSchoolUnit.objects.filter(
@@ -70,14 +73,15 @@ def filtered(request, city):
             city_of_unit__name__contains=city)
         return render(request, 'school/filtered_schools.html',
                       {'areas': areas,
-                       'filtered_schools': category_filtered, 'count': len(category_filtered)})
+                       'filtered_schools': category_filtered, 'count': len(category_filtered),
+                       'url_city': category_filtered[0].city_of_unit.url})
 
 
 # Info about school
 def info_about_authoschool(request, school_pk):
     areas, school = Area.objects.all(), get_object_or_404(DriverSchoolUnit, pk=school_pk)
     return render(request, 'school/school_info.html',
-                  {'areas': areas, 'school': school})
+                  {'areas': areas, 'school': school, 'url_address': school.city_of_unit.url})
 
 
 # just html page
