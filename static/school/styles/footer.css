@@ -1,0 +1,150 @@
+
+
+.footer {
+    background-color: #000;
+    font-family: "Mulish", sans-serif;
+    font-style: normal;
+    color: #fff;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.footer-logo {
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+
+.footer-logo-name {
+    color: #000;
+}
+
+.footer-middle {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 25px 0 40px;
+}
+
+.cards-wrapper {
+    order: 1;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+
+    .footer-content {
+        padding: 25px 0 0;
+    }
+
+
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1919px) {
+
+    .footer-content {
+        padding: 40px 0 0;
+    }
+
+
+}
+
+@media screen and (min-width: 1920px) {
+
+    .footer-content {
+        padding: 45px 0 0;
+    }
+
+
+}
+
+
+
+
+
+
+
+.footer-card {
+    background-color: #fff;
+    text-align: center;
+    padding: 4px 0;
+    border-radius: 6px;
+    margin: 20px 0 0;
+}
+.title-card {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    color: #000;
+    text-decoration: none;
+}
+
+
+
+.footer-contacts {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 40px;
+}
+.contact-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.contact-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+}
+.contact {
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 13px;
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.footer-areas {
+    margin: 0 0 30px;
+}
+.areas-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0 0;
+}
+.areas-title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+}
+.footer-column {
+    display: flex;
+    flex-direction: column;
+}
+.area-name {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 25px;
+    text-decoration: none;
+    color: #fff;
+}
+
+
+
+.politic-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0 0;
+    border-top: 2px solid #fff;
+}
+.politic {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 20px;
+    text-decoration: none;
+    color: #fff;
+}
+
+

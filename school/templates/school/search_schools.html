@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'school/base.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'school/search_school.css' %}" >
+</head>
+<body>
+{% block content %}
+<ol itemscope itemtype="https://schema.org/BreadcrumbList">
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item" href="{% url 'home' %}">
+    <span itemprop="name">Головна</span></a>
+    <meta itemprop="position" content="1" />
+  </li>
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item">
+    <span itemprop="name">{{ name_city }}</span></a>
+    <meta itemprop="position" content="2" />
+  </li>
+</ol>
+
+
+<div>
+    <form action="{% url 'filtered' name_city %}" method="get">
+        <input type="radio" name="category" value="A - A1">A - A1
+        <input type="radio" name="category" value="B - B1" checked>B - B1
+        <input type="radio" name="category" value="C - C1">C - C1
+        <p>
+            <input type="radio" name="category" value="D - D1"> D - D1
+            <input type="radio" name="category" value="C1E">C1E
+            <input type="radio" name="category" value="BE">BE
+        </p>
+        <p>
+            <input type="radio" name="category" value="DE">DE
+            <input type="radio" name="category" value="CE">CE
+            <input type="radio" name="category" value="T">T
+            <input type="radio" name="category" value="T1">T1
+        </p>
+
+
+        <p>
+            <input type="radio" name="filtered" value="price-low-up">Ціна ▲
+            <input type="radio" name="filtered" value="price-up-low">Ціна ▼
+        </p>
+
+        <input type="radio" name="filtered" value="alphabet">Літери
+        <input type="radio" name="filtered" value="rating">Рейтинг
+        <p>
+            <input type='submit' value="Підібрати">
+        </p>
+    </form>
+</div>
+
+<br>
+<br>
+
+
+
+<div class="result">
+    <h1 class="huy">Знайдено {{ count }} автошкіл</h1>
+    <p>{% for res in info %}</p>
+    <div>
+        <p><a href="{% url 'view_school' res.id %}">{{ res.driverschool }}</a></p>
+        <p>{{ res.city_of_unit.area.name }}</p>
+        <p>{{ res.contact }}</p>
+        <p>{{ res.address }}</p>
+
+        {% load new_tags %}
+        {% for course in res.cources.all %}
+        {{ course.category }}
+        {{ course.price }}
+        {% endfor %}
+        <p>{{ res.city_of_unit.name }}</p>
+        {{ res.driverschool.score }}
+
+    </div>
+    <br>
+    <br>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+</body>
+</html>

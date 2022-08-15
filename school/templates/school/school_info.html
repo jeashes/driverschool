@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'school/base.html' %}
+{% block content %}
+
+<ol itemscope itemtype="https://schema.org/BreadcrumbList">
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item" href="{% url 'home' %}">
+    <span itemprop="name">Головна</span></a>
+    <meta itemprop="position" content="1" />
+  </li>
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+
+    <a itemprop="item" href="{% url 'search_authoschool' school.city_of_unit.name %}">
+    <span itemprop="name">{{ school.city_of_unit.name }}</span></a>
+    <meta itemprop="position" content="2" />
+  </li>
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item" >
+    <span itemprop="name">{{ school.driverschool.name }}</span></a>
+    <meta itemprop="position" content="3" />
+  </li>
+</ol>
+
+<br>
+<br>
+
+<p>{{ school.driverschool }}</p>
+<p>{{ school.city_of_unit.name }}</p>
+<p>{{ school.city_of_unit.area.name }}</p>
+<p>{{ school.name }}</p>
+<p>{{ school.contact }}</p>
+
+{% for course in school.cources.all %}
+
+<p>{{ course.short_description }}</p>
+{% endfor %}
+
+<img src="{{ school.image.url }}" alt="">
+{% endblock %}
+
+</body>
+</html>

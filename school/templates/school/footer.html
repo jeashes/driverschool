@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="
+          width=device-width,
+          user-scalable=no,
+          initial-scale=1.0,
+          maximum-scale=1.0,
+          minimum-scale=1.0"
+    >
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'school/styles/style.css' %}" >
+</head>
+<body>
+<footer class="footer">
+    <div class="content-wrapper">
+        <div class="footer-content">
+            <div class="top">
+                <div class="logo-wrapper">
+                    <div class="logo footer-logo">
+                        <span class="logo-name footer-logo-name">Лого</span>
+                    </div>
+                    <span class="logo-title">Автошкола.Ua</span>
+                </div>
+
+                <div class="contacts footer-links">
+                    <div class="icon-wrapper footer-icons">
+                        <a href="#" class="icon icon-header">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="icon icon-header">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+
+                        <a class="icon icon-header">
+                            <i class="cust-icon icon-people"></i>
+                        </a>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="footer-middle">
+                    <div class="cards-wrapper">
+                        <div class="footer-card">
+                            <a href="#" class="title-card">Стати водієм</a>
+                        </div>
+                        <div class="footer-card">
+                            <a href="#" class="title-card">Стати партнером</a>
+                        </div>
+                    </div>
+                    <div class="footer-contacts">
+                        <div class="contact-wrapper">
+                            <span class="contact-title">Контакти</span>
+                            <a href="tel:+380956675370" class="contact">+380(95)667-53-70</a>
+                        </div>
+                        <div class="contact-wrapper">
+                            <span class="email-title">Email</span>
+                            <a href="mailto:google89@gmail.com" class="contact">google89@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="footer-areas">
+                        <div class="areas-title">
+                            Області
+                        </div>
+                        <div class="areas-wrapper">
+                            <div class="footer-column">
+                                {% for area in areas|slice:":12" %}
+                                <a href="{% url 'search_authoschool' area.name %}" class="area-wrapper">
+                                    <span class="area-name">{{ area.name }}</span>
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                                {% endfor %}
+                            </div>
+                            <div class="footer-column">
+                                {% for area in areas|slice:"12:24" %}
+                                <a href="{% url 'search_authoschool' area.name %}" class="area-wrappername">
+                                    <span class="area-name">{{ area.name }}</span>
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            <div class="politic-wrapper">
+                <a href="#" class="politic">Користувацька угода</a>
+                <a href="#" class="politic">Політика конфеденційності</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://kit.fontawesome.com/e23493b56f.js" crossorigin="anonymous"></script>
+  {% block content %}{% endblock %}
+</body>
+</html>

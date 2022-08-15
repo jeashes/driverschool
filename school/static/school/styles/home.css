@@ -1,0 +1,481 @@
+@font-face {
+    font-family: 'icomoon';
+    src:  url('../fonts/icomoon.eot?vz7pb1');
+    src:  url('../fonts/icomoon.eot?vz7pb1#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?vz7pb1') format('truetype'),
+    url('../fonts/icomoon.woff?vz7pb1') format('woff'),
+    url('../fonts/icomoon.svg?vz7pb1#icomoon') format('svg');
+
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+.cust-icon {
+    font-family: 'icomoon', Arial, sans-serif !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+    /*
+        start home search
+    */
+
+    .home-search {
+        position: absolute;
+        top: 150px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        font-family: 'Mulish', Arial, sans-serif;
+        font-style: normal;
+        color: #fff;
+    }
+
+    .header-title {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 35px;
+    }
+
+    .header-description {
+        margin: 15px 0 80px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0.015em;
+    }
+
+    .header-politic {
+        border: none !important;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .search-wrapper {
+        max-width: 620px;
+        width: 100%;
+        display: flex;
+        background-color: #fff;
+        border-radius: 6px;
+    }
+
+
+
+    .fa-location-dot {
+        color: #F28800FF;
+        margin: 0 20px;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+    }
+
+    .search {
+        width: 81%;
+        margin: 13px 0;
+        border: none;
+        outline: none;
+    }
+
+    .search::placeholder {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 16px;
+    }
+
+    .abc-block-wrapper {
+        background-color: #000;
+        display: flex;
+        align-items: center;
+        padding: 0 5px;
+    }
+    .fa-caret-up {
+        font-size: 8px;
+    }
+    .icon-search {
+        width: 13%;
+        background-color: #F28800;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 23px;
+        border-radius: 0 6px 6px 0;
+        color: #fff;
+        border: none;
+    }
+
+    #search-result {
+        display: none;
+        background-color: #fff;
+        max-width: 510px;
+        width: 100%;
+        max-height: 180px;
+        height: 100%;
+        position: absolute;
+        top: 205px;
+        overflow: auto;
+        border-radius: 6px;
+    }
+    .search-item {
+        display: flex;
+        margin: 10px 0;
+    }
+
+    .school-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .school-city {
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 13px;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    .city-code {
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 13px;
+        color: rgba(0, 0, 0, 0.8);
+    }
+
+    .school-name {
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 19px;
+        color: #000;
+    }
+
+    *::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: #f9f9f9;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: #cccccc;
+        border-radius: 16px;
+        border: 2px solid #f9f9f9;
+    }
+
+    .politic-checkbox {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+    }
+
+    .politic-title {
+        font-weight: 300;
+        font-size: 9px;
+        line-height: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        display: flex;
+        align-items: end;
+        margin: 0 0 0 10px;
+    }
+
+    /*
+        end home-search
+    */
+
+    /*
+        start cards
+    */
+
+    .cards-content {
+        position: absolute;
+        top: -30px;
+        right: 0;
+        left: 0;
+        padding: 0 16px;
+    }
+    .cards {
+        position: relative;
+    }
+
+    .card {
+        padding: 25px 5px 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #FBFBFB;
+        box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+        border-radius: 12px;
+        margin: 0 auto 40px;
+        max-width: 288px;
+    }
+
+    .title {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 23px;
+        text-align: center;
+    }
+
+    .card-description {
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 130%;
+        text-align: center;
+        margin: 15px 0 30px;
+    }
+
+    .submit {
+        background: #F28800;
+        border-radius: 6px;
+        width: 50%;
+        text-align: center;
+        padding: 7px 19px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        color: #FFFFFF;
+    }
+
+    /*
+        end cards
+    */
+
+    /*
+    start find city
+    */
+
+    .find-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .find-city {
+        margin: 460px 0 0;
+        box-shadow: 0 0 32px rgb(0 0 0 / 10%);
+        font-family: 'Mulish', Arial, sans-serif;
+        font-style: normal;
+        padding: 20px 16px 40px;
+    }
+
+    .find-city-description {
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 14px;
+        text-align: center;
+        width: 60%;
+        margin: 10px 0 25px;
+    }
+
+    .find-titles {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .find-title-wrapper {
+        width: 35%;
+        padding: 12px 17px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+    }
+
+    .active {
+        background-color: #fff;
+        filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.15));
+    }
+
+    .find-titles {
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 15px;
+        margin: 0 0 30px;
+    }
+
+    .areas-block {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .fa-map {
+        font-size: 20px;
+    }
+
+    .icon-abc {
+        font-size: 32px;
+    }
+
+    .find-area-name {
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 13px;
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 15px rgb(0 0 0 / 10%);
+        border-radius: 12px;
+        padding: 5px 15px;
+        margin: 0 0 30px;
+
+    }
+
+    .letters-block {
+        display: none;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .find-letter {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #FFFFFF;
+        border-radius: 6px;
+        filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.2));
+        margin: 0 10px 30px;
+    }
+
+    .city-name {
+        display: none;
+    }
+
+    /*
+    end find city
+    */
+
+    .icon-abc:before {
+        content: "\e900";
+    }
+    .icon-city:before {
+        content: "\e901";
+    }
+    .icon-graduation-cap:before {
+        content: "\e902";
+    }
+    .icon-people:before {
+        content: "\e904";
+        color: #fff;
+    }
+
+
+    .statistic {
+        font-family: 'Rubik', Arial, sans-serif;
+        font-style: normal;
+    }
+    .statistic-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 90px 0;
+    }
+    .statistics {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 0 30px;
+    }
+    .icon-two-people:before {
+        content: "\e905";
+    }
+    .icon-two-people{
+        font-size: 60px;
+    }
+    .icon-city{
+        font-size: 60px;
+    }
+    .icon-graduation-cap{
+        font-size: 60px;
+    }
+    .statistic-number {
+
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .statistic-title {
+
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        color: rgba(0, 0, 0, 0.8);
+    }
+
+    .catalog {
+        font-family: 'Mulish', Arial, sans-serif;
+        font-style: normal;
+    }
+
+    .catalog-content {
+        margin: 0 0 90px;
+    }
+
+    .car-road {
+        width: 100%;
+        background: linear-gradient(0deg, rgba(146, 146, 146, 0.2), rgba(146, 146, 146, 0.2));
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+    }
+
+    .catalog-description {
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 14px;
+    }
+
+    .catalog-more {
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 140%;
+        color: #4B49A4;
+    }
+
+
+
+    .add-school {
+        font-family: 'Mulish', Arial, sans-serif;
+        font-style: normal;
+        background: linear-gradient(187.06deg, #4B52FD -6.32%, #FBFF40 97.32%);
+        padding: 170px 0;
+        position: relative;
+        margin: 90px 0;
+    }
+
+    .add-school-content {
+        position: absolute;
+        background-color: #fff;
+        top: 65px;
+        right: 0;
+        left: 0;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 16px 40px;
+    }
+
+    .add-school-description {
+        text-align: center;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 14px;
+        margin: 22px 0;
+    }
+    .add-school-mail {
+        margin: 0 0 22px;
+    }
+    .add-school-description-bottom {
+        text-align: center;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 14px;
+    }

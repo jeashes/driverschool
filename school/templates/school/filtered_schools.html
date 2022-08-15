@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'school/base.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+<ol itemscope itemtype="https://schema.org/BreadcrumbList">
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item" href="{% url 'home' %}">
+    <span itemprop="name">Головна</span></a>
+    <meta itemprop="position" content="1" />
+  </li>
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item">
+    <span itemprop="name">{{ name_city }}</span></a>
+    <meta itemprop="position" content="2" />
+  </li>
+</ol>
+
+
+
+
+
+<div class="result">
+    <h1>Знайдено {{ count }} автошкіл</h1>
+    <p>{% for school in filtered_schools %}</p>
+    <div>
+        <p>{{ school.driverschool.name }}</p>
+        <p>{{ school.city_of_unit.area.name }}</p>
+        <p>{{ school.contact }}</p>
+        <p>{{ school.address }}</p>
+
+        <p>{{ school.driverschool.score }}</p>
+        {% for course in school.cources.all %}
+        {{ course.category }}
+        {{ course.price }}
+        {% endfor %}
+
+        <p>{{ school.city_of_unit.name }}</p>
+    </div>
+    <br>
+    <br>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+</body>
+</html>
