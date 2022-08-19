@@ -8,5 +8,14 @@
 </head>
 <body>
 <h1 style="center">ERROR404</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ create_application_form }}
+</form>
+
+<form method="post">
+    {% csrf_token %}
+    {{ partnership_form}}
+</form>
 </body>
 </html>

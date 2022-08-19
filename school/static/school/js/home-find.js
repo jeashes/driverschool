@@ -32,17 +32,42 @@ function showResultAreaLetter() {
 
     for (let h=0; h < areaWrapper.length; h++) {
         areaWrapper[h].onclick = function () {
-            console.table(resultWrapper[0].children[h].textContent)
-            console.table(areaWrapper[h].textContent)
+            let result = resultWrapper[0].children[h].textContent.trim()
+                    .replaceAll('"', '').split(' ')[2],
+                check = areaWrapper[h].textContent.trim();
 
-            if (resultWrapper[0].children[h].textContent.includes(areaWrapper[h].textContent)) {
-                resultWrapper.classList.add("test");
+            if (check == result) {
+                for (let k=0; k < resultWrapper[0].children.length; k++) {
+                    resultWrapper[0].children[k].classList.remove("test")
+                }
+                resultWrapper[0].children[h].classList.add("test")
+            }
+        }
+    }
+
+/*
+    for (let h=0; h < areaWrapper.length; h++) {
+        areaWrapper[h].onclick = function () {
+            console.table(resultWrapper[h].children[0].textContent
+                        .split(" міста ", 2)[1].trim()
+                        .replaceAll('"', '').split(' ')[0])
+
+            console.table(areaWrapper[h].textContent.trim())
+
+            if (resultWrapper[0].children[h].textContent.split(" міста ", 2)[1]
+                .trim().replaceAll('"', '').split(' ')[0]
+                .includes(areaWrapper[h].textContent.trim())) {
+
+                console.table("yes")
+                resultWrapper[h].classList.add("test");
+
             } else {
                 console.table("not")
             }
 
         }
     }
+*/
 
 
     // for (let i = 0; i < areaWrapper.length; i++) {

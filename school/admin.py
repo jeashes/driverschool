@@ -24,16 +24,9 @@ class CityAdmin(admin.ModelAdmin):
     list_filter = ('area',)
 
 
-class CategoryAdminForm(forms.ModelForm):
-    class Meta:
-        model = Category
-        fields = '__all__'
-
-
-class CategoryAdmin(admin.ModelAdmin):
-    form = CategoryAdminForm
+@admin.register(Category)
+class CategoryAdmin(ImportExportModelAdmin):
     fields = ('name', 'description')
-    list_display = ('name', 'description',)
 
 
 class CoursesAdminForm(forms.ModelForm):
@@ -91,10 +84,10 @@ class PartnershipAdminForm(forms.ModelForm):
 
 class PartnershipAdmin(admin.ModelAdmin):
     form = PartnershipAdminForm
-    list_display = ('first_name', 'last_name',)
-    list_display_links = ('first_name', 'last_name')
-    search_fields = ('first_name', 'last_name',)
-    fields = ('first_name', 'last_name', 'phone_number', 'email', 'description')
+    list_display = ('firstLast_name',)
+    list_display_links = ('firstLast_name', )
+    search_fields = ('firstLast_name',)
+    fields = ('firstLast_name', 'phone_number', 'email', 'description')
 
 
 class DriverApplicationAdminForm(forms.ModelForm):
@@ -105,11 +98,11 @@ class DriverApplicationAdminForm(forms.ModelForm):
 
 class DriverApplicationAdmin(admin.ModelAdmin):
     form = DriverApplicationAdminForm
-    list_display = ('first_name', 'last_name',)
-    list_display_links = ('first_name', 'last_name')
-    search_fields = ('first_name', 'last_name',)
+    list_display = ('firstLast_name',)
+    list_display_links = ('firstLast_name', )
+    search_fields = ('firstLast_name',)
     list_filter = ('driverschoolunit',)
-    fields = ('first_name', 'last_name', 'phone_number', 'email', 'driverschoolunit', 'сourse')
+    fields = ('firstLast_name', 'phone_number', 'email', 'city', 'driverschoolunit', 'course')
 
 
 @admin.register(Alphabet)
@@ -121,7 +114,6 @@ admin.site.site_title = "Адміністрування"
 admin.site.site_header = "Адміністрування"
 
 admin.site.register(City, CityAdmin)
-admin.site.register(Category, CategoryAdmin)
 admin.site.register(Courses, CoursesAdmin)
 admin.site.register(DriverSchool, DriverSchoolAdmin)
 admin.site.register(DriverSchoolUnit, DriverSchoolUnitAdmin)

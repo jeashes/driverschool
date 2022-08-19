@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Count
 from .models import DriverSchoolUnit, Alphabet, Area
+from .forms import CreateApplicationForm, PartnershipForm
 
 
 def home(request):
     schools, areas, letters = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all()
-    return render(request, 'school/home.html', {'areas': areas, 'schools': schools, 'letters': letters})
+    return render(request, 'school/home.html', {'areas': areas, 'schools': schools, 'letters': letters,
+                                                'create_application_form': CreateApplicationForm()})
 
 
 # Search schools code_city/city
@@ -81,7 +83,7 @@ def filtered(request, city):
 def info_about_authoschool(request, school_pk):
     areas, school = Area.objects.all(), get_object_or_404(DriverSchoolUnit, pk=school_pk)
     return render(request, 'school/school_info.html',
-                  {'areas': areas, 'school': school, 'url_address': school.city_of_unit.url})
+                  {'areas': areas, 'school': school, 'url_address': school.url})
 
 
 # just html page
@@ -100,4 +102,6 @@ def footer(request):
 # just html page
 def error404(request):
     schools, areas = DriverSchoolUnit.objects.all(), Area.objects.all()
-    return render(request, 'school/error404.html', {'areas': areas, 'schools': schools})
+    return render(request, 'school/error404.html',
+                  {'areas': areas, 'schools': schools, 'create_application_form': CreateApplicationForm(),
+                   'partnership_form': PartnershipForm()})

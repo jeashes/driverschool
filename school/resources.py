@@ -1,5 +1,5 @@
 from import_export import resources
-from school.models import Area, Alphabet
+from school.models import Area, Alphabet, Category
 
 
 class AreaResource(resources.ModelResource):
@@ -10,3 +10,8 @@ class AreaResource(resources.ModelResource):
 class AlphabetResource(resources.ModelResource):
     class Meta:
         model = Alphabet
+
+
+class CategoryResource(resources.ModelResource):
+    class Meta:
+        model = Category

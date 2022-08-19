@@ -30,7 +30,7 @@
     <h1>Знайдено {{ count }} автошкіл</h1>
     <p>{% for school in filtered_schools %}</p>
     <div>
-        <p>{{ school.driverschool.name }}</p>
+        <p><a href="{% url 'view_school' school.id %}">{{ school.driverschool }}</a></p>
         <p>{{ school.city_of_unit.area.name }}</p>
         <p>{{ school.contact }}</p>
         <p>{{ school.address }}</p>

@@ -118,39 +118,38 @@ class DriverSchoolUnit(models.Model):
 
 
 class Partnership(models.Model):
-    first_name = models.CharField(max_length=50, verbose_name='Ім''я')
-    last_name = models.CharField(max_length=50, verbose_name='Прізвище')
+    firstLast_name = models.CharField(max_length=50, verbose_name='ПІБ')
     phone_number = models.CharField(max_length=20, verbose_name='Контактний номер тел.')
     email = models.CharField(max_length=100, verbose_name='Контактний email')
     description = models.TextField(blank=True, verbose_name='Опис')
     objects = models.Manager()
 
     def __str__(self):
-        return self.last_name
+        return self.firstLast_name
 
     class Meta:
         verbose_name = 'Партнер'
         verbose_name_plural = 'Партнери'
-        ordering = ['last_name']
+        ordering = ['firstLast_name']
 
 
 class DriverApplication(models.Model):
     driverschoolunit = models.ForeignKey(DriverSchoolUnit, on_delete=models.CASCADE, verbose_name='Філія автошколи')
-    first_name = models.CharField(max_length=50, verbose_name='Ім''я')
-    last_name = models.CharField(max_length=50, verbose_name='Прізвище')
+    firstLast_name = models.CharField(max_length=50, verbose_name='ПІБ')
     phone_number = models.CharField(max_length=20, verbose_name='Контактний номер тел.')
     email = models.CharField(max_length=100, verbose_name='Контактний email')
     status = models.IntegerField(default=0, verbose_name='Статус')
     course = models.ForeignKey(Courses, on_delete=models.CASCADE, verbose_name='Курс')
+    city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Місто')
     objects = models.Manager()
 
     def __str__(self):
-        return self.last_name
+        return self.firstLast_name
 
     class Meta:
         verbose_name = 'Заявка'
         verbose_name_plural = 'Заявки'
-        ordering = ['last_name']
+        ordering = ['firstLast_name']
 
 
 class Alphabet(models.Model):
