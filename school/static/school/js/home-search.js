@@ -1,36 +1,35 @@
-let inputWrapper = document.getElementsByClassName("home-search")[0]
+let inputWrapper = document.getElementsByClassName("home-search")[0],
     input = document.getElementById("home-search"),
-    searchResult = document.getElementById("search-result");
+    searchResult = document.getElementById("search-result"),
+    delayInMilliseconds = 110; // 0.11 second
 
 
-    inputWrapper.onclick = function(){
+inputWrapper.onclick = function(){
     if (input === document.activeElement) {
-        searchResult.style.display = "block";
-    } else {
-        searchResult.style.display = "none";
+        searchResult.classList.add("active-result");
     }};
+
+input.onblur = function () {
+    setTimeout(function() {
+        searchResult.classList.remove("active-result");
+    }, delayInMilliseconds);
+};
 
 
 function homeSearch() {
 
-    let filter = input.value.toUpperCase(),
+    let filter = input.value.toLowerCase(),
         wrapper = document.getElementById("search-result"),
         item = wrapper.children;
 
-
-
     for (let i = 0; i < item.length; i++) {
-        let nameSchool = item[i].getElementsByClassName("school-name")[0],
-            nameSchoolValue = nameSchool.textContent,
-            nameCity = item[i].getElementsByClassName("school-city")[0],
-            nameCityValue = nameCity.textContent,
-            codeCity = item[i].getElementsByClassName("city-code")[0],
-            codeCityValue = codeCity.textContent;
+        let school = item[i].getElementsByClassName("school-info")[0],
+            schoolName = school.children[0].textContent.toLowerCase(),
+            schoolCityName = school.children[1].textContent.split(" - ")[0].toLowerCase(),
+            schoolCityCode = school.children[1].textContent.match(/\d/g).join("");
 
-        if (nameSchoolValue.trim().toUpperCase().indexOf(filter) > -1 ||
-            nameCityValue.trim().toUpperCase().indexOf(filter) > -1 ||
-            codeCityValue.trim().toUpperCase().indexOf(filter) > -1) {
-            item[i].style.display = "";
+        if (schoolName.includes(filter) || schoolCityName.includes(filter) || schoolCityCode.includes(filter)) {
+            item[i].style.display = "flex";
         } else {
             item[i].style.display = "none";
         }

@@ -1,7 +1,8 @@
 from django.db import models
 from django import forms
 from django import core
-from smart_selects.db_fields import ChainedManyToManyField
+from smart_selects.db_fields import ChainedManyToManyField, ChainedForeignKey
+
 
 class Area(models.Model):
     name = models.CharField(max_length=50, verbose_name='Назва області')

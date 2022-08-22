@@ -22,6 +22,36 @@
   </li>
 </ol>
 
+<div>
+    <form action="{% url 'filtered' name_city %}" method="get">
+        <input type="radio" name="category" value="A - A1">A - A1
+        <input type="radio" name="category" value="B - B1" checked>B - B1
+        <input type="radio" name="category" value="C - C1">C - C1
+        <p>
+            <input type="radio" name="category" value="D - D1"> D - D1
+            <input type="radio" name="category" value="C1E">C1E
+            <input type="radio" name="category" value="BE">BE
+        </p>
+        <p>
+            <input type="radio" name="category" value="DE">DE
+            <input type="radio" name="category" value="CE">CE
+            <input type="radio" name="category" value="T">T
+            <input type="radio" name="category" value="T1">T1
+        </p>
+
+
+        <p>
+            <input type="radio" name="filtered" value="price-low-up">Ціна ▲
+            <input type="radio" name="filtered" value="price-up-low">Ціна ▼
+        </p>
+
+        <input type="radio" name="filtered" value="alphabet">Літери
+        <input type="radio" name="filtered" value="rating">Рейтинг
+        <p>
+            <input type='submit' value="Підібрати">
+        </p>
+    </form>
+</div>
 
 
 
