@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-hmpmvy-o5*rnn56oqi1+@7knl7c)0u)auu27!so-da1bau=9a8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['driverschool.herokuapp.com']
 
 
 # Application definition
