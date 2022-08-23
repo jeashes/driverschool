@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'import_export',
     'ckeditor',
     'smart_selects',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [

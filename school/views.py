@@ -29,8 +29,8 @@ def search_authoschool(request, searched):
 
 def search(request):
     if request.GET['searched']:
-        searched = request.GET['searched']
         areas = Area.objects.all()
+        searched = request.GET['searched']
         if DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched):
             city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched)
             return render(request, 'school/search_schools.html',
@@ -43,8 +43,11 @@ def search(request):
                           {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
                            'name_city': city_autoschools[0].city_of_unit,
                            'url_city': city_autoschools[0].city_of_unit.url})
-        else:
-            return render(request, 'school/error404.html')
+    else:
+        schools, areas, letters = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all()
+        return render(request, 'school/home.html', {'areas': areas, 'schools': schools, 'letters': letters,
+                                                    'create_application_form': CreateApplicationForm(),
+                                                    'error': 'Please input'})
 
 
 # for big filter
@@ -121,32 +124,39 @@ def error404(request):
 
 
 def create_driver_application(request):
-    if request.method == 'GET':
-        schools, areas = DriverSchoolUnit.objects.all(), Area.objects.all()
-        return render(request, 'school/error404.html',
-                      {'areas': areas, 'schools': schools, 'create_application_form': CreateApplicationForm(),
-                       'partnership_form': PartnershipForm()})
-    else:
-
+    if request.method == 'POST':
         form = CreateApplicationForm(request.POST)
         if form.is_valid():
             new_app = form.save(commit=False)
             new_app.user = request.user
             new_app.save()
             return redirect('home')
+        else:
+            return render(request, 'school/error404.html',
+                          {'create_application_form': form,
+                           'partnership_form': PartnershipForm()})
 
-
-def create_partnership_app(request):
-    if request.method == 'GET':
+    else:
         schools, areas = DriverSchoolUnit.objects.all(), Area.objects.all()
         return render(request, 'school/error404.html',
                       {'areas': areas, 'schools': schools, 'create_application_form': CreateApplicationForm(),
                        'partnership_form': PartnershipForm()})
-    else:
 
+
+def create_partnership_app(request):
+    if request.method == 'POST':
         form = PartnershipForm(request.POST)
         if form.is_valid():
             new_app = form.save(commit=False)
             new_app.user = request.user
             new_app.save()
             return redirect('home')
+        else:
+            return render(request, 'school/error404.html',
+                          {'create_application_form': CreateApplicationForm(),
+                           'partnership_form': form})
+    else:
+        schools, areas = DriverSchoolUnit.objects.all(), Area.objects.all()
+        return render(request, 'school/error404.html',
+                      {'areas': areas, 'schools': schools, 'create_application_form': CreateApplicationForm(),
+                       'partnership_form': PartnershipForm()})

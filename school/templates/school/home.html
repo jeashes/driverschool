@@ -34,7 +34,9 @@
                 </button>
 
             </form>
-
+            {% if error %}
+            {{ error }}
+            {% endif %}
             <div class="politic-wrapper">
                 <i class="fa-solid fa-check"></i>
                 <span>Користувацька угода</span>
@@ -153,7 +155,7 @@
                                 {% endfor %}
                             </div>
                             {% if area.cities|split:'|'|length > 22 %}
-                                <div class="city-result">
+                                <div class="city-result" style="display: none;">
                                     {% load new_tags %}
                                     {% for lcity in area.cities|split:'|'|slice:"22:44" %}
                                         <a href="{% url 'search_authoschool' lcity  %}">

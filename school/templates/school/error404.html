@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
+{% load bootstrap3 %}
+{% bootstrap_messages %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,13 +12,13 @@
 <h1 style="center">ERROR404</h1>
 <form action="{% url 'driver_app' %}" method="post">
     {% csrf_token %}
-    {{ create_application_form }}
+    {% bootstrap_form create_application_form %}
     <button type="submit">Submit</button>
 </form>
 <br>
 <form method="post">
     {% csrf_token %}
-    {{ partnership_form}}
+    {{ partnership_form.as_p }}
     <button type="submit">Submit</button>
 </form>
 </body>
