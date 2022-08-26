@@ -1,9 +1,9 @@
 
 {% extends 'school/base.html' %}
-{% load static %}
 {% block content %}
 
-<section class="home-search"    >
+{% load static %}
+<section class="home-search">
     <div class="content-wrapper">
         <div class="search-content">
 
@@ -146,33 +146,72 @@
                     {% for area in areas|slice:":24" %}
                         <div class="result-block">
                             <h3> Знайдені міста "{{ area.name }}" </h3>
-                            <div class="city-result">
-                                {% load new_tags %}
-                                {% for lcity in area.cities|split:'|'|slice:":22" %}
-                                    <a href="{% url 'search_authoschool' lcity  %}">
-                                        <li>{{ lcity }}</li>
-                                    </a>
-                                {% endfor %}
-                            </div>
-                            {% if area.cities|split:'|'|length > 22 %}
-                                <div class="city-result" style="display: none;">
-                                    {% load new_tags %}
-                                    {% for lcity in area.cities|split:'|'|slice:"22:44" %}
-                                        <a href="{% url 'search_authoschool' lcity  %}">
-                                            <li>{{ lcity }}</li>
-                                        </a>
-                                    {% endfor %}
-                                </div>
-                            {% elif area.cities|split:'|'|length > 44 %}
-                                <div class="city-result">
-                                    {% load new_tags %}
-                                    {% for lcity in area.cities|split:'|'|slice:"44:66" %}
-                                        <a href="{% url 'search_authoschool' lcity  %}">
-                                            <li>{{ lcity }}</li>
-                                        </a>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
+
+<div class="slideshow-container">
+
+    <div class="mySlides fade">
+      <div class="numbertext">1 / 3</div>
+      <img src="img_nature_wide.jpg" style="width:100%">
+      <div class="text">Caption Text</div>
+    </div>
+
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 3</div>
+      <img src="img_snow_wide.jpg" style="width:100%">
+      <div class="text">Caption Two</div>
+    </div>
+
+    <div class="mySlides fade">
+      <div class="numbertext">3 / 3</div>
+      <img src="img_mountains_wide.jpg" style="width:100%">
+      <div class="text">Caption Three</div>
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+<!--
+                                          <div class="city-result">
+                                            {% load new_tags %}
+                                            {% for lcity in area.cities|split:'|'|slice:":22" %}
+                                                <a href="{% url 'search_authoschool' lcity  %}">
+                                                    <li>{{ lcity }}</li>
+                                                </a>
+                                            {% endfor %}
+                                            </div>
+-->
+<!--
+                                                    {% if area.cities|split:'|'|length > 22 %}
+                                                        <div class="city-result">
+                                                            {% load new_tags %}
+                                                            {% for lcity in area.cities|split:'|'|slice:"22:44" %}
+                                                                <a href="{% url 'search_authoschool' lcity  %}">
+                                                                    <li>{{ lcity }}</li>
+                                                                </a>
+                                                            {% endfor %}
+                                                        </div>
+        -->
+<!--
+                                                        <div class="city-result">
+                                                            {% load new_tags %}
+                                                            {% for lcity in area.cities|split:'|'|slice:"44:66" %}
+                                                                <a href="{% url 'search_authoschool' lcity  %}">
+                                                                    <li>{{ lcity }}</li>
+                                                                </a>
+                                                            {% endfor %}
+                                                        </div>
+                                                    {% endif %}
+-->
+
+
                             <i class="fa-solid fa-arrow-left-long"></i>
                         </div>
                     {% endfor %}
@@ -281,6 +320,13 @@
         </div>
     </div>
 </section>
+
+
+<script defer src="{% static 'school/js/itc-slider.js' %}"></script>
+
+
+<script src="{% static 'school/js/home-search.js' %}"></script>
+<script src="{% static 'school/js/home-find.js' %}"></script>
 
 {% endblock %}
 

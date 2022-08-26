@@ -107,7 +107,7 @@ span {
     font-size: 8px;
 }
 
-.icon-search {
+.icon-search,  .icon-search{
     width: 13%;
     background-color: #F28800;
     display: flex;
@@ -117,6 +117,8 @@ span {
     border-radius: 0 6px 6px 0;
     color: #fff;
     border: none;
+    margin: 0;
+
 }
 
 #search-result {
@@ -228,29 +230,6 @@ span {
     line-height: 21px;
     text-align: center;
     margin: 15px 0 45px;
-}
-
-.card > button {
-    border: none;
-    background: #F28800;
-    border-radius: 12px;
-    width: fit-content;
-    text-align: center;
-    padding: 11px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-
-.card > button > span {
-    font-size: 18px;
-    line-height: 23px;
-    color: #FFFFFF;
-}
-
-.card > button > i {
-    display: none !important;
 }
 
 /*

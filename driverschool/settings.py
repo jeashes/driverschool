@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'driverschool.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'driverschool',
+        'NAME': 'drive-schools-db',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'blp#5=RU?pI_USIf&3lj',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -127,6 +127,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR / 'static'
+
+STATIC_DIR = os.path.join(BASE_DIR,'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

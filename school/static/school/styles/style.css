@@ -39,6 +39,7 @@
     font-style: normal;
     font-display: block;
 }
+
 body {
     background-color: #f9f9fc;
 }
@@ -55,6 +56,37 @@ body {
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+    border: none;
+    background: #F28800;
+    border-radius: 12px;
+    width: fit-content;
+    text-align: center;
+    padding: 11px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+button > span {
+    font-size: 18px;
+    line-height: 23px;
+    color: #FFFFFF;
+}
+
+button > i {
+    display: flex !important;
+    margin: 0 0 0 20px;
+    width: 35px;
+    height: 35px;
+    color: #F28800;
+    background: #fff;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
 }
 
 /*---- start logo----*/

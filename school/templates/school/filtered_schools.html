@@ -1,86 +1,221 @@
-<!DOCTYPE html>
-<html lang="en">
 {% extends 'school/base.html' %}
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+
 {% block content %}
-<ol itemscope itemtype="https://schema.org/BreadcrumbList">
-  <li itemprop="itemListElement" itemscope
-      itemtype="https://schema.org/ListItem">
-    <a itemprop="item" href="{% url 'home' %}">
-    <span itemprop="name">Головна</span></a>
-    <meta itemprop="position" content="1" />
-  </li>
-  <li itemprop="itemListElement" itemscope
-      itemtype="https://schema.org/ListItem">
-    <a itemprop="item">
-    <span itemprop="name">{{ name_city }}</span></a>
-    <meta itemprop="position" content="2" />
-  </li>
-</ol>
 
-<div>
-    <form action="{% url 'filtered' name_city %}" method="get">
-        <input type="radio" name="category" value="A - A1">A - A1
-        <input type="radio" name="category" value="B - B1" checked>B - B1
-        <input type="radio" name="category" value="C - C1">C - C1
-        <p>
-            <input type="radio" name="category" value="D - D1"> D - D1
-            <input type="radio" name="category" value="C1E">C1E
-            <input type="radio" name="category" value="BE">BE
-        </p>
-        <p>
-            <input type="radio" name="category" value="DE">DE
-            <input type="radio" name="category" value="CE">CE
-            <input type="radio" name="category" value="T">T
-            <input type="radio" name="category" value="T1">T1
-        </p>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'school/styles/search_school.css' %}" >
+</head>
 
 
-        <p>
-            <input type="radio" name="filtered" value="price-low-up">Ціна ▲
-            <input type="radio" name="filtered" value="price-up-low">Ціна ▼
-        </p>
+<body>
 
-        <input type="radio" name="filtered" value="alphabet">Літери
-        <input type="radio" name="filtered" value="rating">Рейтинг
-        <p>
-            <input type='submit' value="Підібрати">
-        </p>
-    </form>
-</div>
+<section class="city-info">
+    <div class="content-wrapper">
+        <div class="city-info-content">
+            <h1> Автошколи {{ name_city }}</h1>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            </p>
+            <p>
+                when an unknown printer took a galley of type and scrambled it to
+                make a type specimen book.when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+            </p>
 
-
-
-
-<div class="result">
-    <h1>Знайдено {{ count }} автошкіл</h1>
-    <p>{% for school in filtered_schools %}</p>
-    <div>
-        <p><a href="{% url 'view_school' school.id %}">{{ school.driverschool }}</a></p>
-        <p>{{ school.city_of_unit.area.name }}</p>
-        <p>{{ school.contact }}</p>
-        <p>{{ school.address }}</p>
-
-        <p>{{ school.driverschool.score }}</p>
-        {% for course in school.cources.all %}
-        {{ course.category }}
-        {{ course.price }}
-        {% endfor %}
-
-        <p>{{ school.city_of_unit.name }}</p>
+            <a href="{% url 'home' %}">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <span>Назад</span>
+            </a>
+        </div>
     </div>
-    <br>
-    <br>
-    {% endfor %}
-</div>
+</section>
 
-<p><a href="{{ url_city }}">Карта міста зі школами</a></p>
+<section class="results">
+    <div class="content-wrapper">
+        <div class="results-content">
+
+            <div class="breadcrumbs">
+                <a href="{% url 'home' %}"> Головна </a>
+                <span> > {{ name_city }}</span>
+            </div>
+
+            <h2>Знайдено {{ count }} автошкіл</h2>
+
+            <div class="filter-result-wrapper">
+
+                <div class="filters">
+                    <form id="category" action="{% url 'filtered' name_city %}" method="get">
+
+                        <div class="category-wrapper">
+
+                            <h6> Категорії </h6>
+
+                            <div class="category">
+
+                                <div class="main-category">
+
+                                    <label for="A-A1">
+                                        A - A1
+                                        <input id="A-A1" type="radio" name="category" value="A - A1">
+                                    </label>
+
+                                    <label for="B-B1" class="active">
+                                        B - B1
+                                        <input id="B-B1" type="radio" name="category" value="B - B1" checked>
+                                    </label>
+
+                                    <label for="C-C1">
+                                        C - C1
+                                        <input id="C-C1" type="radio" name="category" value="C - C1">
+                                    </label>
+
+                                    <label for="D-D1">
+                                        D - D1
+                                        <input id="D-D1" type="radio" name="category" value="D - D1">
+                                    </label>
+
+                                    <label for="C1E">
+                                        C1E
+                                        <input id="C1E" type="radio" name="category" value="C1E">
+                                    </label>
+
+                                    <label for="D1E">
+                                        D1E
+                                        <input id="D1E" type="radio" name="category" value="D1E">
+                                    </label>
+
+                                </div>
+
+                                <div class="other-category">
+
+                                    <label for="BE">
+                                        BE
+                                        <input id="BE" type="radio" name="category" value="BE">
+                                    </label>
+
+                                    <label for="CE">
+                                        CE
+                                        <input id="CE" type="radio" name="category" value="CE">
+                                    </label>
+
+                                    <label for="DE">
+                                        DE
+                                        <input id="DE" type="radio" name="category" value="DE">
+                                    </label>
+
+                                    <label for="T">
+                                        T
+                                        <input id="T" type="radio" name="category" value="T">
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="other-filter">
+
+                            <label id="filter-price" for="price-low-up" for="price-up-low">
+                                Ціна
+                                <div class="icon-price">
+                                    <i class="fa-solid fa-caret-down"></i>
+                                    <i class="fa-solid fa-caret-up"></i>
+                                </div>
+                                <input id="price-up-low" type="radio" name="filtered" value="price-up-low">
+                                <input id="price-low-up" type="radio" name="filtered" value="price-low-up">
+                            </label>
+
+                            <label for="alphabet">
+                                Літери
+                                <input id="alphabet" type="radio" name="filtered" value="alphabet">
+                                <i class="cust-icon icon-abc"></i>
+                            </label>
+
+                            <label for="rating">
+                                Рейтинг
+                                <input id="rating" type="radio" name="filtered" value="rating">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </label>
+
+                        </div>
+
+                        <button type='submit' value="Підібрати">
+                            Застосувати
+                        </button>
+
+                    </form>
+                </div>
+
+                <div class="result-wrapper">
+                    {% for school in filtered_schools %}
+                        <div class="school-info">
+
+                            <div class="school-text">
+
+                                <div class="school-score">
+                                    <span>Рейтинг</span>
+                                    <span> {{ school.driverschool.score }} </span>
+                                </div>
+
+                                <h3>{{ school.driverschool }}</h3>
+
+                                <div class="school-address">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span>{{ school.address }}</span>
+                                </div>
+
+                                <div class="school-phone">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <a href="#">{{ school.contact }}</a>
+                                </div>
+
+                                <a href="{% url 'view_school' school.id %}">
+                                    <button>
+                                        <span>Ознайомитись</span>
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </button>
+                                </a>
+
+                            </div>
+
+                            <div class="school-img-category">
+
+                                <img src="{% static 'school/test-image.jpg' %}"
+                                     alt="School image" width="188px" height="214px">
+
+                                <div class="img-category-wrapper">
+                                    {% load new_tags %}
+                                    {% for course in school.cources.all %}
+                                        <span>{{ course.category }}</span>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<p class="all-maps"><a href="{{ url_city }}">Карта міста зі школами</a></p>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2869.7686463530704!2d27.67283880113543!3d49.07881533956269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1z0LDQstGC0L7RiNC60L7Qu9C4INCR0LDRgA!5e0!3m2!1sen!2sua!4v1661291053592!5m2!1sen!2sua"
+        width="1910" height="600" style="border:0;" allowfullscreen=""
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+
+<script src="{% static 'school/js/rating.js' %}"></script>
+<script defer src="{% static 'school/js/filter-schools.js' %}"></script>
+</body>
 {% endblock %}
 
-
-</body>
 </html>
