@@ -45,9 +45,7 @@
                     <h6> Області </h6>
                     <div class="footer-areas">
                         {% for area in areas|slice:":24" %}
-                            <a href="#">
-                                <span>{{ area.name }}</span>
-                            </a>
+                            <span>{{ area.name }}</span>
                         {% endfor %}
                     </div>
                 </div>
@@ -65,6 +63,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script defer src="{% static 'school/js/itc-slider.js' %}"></script>
+<script defer src="{% static 'school/js/footer-anchor.js' %}"></script>
 {% block content %}
 {% endblock %}
 
