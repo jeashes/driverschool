@@ -1,13 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Count
-from .models import DriverSchoolUnit, Alphabet, Area
+from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City
 from .forms import CreateApplicationForm, PartnershipForm
 
 
 def home(request):
-    schools, areas, letters = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all()
+    schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), \
+                                           DriverApplication.objects.all(), City.objects.all()
     return render(request, 'school/home.html', {'areas': areas, 'schools': schools, 'letters': letters,
-                                                'create_application_form': CreateApplicationForm()})
+                                                'create_application_form': CreateApplicationForm(),
+                                                'partnership_form': PartnershipForm(), 'len_apps': len(application),
+                                                'len_schools': len(schools), 'len_cities': len(cities)})
 
 
 # Search schools code_city/city
@@ -31,8 +34,8 @@ def search(request):
     if request.GET['searched']:
         areas = Area.objects.all()
         searched = request.GET['searched']
-        if DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched):
-            city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched)
+        if DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched.capitalize()):
+            city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched.capitalize())
             return render(request, 'school/search_schools.html',
                           {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
                            'name_city': city_autoschools[0].city_of_unit,
@@ -43,6 +46,9 @@ def search(request):
                           {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
                            'name_city': city_autoschools[0].city_of_unit,
                            'url_city': city_autoschools[0].city_of_unit.url})
+        else:
+            return render(request, 'school/search_schools.html',
+                          {'areas': areas, 'error': 'Not found, please input another word', 'name_city': 'Error'})
     else:
         schools, areas, letters = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all()
         return render(request, 'school/home.html', {'areas': areas, 'schools': schools, 'letters': letters,

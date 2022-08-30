@@ -45,7 +45,7 @@
                     <h6> Області </h6>
                     <div class="footer-areas">
                         {% for area in areas|slice:":24" %}
-                            <a href="{% url 'search_authoschool' area.name %}">
+                            <a href="#">
                                 <span>{{ area.name }}</span>
                             </a>
                         {% endfor %}
