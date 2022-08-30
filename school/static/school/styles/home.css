@@ -113,12 +113,14 @@ span {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 23px;
     border-radius: 0 6px 6px 0;
-    color: #fff;
-    border: none;
-    margin: 0;
+}
 
+.fa-magnifying-glass{
+    font-size: 30px;
+    color: #fff;
+    margin: 0;
+    background: none;
 }
 
 #search-result {
