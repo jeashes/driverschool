@@ -1,6 +1,6 @@
 asgiref==3.5.2
 defusedxml==0.7.1
-diff-match-patch==20200713
+diff-match-patch==20200713pip install --user django-import_export
 dj-database-url==1.0.0
 Django==4.1
 django-bootstrap3==22.1
