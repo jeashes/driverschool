@@ -135,14 +135,15 @@ class Partnership(models.Model):
 
 
 class DriverApplication(models.Model):
-    driverschoolunit = models.ForeignKey(DriverSchoolUnit, on_delete=models.CASCADE, verbose_name='Філія автошколи',
-                                         validators=[])
+    city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Місто')
+    driverschoolunit = ChainedForeignKey(DriverSchoolUnit, chained_field='city', chained_model_field="city_of_unit",
+                                         on_delete=models.CASCADE, verbose_name='Філія автошколи')
     firstLast_name = models.CharField(max_length=50, verbose_name='ПІБ')
     phone_number = models.CharField(max_length=20, verbose_name='Контактний номер тел.')
     email = models.CharField(max_length=100, verbose_name='Контактний email')
     status = models.IntegerField(default=0, verbose_name='Статус')
-    course = models.ForeignKey(Courses, on_delete=models.CASCADE, verbose_name='Курс')
-    city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Місто')
+    course = ChainedForeignKey(Courses, chained_field='driverschoolunit', chained_model_field="driverschoolunit",
+                               on_delete=models.CASCADE, verbose_name='Курс')
     objects = models.Manager()
 
     def __str__(self):

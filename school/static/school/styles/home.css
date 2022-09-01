@@ -95,7 +95,7 @@ span {
     line-height: 16px;
 }
 
-.abc-block-wrapper {
+.abc-icon-wrapper {
     width: 8%;
     background-color: #000;
     display: flex;
@@ -107,13 +107,17 @@ span {
     font-size: 8px;
 }
 
-.icon-search,  .icon-search{
+.icon-search{
     width: 13%;
     background-color: #F28800;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 23px;
     border-radius: 0 6px 6px 0;
+    color: #fff;
+    border: none;
+    margin: 0;
 }
 
 .fa-magnifying-glass{
@@ -123,17 +127,50 @@ span {
     background: none;
 }
 
+.abc-block-wrapper {
+    position: absolute;
+    top: 213px;
+    max-width: 543px;
+    width: 100%;
+    background: #fff;
+    color: #000;
+    border-radius: 6px 6px 0 0;
+    display: none;
+}
+
+.abc-block {
+    max-width: 497px;
+    padding: 8px 20px;
+}
+
+.black-block {
+    width: 9%;
+    background: #000;
+    border-radius: 0 6px 0 0;
+}
+
+.abc-block > span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0 10px 0 0;
+}
+
 #search-result {
     display: none;
     background-color: #fff;
-    max-width: 502px;
+    max-width: 497px;
     width: 100%;
     max-height: 180px;
     height: fit-content;
     position: absolute;
-    top: 335px;
+    top: 340px;
     overflow: auto;
     border-radius: 6px;
+}
+
+.active-abc {
+    display: flex;
 }
 
 .active-result {
@@ -432,7 +469,7 @@ span {
     border-radius: 12px;
 }
 
-.test {
+.active-find {
     display: block;
     animation: ani 1s forwards;
 }

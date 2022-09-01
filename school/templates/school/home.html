@@ -24,7 +24,7 @@
                        onkeyup="homeSearch()"
                        placeholder="Пошук:  містом, кодом міста та автошколи">
 
-                <div class="abc-block-wrapper">
+                <div class="abc-icon-wrapper">
                     <i class="cust-icon icon-abc"></i>
                     <i class="fa-solid fa-caret-up"></i>
                 </div>
@@ -40,6 +40,15 @@
             <div class="politic-wrapper">
                 <i class="fa-solid fa-check"></i>
                 <span>Користувацька угода</span>
+            </div>
+
+            <div class="abc-block-wrapper">
+                <div class="abc-block">
+                    {% for letter in letters %}
+                        <span>{{ letter.letter }}</span>
+                    {% endfor %}
+                </div>
+                <div class="black-block"></div>
             </div>
 
             <div id="search-result">
@@ -151,19 +160,16 @@
 
     <div class="mySlides fade">
       <div class="numbertext">1 / 3</div>
-      <img src="img_nature_wide.jpg" style="width:100%">
       <div class="text">Caption Text</div>
     </div>
 
     <div class="mySlides fade">
       <div class="numbertext">2 / 3</div>
-      <img src="img_snow_wide.jpg" style="width:100%">
       <div class="text">Caption Two</div>
     </div>
 
     <div class="mySlides fade">
       <div class="numbertext">3 / 3</div>
-      <img src="img_mountains_wide.jpg" style="width:100%">
       <div class="text">Caption Three</div>
     </div>
 
@@ -242,7 +248,7 @@
         <div class="statistic-content">
             <div class="statistic ">
                 <i class="cust-icon icon-two-people"></i>
-                <p> {{ len_apps }} </p>
+                <p>{{ len_apps }} </p>
                 <span> Подали заявок </span>
             </div>
             <div class="statistic">

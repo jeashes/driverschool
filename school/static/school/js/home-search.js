@@ -1,7 +1,16 @@
 let inputWrapper = document.getElementsByClassName("home-search")[0],
     input = document.getElementById("home-search"),
     searchResult = document.getElementById("search-result"),
-    delayInMilliseconds = 110; // 0.11 second
+    delayInMilliseconds = 110, // 0.11 second
+    abcBlock = document.getElementsByClassName("abc-icon-wrapper")[0],
+    abcWrapper = document.getElementsByClassName("abc-block-wrapper")[0];
+
+
+
+abcBlock.onclick = function(){
+    console.table("work");
+    abcWrapper.classList.toggle("active-abc");
+}
 
 
 inputWrapper.onclick = function(){

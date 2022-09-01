@@ -38,8 +38,12 @@
 <p>{{ school.city_of_unit.name }}</p>
 <p>{{ school.city_of_unit.area.name }}</p>
 <p>{{ school.name }}</p>
-<p>{{ school.contact }}</p>
-
+{% load new_tags %}
+<p>{% for contact in school.contact|split:',' %}</p>
+<p>
+  {{ contact }}
+</p>
+{% endfor %}
 {% for course in school.cources.all %}
 
 <p>{{ course.short_description }}</p>
@@ -47,10 +51,7 @@
 
 <img src="{{ school.image.url }}" alt="">
 
-<iframe src="{{ url_address }}"
-        width="1910" height="600" style="border:0;" allowfullscreen=""
-        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-</iframe>
+
 {% endblock %}
 
 </body>

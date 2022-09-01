@@ -21,82 +21,26 @@ function showAreaLetter() {
     }
 }
 
-
-function showResultAreaLetter() {
-    let areaWrapper = document.getElementsByClassName("area-wrapper"),
-        resultWrapper = document.getElementsByClassName("areas-result");
-
-    // let letterWrapper = document.getElementsByClassName("letter-wrapper"),
-    //     resultLetter = resultWrapper.textContent.split(" літерою ")[1];
+function showResult(result, wrapper) {
+    let Result = document.getElementsByClassName(result)[0],
+        Wrapper = document.getElementsByClassName(wrapper)[0],
+        Block =  document.getElementsByClassName("result-block");
 
 
-    for (let h=0; h < areaWrapper.length; h++) {
-        areaWrapper[h].onclick = function () {
-            let result = resultWrapper[0].children[h].textContent.trim()
-                    .replaceAll('"', '').split(' ')[2],
-                check = areaWrapper[h].textContent.trim();
+        for (let i=0; i < Result.children.length; i++) {
 
-            if (check == result) {
-                for (let k=0; k < resultWrapper[0].children.length; k++) {
-                    resultWrapper[0].children[k].classList.remove("test")
-                }
-                resultWrapper[0].children[h].classList.add("test")
+        Wrapper.children[i].onclick = function () {
+            for (let k = 0; k < Block.length; k++) {
+                Block[k].classList.remove("active-find");
             }
+                Result.children[i].classList.add("active-find");
         }
     }
-
-/*
-    for (let h=0; h < areaWrapper.length; h++) {
-        areaWrapper[h].onclick = function () {
-            console.table(resultWrapper[h].children[0].textContent
-                        .split(" міста ", 2)[1].trim()
-                        .replaceAll('"', '').split(' ')[0])
-
-            console.table(areaWrapper[h].textContent.trim())
-
-            if (resultWrapper[0].children[h].textContent.split(" міста ", 2)[1]
-                .trim().replaceAll('"', '').split(' ')[0]
-                .includes(areaWrapper[h].textContent.trim())) {
-
-                console.table("yes")
-                resultWrapper[h].classList.add("test");
-
-            } else {
-                console.table("not")
-            }
-
-        }
-    }
-*/
-
-
-    // for (let i = 0; i < areaWrapper.length; i++) {
-    //
-    //     areaWrapper[i].onclick = function () {
-    //
-    //         console.table(areaWrapper[i]);
-    //
-    //         if (areaResult[i].includes(areaName[i])) {
-    //             areaWrapper[i].classList.add("test");
-    //         } else {
-    //             areaWrapper[i].classList.remove("test");
-    //         }
-    //
-    //     }
-    //
-    // }
-    //
-    // for (let j = 0; j < letterWrapper.length; j++) {
-    //
-    //     if (letterResult[j].includes(letterName[j])) {
-    //         letterName[j].style.display = "flex";
-    //     } else {
-    //         letterName[j].style.display = "none";
-    //     }
-    //
-    // }
-
 }
 
+showResult("letters-result", "letters-block");
+showResult("areas-result", "areas-block");
+
+
+
 showAreaLetter();
-showResultAreaLetter();

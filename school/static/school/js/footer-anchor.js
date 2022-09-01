@@ -3,9 +3,7 @@ let footerWrapper = document.getElementsByClassName("footer-areas")[0],
 
     function clickButton(item) {
         let click_event = new CustomEvent('click');
-
-        areaWrapper.children[item].dispatchEvent(click_event);
-        areaWrapper.children[item].addClass("active");
+        setTimeout(areaWrapper.children[item].dispatchEvent(click_event), 1000)
     }
 
     for (let i=0; i < footerWrapper.children.length; i++) {

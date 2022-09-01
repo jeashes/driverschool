@@ -6,7 +6,7 @@ from .forms import CreateApplicationForm, PartnershipForm
 
 def home(request):
     schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), \
-                                           DriverApplication.objects.all(), City.objects.all()
+                                                   DriverApplication.objects.all(), City.objects.all()
     return render(request, 'school/home.html', {'areas': areas, 'schools': schools, 'letters': letters,
                                                 'create_application_form': CreateApplicationForm(),
                                                 'partnership_form': PartnershipForm(), 'len_apps': len(application),
@@ -20,12 +20,16 @@ def search_authoschool(request, searched):
         city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched)
         return render(request, 'school/search_schools.html',
                       {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                       'name_city': city_autoschools[0].city_of_unit, 'url_city': city_autoschools[0].city_of_unit.url})
+                       'name_city': city_autoschools[0].city_of_unit, 'url_city': city_autoschools[0].city_of_unit.url,
+                       'create_application_form': CreateApplicationForm(),
+                       'partnership_form': PartnershipForm(), })
     if DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched):
         city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
         return render(request, 'school/search_schools.html',
                       {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                       'name_city': city_autoschools[0].city_of_unit, 'url_city': city_autoschools[0].city_of_unit.url})
+                       'name_city': city_autoschools[0].city_of_unit, 'url_city': city_autoschools[0].city_of_unit.url,
+                       'create_application_form': CreateApplicationForm(),
+                       'partnership_form': PartnershipForm(), })
     else:
         return render(request, 'school/error404.html')
 
@@ -39,21 +43,26 @@ def search(request):
             return render(request, 'school/search_schools.html',
                           {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
                            'name_city': city_autoschools[0].city_of_unit,
-                           'url_city': city_autoschools[0].city_of_unit.url})
+                           'url_city': city_autoschools[0].city_of_unit.url,
+                           'create_application_form': CreateApplicationForm(),
+                           'partnership_form': PartnershipForm(), })
         if DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched):
             city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
             return render(request, 'school/search_schools.html',
                           {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
                            'name_city': city_autoschools[0].city_of_unit,
-                           'url_city': city_autoschools[0].city_of_unit.url})
+                           'url_city': city_autoschools[0].city_of_unit.url,
+                           'create_application_form': CreateApplicationForm(),
+                           'partnership_form': PartnershipForm(), })
         else:
             return render(request, 'school/search_schools.html',
                           {'areas': areas, 'error': 'Not found, please input another word', 'name_city': 'Error'})
     else:
         schools, areas, letters = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all()
         return render(request, 'school/home.html', {'areas': areas, 'schools': schools, 'letters': letters,
+                                                    'error': 'Please input',
                                                     'create_application_form': CreateApplicationForm(),
-                                                    'error': 'Please input'})
+                                                    'partnership_form': PartnershipForm(), })
 
 
 # for big filter
@@ -79,7 +88,9 @@ def filtered(request, city):
             return render(request, 'school/filtered_schools.html',
                           {'areas': areas, 'filtered_schools': ordered_schools, 'count': len(ordered_schools),
                            'url_city': ordered_schools[0].city_of_unit.url,
-                           'name_city': ordered_schools[0].city_of_unit})
+                           'name_city': ordered_schools[0].city_of_unit,
+                           'create_application_form': CreateApplicationForm(),
+                           'partnership_form': PartnershipForm(), })
         else:
             ordered_schools = filtered_schools.order_by(filter_value_in_key[request.GET.get('filtered')]).distinct(
                 filter_value_in_key[request.GET.get('filtered')])
@@ -87,7 +98,9 @@ def filtered(request, city):
             return render(request, 'school/filtered_schools.html',
                           {'areas': areas, 'filtered_schools': ordered_schools, 'count': len(ordered_schools),
                            'url_city': ordered_schools[0].city_of_unit.url,
-                           'name_city': ordered_schools[0].city_of_unit})
+                           'name_city': ordered_schools[0].city_of_unit,
+                           'create_application_form': CreateApplicationForm(),
+                           'partnership_form': PartnershipForm(), })
 
 
     else:
@@ -98,14 +111,19 @@ def filtered(request, city):
                       {'areas': areas,
                        'filtered_schools': category_filtered, 'count': len(category_filtered),
                        'url_city': category_filtered[0].city_of_unit.url,
-                       'name_city': category_filtered[0].city_of_unit})
+                       'name_city': category_filtered[0].city_of_unit,
+                       'create_application_form': CreateApplicationForm(),
+                       'partnership_form': PartnershipForm(), })
 
 
 # Info about school
 def info_about_authoschool(request, school_pk):
-    areas, school = Area.objects.all(), get_object_or_404(DriverSchoolUnit, pk=school_pk)
+    areas, school, app_form, partnership_form = Area.objects.all(), get_object_or_404(DriverSchoolUnit,
+                                                                                      pk=school_pk), \
+                                                CreateApplicationForm(), PartnershipForm()
     return render(request, 'school/school_info.html',
-                  {'areas': areas, 'school': school, 'url_address': school.url})
+                  {'areas': areas, 'school': school, 'url_address': school.url, 'app_form': app_form,
+                   'partnership_form': partnership_form})
 
 
 # just html page
@@ -117,16 +135,18 @@ def base(request):
 # just html page
 def footer(request):
     areas = Area.objects.all()
-
-    return render(request, 'school/footer.html', {'areas': areas})
+    create_application_form, partnership_form = CreateApplicationForm(), PartnershipForm()
+    return render(request, 'school/footer.html', {'areas': areas, 'create_application_form': CreateApplicationForm(),
+                                                  'partnership_form': partnership_form})
 
 
 # just html page
 def error404(request):
-    schools, areas = DriverSchoolUnit.objects.all(), Area.objects.all()
+    schools, areas, create_application_form, partnership_form = DriverSchoolUnit.objects.all(), Area.objects.all(), \
+                                                                CreateApplicationForm(), PartnershipForm()
     return render(request, 'school/error404.html',
-                  {'areas': areas, 'schools': schools, 'create_application_form': CreateApplicationForm(),
-                   'partnership_form': PartnershipForm()})
+                  {'areas': areas, 'schools': schools, 'create_application_form': create_application_form,
+                   'partnership_form': partnership_form})
 
 
 def create_driver_application(request):
