@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 function showAreaLetter() {
     let buttonWrapper = document.getElementsByClassName("find-title"),
         areasWrapper = document.getElementsByClassName("areas-block"),
@@ -21,19 +30,41 @@ function showAreaLetter() {
     }
 }
 
+function hideShow (result, i) {
+    let block =  document.getElementsByClassName("result-block"),
+        results = document.getElementsByClassName(result)[0],
+        active = document.getElementsByClassName("active-find")[0];
+
+
+    results.children[i].classList.add("active-find");
+    active.classList.add("active-close");
+
+    setTimeout(function() {
+        for (let k = 0; k < block.length; k++) {
+            block[k].classList.remove("active-find");
+            block[k].classList.remove("active-close");
+        }
+    }, 1000);
+
+
+}
+
 function showResult(result, wrapper) {
-    let Result = document.getElementsByClassName(result)[0],
-        Wrapper = document.getElementsByClassName(wrapper)[0],
-        Block =  document.getElementsByClassName("result-block");
+    let results = document.getElementsByClassName(result)[0],
+        wrappers = document.getElementsByClassName(wrapper)[0];
 
+        for (let i=0; i < results.children.length; i++) {
 
-        for (let i=0; i < Result.children.length; i++) {
+        wrappers.children[i].onclick = function () {
 
-        Wrapper.children[i].onclick = function () {
-            for (let k = 0; k < Block.length; k++) {
-                Block[k].classList.remove("active-find");
+            if ($(".active-find").length === 0){
+                hideShow(result, i);
+            } else {
+                hideShow(result, i);
+                setTimeout(function() {
+                    results.children[i].classList.add("active-find");
+                }, 1000);
             }
-                Result.children[i].classList.add("active-find");
         }
     }
 }

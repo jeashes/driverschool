@@ -151,6 +151,10 @@
                 </div>
 
                 <div class="result-wrapper">
+                    {% if error %}
+                    {{ error }}
+                    {{ else }}
+
                     {% for res in info %}
                         <div class="school-info">
 
@@ -203,6 +207,7 @@
 
                         </div>
                     {% endfor %}
+                    {% endif %}
                 </div>
 
             </div>

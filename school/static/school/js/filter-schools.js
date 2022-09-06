@@ -1,10 +1,9 @@
-let iconPrise = test => {for (let i = 0; i<2; i++) {
+let iconPrise = test => { for (let i = 0; i<2; i++) {
     $(".icon-price").find("i").get(i).style.color = "rgba(255, 255, 255, 1)";
-}};
+  }};
 
 function uncheckedInput(thisis, className, number) {
   $("input").checked = false;
-
   $('*').removeClass(className);
   thisis.checked = true;
   switch (number) {

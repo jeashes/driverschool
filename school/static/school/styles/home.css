@@ -140,7 +140,7 @@ span {
 
 .abc-block {
     max-width: 497px;
-    padding: 8px 20px;
+    padding: 8px 15px;
 }
 
 .black-block {
@@ -150,10 +150,11 @@ span {
 }
 
 .abc-block > span {
+padding: 0 5px 0;
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
-    margin: 0 10px 0 0;
+    cursor: pointer;
 }
 
 #search-result {
@@ -343,6 +344,7 @@ span {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 12px;
     margin: 0 20px;
+    cursor: pointer;
 }
 
 .active-title {
@@ -382,6 +384,7 @@ span {
     box-shadow: 0 0 15px rgb(0 0 0 / 10%);
     border-radius: 12px;
     padding: 5px 15px;
+    cursor: pointer;
 }
 
 .area-wrapper > span:hover {
@@ -426,6 +429,17 @@ span {
     box-shadow: 0 0 15px rgb(0 0 0 / 10%);
     border-radius: 12px;
     padding: 5px 10px;
+    cursor: pointer;
+}
+
+.letter-wrapper > span:hover {
+    color: #fff;
+    background: #F28800;
+}
+
+.letter-wrapper > span:active {
+    color: #000;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .letters-block:only-child {
@@ -474,9 +488,19 @@ span {
     animation: ani 1s forwards;
 }
 
+.active-close {
+    display: block;
+    animation: close 1s forwards;
+}
+
 @keyframes ani {
     0% {transform: translateX(0);}
     100% {transform: translatex(713px);}
+}
+
+@keyframes close {
+    0% {transform: translateX(713px);}
+    100% {transform: translatex(0);}
 }
 
 .result-block > h3 {

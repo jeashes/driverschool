@@ -2,7 +2,10 @@ let footerWrapper = document.getElementsByClassName("footer-areas")[0],
     areaWrapper = document.getElementsByClassName("areas-block")[0];
 
     function clickButton(item) {
-        let click_event = new CustomEvent('click');
+        let click_event = new CustomEvent('click'),
+            findTitle = document.getElementsByClassName("find-title");
+
+        setTimeout(findTitle[0].dispatchEvent(click_event), 100);
         setTimeout(areaWrapper.children[item].dispatchEvent(click_event), 1000)
     }
 
