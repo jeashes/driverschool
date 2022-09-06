@@ -149,12 +149,12 @@
 
                     </form>
                 </div>
-
+                {% if error %}
                 <div class="result-wrapper">
-                    {% if error %}
-                    {{ error }}
-                    {{ else }}
-
+                {{ error }}
+                </div>
+                {% else %}
+                <div class="result-wrapper">
                     {% for res in info %}
                         <div class="school-info">
 
@@ -207,9 +207,8 @@
 
                         </div>
                     {% endfor %}
-                    {% endif %}
                 </div>
-
+                {% endif %}
             </div>
 
         </div>
