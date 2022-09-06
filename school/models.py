@@ -101,7 +101,7 @@ class DriverSchoolUnit(models.Model):
     name = models.CharField(max_length=250, verbose_name='Назва філії')
     address = models.CharField(max_length=400, verbose_name='Адреса автошколи')
     driverschool = models.ForeignKey(DriverSchool, on_delete=models.CASCADE, verbose_name='Головний офіс')
-    url = models.URLField(max_length=400, blank=True, verbose_name='Геопозиція автошколи')
+    url = models.URLField(max_length=1500, blank=True, verbose_name='Геопозиція автошколи')
     category = models.ManyToManyField(Category, verbose_name='Категорії', blank=True)
     cources = ChainedManyToManyField(Courses, chained_field='category', chained_model_field='category',
                                      verbose_name='Курси', blank='True')
