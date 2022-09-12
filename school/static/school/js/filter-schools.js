@@ -37,6 +37,8 @@ $(".other-filter").on('change','input[type=radio]',(function() {
   }
 }));
 
+
+
 $("#filter-price").on('change','input[type=radio]',(function () {
 
   uncheckedInput($(this), "actives", 3)

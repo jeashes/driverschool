@@ -7,67 +7,97 @@ from .forms import CreateApplicationForm, PartnershipForm
 def home(request):
     schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), \
                                                    DriverApplication.objects.all(), City.objects.all()
-    return render(request, 'school/home.html', {'areas': areas, 'schools': schools, 'letters': letters,
-                                                'create_application_form': CreateApplicationForm(),
-                                                'partnership_form': PartnershipForm(), 'len_apps': len(application),
-                                                'len_schools': len(schools), 'len_cities': len(cities)})
+    dict_home = {'areas': areas, 'schools': schools, 'letters': letters,
+                 'create_application_form': CreateApplicationForm(),
+                 'partnership_form': PartnershipForm(), 'len_apps': len(application),
+                 'len_schools': len(schools), 'len_cities': len(cities)}
+    return render(request, 'school/home.html', dict_home)
 
 
 # Search schools code_city/city
 def search_authoschool(request, searched):
     areas = Area.objects.all()
-    if DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched):
-        city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched)
+
+    django_search_school_city = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched.capitalize())
+    django_search_school_code = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
+
+    if django_search_school_city:
+        city_autoschools = django_search_school_city
+
+        dict_search_school_city = {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
+                                   'name_city': city_autoschools[0].city_of_unit,
+                                   'url_city': city_autoschools[0].city_of_unit.url,
+                                   'create_application_form': CreateApplicationForm(),
+                                   'partnership_form': PartnershipForm(), }
+
         return render(request, 'school/search_schools.html',
-                      {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                       'name_city': city_autoschools[0].city_of_unit, 'url_city': city_autoschools[0].city_of_unit.url,
-                       'create_application_form': CreateApplicationForm(),
-                       'partnership_form': PartnershipForm(), })
-    if DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched):
-        city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
-        return render(request, 'school/search_schools.html',
-                      {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                       'name_city': city_autoschools[0].city_of_unit, 'url_city': city_autoschools[0].city_of_unit.url,
-                       'create_application_form': CreateApplicationForm(),
-                       'partnership_form': PartnershipForm(), })
+                      dict_search_school_city)
+
+    if django_search_school_code:
+
+        city_autoschools = django_search_school_code
+
+        dict_search_school_code = {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
+                                   'name_city': city_autoschools[0].city_of_unit,
+                                   'url_city': city_autoschools[0].city_of_unit.url,
+                                   'create_application_form': CreateApplicationForm(),
+                                   'partnership_form': PartnershipForm(), }
+
+        return render(request, 'school/search_schools.html', dict_search_school_code)
+
     else:
         return render(request, 'school/error404.html')
 
 
 def search(request):
     if request.GET['searched']:
-        areas = Area.objects.all()
-        searched = request.GET['searched']
-        if DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched.capitalize()):
-            city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched.capitalize())
+        areas, searched = Area.objects.all(), request.GET['searched']
+
+        django_search_city = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched.capitalize())
+        django_search_code = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
+
+        if django_search_city:
+            city_autoschools = django_search_city
+
+            dict_search_city = {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
+                                'name_city': city_autoschools[0].city_of_unit,
+                                'url_city': city_autoschools[0].city_of_unit.url,
+                                'create_application_form': CreateApplicationForm(),
+                                'partnership_form': PartnershipForm(), }
+
             return render(request, 'school/search_schools.html',
-                          {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                           'name_city': city_autoschools[0].city_of_unit,
-                           'url_city': city_autoschools[0].city_of_unit.url,
-                           'create_application_form': CreateApplicationForm(),
-                           'partnership_form': PartnershipForm(), })
-        if DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched):
-            city_autoschools = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
+                          dict_search_city)
+        if django_search_code:
+
+            city_autoschools = django_search_code
+
+            dict_search_code = {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
+                                'name_city': city_autoschools[0].city_of_unit,
+                                'url_city': city_autoschools[0].city_of_unit.url,
+                                'create_application_form': CreateApplicationForm(),
+                                'partnership_form': PartnershipForm(), }
+
             return render(request, 'school/search_schools.html',
-                          {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                           'name_city': city_autoschools[0].city_of_unit,
-                           'url_city': city_autoschools[0].city_of_unit.url,
-                           'create_application_form': CreateApplicationForm(),
-                           'partnership_form': PartnershipForm(), })
+                          dict_search_code)
         else:
             return render(request, 'school/search_schools.html',
                           {'areas': areas, 'error': 'Not found, please input another word', 'name_city': 'Error'})
     else:
+
         schools, areas, letters = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all()
-        return render(request, 'school/home.html', {'areas': areas, 'schools': schools, 'letters': letters,
-                                                    'error': 'Please input',
-                                                    'create_application_form': CreateApplicationForm(),
-                                                    'partnership_form': PartnershipForm(), })
+
+        dict_search_error = {'areas': areas, 'schools': schools, 'letters': letters,
+                             'error': 'Please input',
+                             'create_application_form': CreateApplicationForm(),
+                             'partnership_form': PartnershipForm(), }
+
+        return render(request, 'school/home.html', dict_search_error)
 
 
 # for big filter
 def filtered(request, city):
-    areas, schools = Area.objects.all(), DriverSchoolUnit.objects.all()
+    areas, schools, letter = Area.objects.all(), DriverSchoolUnit.objects.all(), request.GET.get('category')
+
     filter_value_in_key = {
         "price-low-up": 'cources__price',
         "price-up-low": 'cources__price',
@@ -75,45 +105,107 @@ def filtered(request, city):
         'rating': 'driverschool__score',
     }
 
-    letter = request.GET.get('category')
-    if request.GET.get('filtered'):
-        filtered_schools = DriverSchoolUnit.objects.filter(
-            cources__category__name__contains=letter).filter(
-            city_of_unit__name__contains=city)
-        if request.GET.get('filtered') == 'price-up-low' or request.GET.get('filtered') == 'rating':
-            ordered_schools = filtered_schools.order_by(
-                '-' + filter_value_in_key[request.GET.get('filtered')]).distinct(
-                filter_value_in_key[request.GET.get('filtered')])
+    if city[0] == '0':
+        if request.GET.get('filtered'):
 
-            return render(request, 'school/filtered_schools.html',
-                          {'areas': areas, 'filtered_schools': ordered_schools, 'count': len(ordered_schools),
-                           'url_city': ordered_schools[0].city_of_unit.url,
-                           'name_city': ordered_schools[0].city_of_unit,
-                           'create_application_form': CreateApplicationForm(),
-                           'partnership_form': PartnershipForm(), })
+            filtered_schools = DriverSchoolUnit.objects.filter(
+                cources__category__name__contains=letter).filter(
+                city_of_unit__post_code__contains=city)
+
+            if request.GET.get('filtered') == 'price-up-low' or request.GET.get('filtered') == 'rating':
+
+                ordered_schools = filtered_schools.order_by(
+                    '-' + filter_value_in_key[request.GET.get('filtered')]).distinct(
+                    filter_value_in_key[request.GET.get('filtered')])
+
+                dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
+                                          'count': len(ordered_schools),
+                                          'url_city': ordered_schools[0].city_of_unit.url,
+                                          'name_city': ordered_schools[0].city_of_unit,
+                                          'create_application_form': CreateApplicationForm(),
+                                          'partnership_form': PartnershipForm(), }
+
+                return render(request, 'school/filtered_schools.html',
+                              dict_filter_order_code)
+            else:
+                ordered_schools = filtered_schools.order_by(filter_value_in_key[request.GET.get('filtered')]).distinct(
+                    filter_value_in_key[request.GET.get('filtered')])
+
+                dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
+                                          'count': len(ordered_schools),
+                                          'url_city': ordered_schools[0].city_of_unit.url,
+                                          'name_city': ordered_schools[0].city_of_unit,
+                                          'create_application_form': CreateApplicationForm(),
+                                          'partnership_form': PartnershipForm(), }
+
+                return render(request, 'school/filtered_schools.html',
+                              dict_filter_order_code)
         else:
-            ordered_schools = filtered_schools.order_by(filter_value_in_key[request.GET.get('filtered')]).distinct(
-                filter_value_in_key[request.GET.get('filtered')])
 
+            category_filtered = DriverSchoolUnit.objects.filter(
+                cources__category__name__contains=letter).filter(
+                city_of_unit__post_code__contains=city)
+
+            dict_category_filter = {'areas': areas,
+                                    'filtered_schools': category_filtered, 'count': len(category_filtered),
+                                    'url_city': category_filtered[0].city_of_unit.url,
+                                    'name_city': category_filtered[0].city_of_unit,
+                                    'create_application_form': CreateApplicationForm(),
+                                    'partnership_form': PartnershipForm(), }
             return render(request, 'school/filtered_schools.html',
-                          {'areas': areas, 'filtered_schools': ordered_schools, 'count': len(ordered_schools),
-                           'url_city': ordered_schools[0].city_of_unit.url,
-                           'name_city': ordered_schools[0].city_of_unit,
-                           'create_application_form': CreateApplicationForm(),
-                           'partnership_form': PartnershipForm(), })
-
+                          dict_category_filter)
 
     else:
-        category_filtered = DriverSchoolUnit.objects.filter(
-            cources__category__name__contains=letter).filter(
-            city_of_unit__name__contains=city)
-        return render(request, 'school/filtered_schools.html',
-                      {'areas': areas,
-                       'filtered_schools': category_filtered, 'count': len(category_filtered),
-                       'url_city': category_filtered[0].city_of_unit.url,
-                       'name_city': category_filtered[0].city_of_unit,
-                       'create_application_form': CreateApplicationForm(),
-                       'partnership_form': PartnershipForm(), })
+        if request.GET.get('filtered'):
+
+            filtered_schools = DriverSchoolUnit.objects.filter(
+                cources__category__name__contains=letter).filter(
+                city_of_unit__name__contains=city)
+
+            if request.GET.get('filtered') == 'price-up-low' or request.GET.get('filtered') == 'rating':
+
+                ordered_schools = filtered_schools.order_by(
+                    '-' + filter_value_in_key[request.GET.get('filtered')]).distinct(
+                    filter_value_in_key[request.GET.get('filtered')])
+
+                dict_filter_order_city = {'areas': areas, 'filtered_schools': ordered_schools,
+                                          'count': len(ordered_schools),
+                                          'url_city': ordered_schools[0].city_of_unit.url,
+                                          'name_city': ordered_schools[0].city_of_unit,
+                                          'create_application_form': CreateApplicationForm(),
+                                          'partnership_form': PartnershipForm(), }
+
+                return render(request, 'school/filtered_schools.html',
+                              dict_filter_order_city)
+            else:
+
+                ordered_schools = filtered_schools.order_by(filter_value_in_key[request.GET.get('filtered')]).distinct(
+                    filter_value_in_key[request.GET.get('filtered')])
+
+                dict_filter_order_city = {'areas': areas, 'filtered_schools': ordered_schools,
+                                          'count': len(ordered_schools),
+                                          'url_city': ordered_schools[0].city_of_unit.url,
+                                          'name_city': ordered_schools[0].city_of_unit,
+                                          'create_application_form': CreateApplicationForm(),
+                                          'partnership_form': PartnershipForm(), }
+
+                return render(request, 'school/filtered_schools.html',
+                              dict_filter_order_city)
+        else:
+
+            category_filtered = DriverSchoolUnit.objects.filter(
+                cources__category__name__contains=letter).filter(
+                city_of_unit__name__contains=city)
+
+            dict_category_filter = {'areas': areas,
+                                    'filtered_schools': category_filtered, 'count': len(category_filtered),
+                                    'url_city': category_filtered[0].city_of_unit.url,
+                                    'name_city': category_filtered[0].city_of_unit,
+                                    'create_application_form': CreateApplicationForm(),
+                                    'partnership_form': PartnershipForm(), }
+
+            return render(request, 'school/filtered_schools.html',
+                          dict_category_filter)
 
 
 # Info about school

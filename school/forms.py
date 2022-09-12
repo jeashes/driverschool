@@ -1,4 +1,4 @@
-from django.forms import ModelForm, forms
+from django.forms import ModelForm, forms, TextInput
 from .models import DriverApplication, Partnership
 import re
 from django.core.exceptions import ValidationError
@@ -14,6 +14,11 @@ class CreateApplicationForm(ModelForm):
     class Meta:
         model = DriverApplication
         fields = ['firstLast_name', 'phone_number', 'email', 'city', 'driverschoolunit', 'course']
+        widgets = {
+            'firstLast_name': TextInput(attrs={'placeholder': 'Input First and Last name'}),
+            'phone_number': TextInput(attrs={'placeholder': 'Input phone number'}),
+            'email': TextInput(attrs={'placeholder': 'Input email'}),
+        }
 
     def clean_firstLast_name(self):
         fl_name = self.cleaned_data['firstLast_name']

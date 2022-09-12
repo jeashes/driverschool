@@ -39,7 +39,7 @@
 
             <div class="breadcrumbs">
                 <a href="{% url 'home' %}"> Головна </a>
-                <span> > {{ name_city }}</span>
+                <span>> {{ name_city }}</span>
             </div>
 
             <h2>Знайдено {{ count }} автошкіл</h2>
@@ -215,9 +215,18 @@
     </div>
 </section>
 
+
 </div>
 
-<iframe src="{{ url_city }}" width="1920" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
+<iframe src="{{ url_city }}"
+    width="1910" height="600" style="border:0;" allowfullscreen=""
+    loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+</div>
+
 
 
 <script src="{% static 'school/js/rating.js' %}"></script>

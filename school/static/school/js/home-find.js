@@ -30,6 +30,7 @@ function showAreaLetter() {
     }
 }
 
+
 function hideShow (result, i) {
     let block =  document.getElementsByClassName("result-block"),
         results = document.getElementsByClassName(result)[0],
@@ -68,10 +69,27 @@ function showResult(result, wrapper) {
         }
     }
 }
+function closeTabs(result) {
+    let iconArrow = document.getElementsByClassName("icon-arrow"),
+        results = document.getElementsByClassName(result)[0];
+
+
+    for (let i=0; i < iconArrow.length; i++) {
+        iconArrow[i].onclick = function () {
+            for (let k=0; k < results.length; k++) {
+                hideShow("result", k);
+            }
+        }
+    }
+
+
+}
+
 
 showResult("letters-result", "letters-block");
 showResult("areas-result", "areas-block");
 
 
-
 showAreaLetter();
+closeTabs("letters-result");
+closeTabs("areas-result");

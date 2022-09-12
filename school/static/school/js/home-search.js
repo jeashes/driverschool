@@ -1,7 +1,7 @@
 let inputWrapper = document.getElementsByClassName("home-search")[0],
     input = document.getElementById("home-search"),
     searchResult = document.getElementById("search-result"),
-    delayInMilliseconds = 110, // 0.11 second
+    delayInMilliseconds = 200, // 0.20 second
     abcBlock = document.getElementsByClassName("abc-icon-wrapper")[0],
     abcWrapper = document.getElementsByClassName("abc-block-wrapper")[0];
 
