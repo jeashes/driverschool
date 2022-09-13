@@ -4,9 +4,7 @@ from .forms import CreateApplicationForm, PartnershipForm
 
 
 def home(request):
-    schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), \
-                                                   Alphabet.objects.all(), \
-                                                   DriverApplication.objects.all(), City.objects.all()
+    schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
     dict_home = {'areas': areas, 'schools': schools, 'letters': letters,
                  'create_application_form': CreateApplicationForm(),
                  'partnership_form': PartnershipForm(), 'len_apps': len(application),
@@ -98,12 +96,13 @@ def search(request):
                           {'areas': areas, 'error': 'Not found, please input another word', 'searched': 'Error'})
     else:
 
-        schools, areas, letters = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all()
+        schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
 
         dict_search_error = {'areas': areas, 'schools': schools, 'letters': letters,
                              'error': 'Please input',
                              'create_application_form': CreateApplicationForm(),
-                             'partnership_form': PartnershipForm(), }
+                             'partnership_form': PartnershipForm(), 'len_apps': len(application),
+                             'len_schools': len(schools), 'len_cities': len(cities)}
 
         return render(request, 'school/home.html', dict_search_error)
 
@@ -181,7 +180,7 @@ def filtered(request, city):
                                 'url_city': ''.join([ukraine_map, category_filtered[0].city_of_unit.url][
                                                         city in filter_cities or city in filter_post_code]),
                                 'create_application_form': CreateApplicationForm(),
-                                'partnership_form': PartnershipForm(), 'searched':city}
+                                'partnership_form': PartnershipForm(), 'searched': city}
         return render(request, 'school/filtered_schools.html',
                       dict_category_filter)
 
