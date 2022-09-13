@@ -191,7 +191,8 @@ def info_about_authoschool(request, school_pk):
                                                                                       pk=school_pk), \
                                                 CreateApplicationForm(), PartnershipForm()
     return render(request, 'school/school_info.html',
-                  {'areas': areas, 'school': school, 'url_address': school.url, 'app_form': app_form,
+                  {'areas': areas, 'school': school, 'url_address': school.url,
+                   'create_application_form': app_form,
                    'partnership_form': partnership_form})
 
 

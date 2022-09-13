@@ -30,7 +30,6 @@
             </a>
         </div>
     </div>
-
 </section>
 
 <section class="results">
@@ -39,7 +38,7 @@
 
             <div class="breadcrumbs">
                 <a href="{% url 'home' %}"> Головна </a>
-                <span>> {{ searched }}</span>
+                <span> > {{ searched }}</span>
             </div>
 
             <h2>Знайдено {{ count }} автошкіл</h2>
@@ -149,11 +148,7 @@
 
                     </form>
                 </div>
-                {% if error %}
-                <div class="result-wrapper">
-                {{ error }}
-                </div>
-                {% else %}
+
                 <div class="result-wrapper">
                     {% for res in info %}
                         <div class="school-info">
@@ -208,22 +203,20 @@
                         </div>
                     {% endfor %}
                 </div>
-                {% endif %}
+
             </div>
 
         </div>
     </div>
 </section>
 
-
-</div>
-
-
+<p class="all-maps"><a href="{{ url_city }}">Карта міста зі школами</a></p>
 
 <iframe src="{{ url_city }}"
-    width="1910" height="600" style="border:0;" allowfullscreen=""
-    loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        width="1910" height="600" style="border:0;" allowfullscreen=""
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
 </iframe>
+
 
 </div>
 

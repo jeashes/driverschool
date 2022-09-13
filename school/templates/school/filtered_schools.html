@@ -38,7 +38,7 @@
 
             <div class="breadcrumbs">
                 <a href="{% url 'home' %}"> Головна </a>
-                <span> {{ searched }}</span>
+                <span> > {{ searched }}</span>
             </div>
 
             <h2>Знайдено {{ count }} автошкіл</h2>
@@ -210,14 +210,10 @@
 
 <!--<p class="all-maps"><a href="{{ url_city }}">Карта міста зі школами</a></p>-->
 
-
-
-
-<iframe src="{{ url_city }}"
+<iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2869.7686463530704!2d27.67283880113543!3d49.07881533956269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1z0LDQstGC0L7RiNC60L7Qu9C4INCR0LDRgA!5e0!3m2!1sen!2sua!4v1661291053592!5m2!1sen!2sua"
         width="1910" height="600" style="border:0;" allowfullscreen=""
         loading="lazy" referrerpolicy="no-referrer-when-downgrade">
 </iframe>
-
 
 
 <script src="{% static 'school/js/rating.js' %}"></script>

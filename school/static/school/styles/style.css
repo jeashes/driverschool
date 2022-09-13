@@ -45,6 +45,27 @@ body {
 }
 
 
+.icon-abc:before {
+  content: "\e903";
+}
+.icon-city:before {
+  content: "\e901";
+}
+.icon-graduation-cap:before {
+  content: "\e902";
+}
+.icon-people:before {
+  content: "\e904";
+  color: #fff;
+}
+.icon-two-people:before {
+  content: "\e905";
+}
+.icon-arrow:before {
+  content: "\e900";
+}
+
+
 .cust-icon {
     font-family: 'icomoon', Arial, sans-serif !important;
     speak: never;

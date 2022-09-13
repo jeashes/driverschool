@@ -10,12 +10,14 @@
 </head>
 <body>
 <h1 style="center">ERROR404</h1>
+
 <form action="{% url 'driver_app' %}" method="post">
     {% csrf_token %}
     {% bootstrap_form create_application_form %}
     {{ create_application_form.media }}
     <button type="submit">Submit</button>
 </form>
+
 <br>
 <form method="post">
     {% csrf_token %}
@@ -23,5 +25,6 @@
     {{ partnership_form.media }}
     <button type="submit">Submit</button>
 </form>
+
 </body>
 </html>

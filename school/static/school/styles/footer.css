@@ -51,6 +51,7 @@ footer {
 }
 
 .cards-wrapper > a {
+    cursor: pointer;
     width: fit-content;
     display: flex;
     align-items: center;

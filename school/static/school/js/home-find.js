@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 function showAreaLetter() {
     let buttonWrapper = document.getElementsByClassName("find-title"),
         areasWrapper = document.getElementsByClassName("areas-block"),

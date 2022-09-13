@@ -1,5 +1,8 @@
 <footer>
     {% load static %}
+{% load bootstrap3 %}
+{% bootstrap_messages %}
+
     <div class="content-wrapper">
         <div class="footer-content">
             <div class="top">
@@ -26,11 +29,11 @@
             </div>
             <div class="footer-middle">
                 <div class="cards-wrapper">
-                    <a href="#">
+                    <a>
                         <span>Стати водієм</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </a>
-                    <a href="#">
+                    <a>
                         <span>Стати партнером</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </a>
@@ -56,6 +59,43 @@
             </div>
         </div>
     </div>
+
+            <div class="modal-wrapper">
+                <div class="modal-content">
+
+                    <h2>Заповніть анкету</h2>
+                    <p>
+                        З вами з’яжуться, щоб допомогти підібрати автошколу
+                    </p>
+
+                    <form action="{% url 'driver_app' %}" method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form create_application_form %}
+                        {{ create_application_form.media }}
+                        <button type="submit" class="model-submit">Відправити</button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="modal-wrapper">
+                <div class="modal-content">
+
+                    <h2>Заповніть анкету</h2>
+                    <p>
+                        Ми завжди раді новим партнерам. Будь ласка внесіть данні
+                        з вами зв’яжуться найближчим часом
+                    </p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form partnership_form %}
+                        {{ partnership_form.media }}
+                        <button type="submit" class="model-submit">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+
 </footer>
 
 <script src="https://kit.fontawesome.com/e23493b56f.js" crossorigin="anonymous"></script>
@@ -64,6 +104,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script defer src="{% static 'school/js/itc-slider.js' %}"></script>
 <script defer src="{% static 'school/js/footer-anchor.js' %}"></script>
+<script src="{% static 'school/js/home-form.js' %}"></script>
+<script src="{% static 'school/js/footer-form.js' %}"></script>
+
 {% block content %}
 {% endblock %}
 
