@@ -13,7 +13,7 @@
 <section class="city-info">
     <div class="content-wrapper">
         <div class="city-info-content">
-            <h1> Автошколи {{ name_city }}</h1>
+            <h1> Автошколи {{ searched }}</h1>
             <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -38,7 +38,7 @@
 
             <div class="breadcrumbs">
                 <a href="{% url 'home' %}"> Головна </a>
-                <span> > {{ name_city }}</span>
+                <span> {{ searched }}</span>
             </div>
 
             <h2>Знайдено {{ count }} автошкіл</h2>
@@ -46,7 +46,7 @@
             <div class="filter-result-wrapper">
 
                 <div class="filters">
-                    <form id="category" action="{% url 'filtered' name_city %}" method="get">
+                    <form id="category" action="{% url 'filtered' searched %}" method="get">
 
                         <div class="category-wrapper">
 
