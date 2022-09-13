@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City
+from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, DriverSchool
 from .forms import CreateApplicationForm, PartnershipForm
 
 
@@ -187,11 +187,12 @@ def filtered(request, city):
 
 # Info about school
 def info_about_authoschool(request, school_pk):
-    areas, school, app_form, partnership_form = Area.objects.all(), get_object_or_404(DriverSchoolUnit,
-                                                                                      pk=school_pk), \
-                                                CreateApplicationForm(), PartnershipForm()
+    areas, school_unit, app_form, partnership_form, school = Area.objects.all(), \
+                                                             get_object_or_404(DriverSchoolUnit, pk=school_pk), \
+                                                             CreateApplicationForm(), PartnershipForm(), \
+                                                             get_object_or_404(DriverSchool, pk=school_pk)
     return render(request, 'school/school_info.html',
-                  {'areas': areas, 'school': school, 'url_address': school.url,
+                  {'areas': areas, 'school_unit': school_unit, 'url_address': school_unit.url, 'school': school,
                    'create_application_form': app_form,
                    'partnership_form': partnership_form})
 

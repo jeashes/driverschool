@@ -19,14 +19,14 @@
   <li itemprop="itemListElement" itemscope
       itemtype="https://schema.org/ListItem">
 
-    <a itemprop="item" href="{% url 'search_authoschool' school.city_of_unit.name %}">
-    <span itemprop="name">{{ school.city_of_unit.name }}</span></a>
+    <a itemprop="item" href="{% url 'search_authoschool' school.city %}">
+    <span itemprop="name">{{ school.city }}</span></a>
     <meta itemprop="position" content="2" />
   </li>
   <li itemprop="itemListElement" itemscope
       itemtype="https://schema.org/ListItem">
     <a itemprop="item" >
-    <span itemprop="name">{{ school.driverschool.name }}</span></a>
+    <span itemprop="name">{{ school_unit.driverschool.name }}</span></a>
     <meta itemprop="position" content="3" />
   </li>
 </ol>
@@ -34,22 +34,32 @@
 <br>
 <br>
 
-<p>{{ school.driverschool }}</p>
-<p>{{ school.city_of_unit.name }}</p>
-<p>{{ school.city_of_unit.area.name }}</p>
+<img src="{{ school.image2.url }}" width="330" height="365" alt="">
+<img src="{{ school.image3.url }}" width="330" height="365" alt="">
+<img src="{{ school.image4.url }}" width="330" height="365" alt="">
+<img src="{{ school.image5.url }}" width="330" height="365" alt="">
+
+
+<p>{{ school_unit.score }}</p>
+
 <p>{{ school.name }}</p>
+<p>{{ school.description }}</p>
+
+{% for course in school_unit.cources.all %}
+<p>{{ course.short_description }}</p>
+<p>{{ course.category.description }}</p>
+{% endfor %}
+
+
 {% load new_tags %}
-<p>{% for contact in school.contact|split:',' %}</p>
+<p>{% for contact in school_unit.contact|split:',' %}</p>
 <p>
   {{ contact }}
 </p>
 {% endfor %}
-{% for course in school.cources.all %}
 
-<p>{{ course.short_description }}</p>
-{% endfor %}
+<p>{{ school.address }}</p>
 
-<img src="{{ school.image.url }}" alt="">
 
 <iframe src="{{ url_address }}"
         width="1280" height="400" style="border:0;" allowfullscreen=""
