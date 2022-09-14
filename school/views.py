@@ -238,7 +238,7 @@ def create_driver_application(request):
 
     else:
         schools, areas = DriverSchoolUnit.objects.all(), Area.objects.all()
-        return render(request, 'school/footer.html',
+        return render(request, 'school/error404.html',
                       {'areas': areas, 'schools': schools, 'create_application_form': CreateApplicationForm(),
                        'partnership_form': PartnershipForm()})
 
