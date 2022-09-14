@@ -92,8 +92,12 @@ def search(request):
             return render(request, 'school/search_schools.html',
                           dict_search_code)
         else:
+
             return render(request, 'school/search_schools.html',
-                          {'areas': areas, 'error': 'Not found, please input another word', 'searched': 'Error'})
+                          {'areas': areas, 'error': 'Not found, please input another word', 'searched': 'Error',
+                           'create_application_form': CreateApplicationForm(),
+                           'partnership_form': PartnershipForm(),
+                           'url_city': ukraine_map})
     else:
 
         schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()

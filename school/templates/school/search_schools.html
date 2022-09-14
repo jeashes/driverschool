@@ -4,6 +4,8 @@
 
 <head>
     {% load static %}
+    {% load bootstrap3 %}
+    {% bootstrap_messages %}
     <link rel="stylesheet" type="text/css" href="{% static 'school/styles/search_school.css' %}" >
 </head>
 
@@ -150,6 +152,9 @@
                 </div>
 
                 <div class="result-wrapper">
+                    {% if error %}
+                    {{ error }}
+                    {% endif %}
                     {% for res in info %}
                         <div class="school-info">
 
@@ -209,9 +214,6 @@
         </div>
     </div>
 </section>
-
-<p class="all-maps"><a href="{{ url_city }}">Карта міста зі школами</a></p>
-
 <iframe src="{{ url_city }}"
         width="1910" height="600" style="border:0;" allowfullscreen=""
         loading="lazy" referrerpolicy="no-referrer-when-downgrade">
