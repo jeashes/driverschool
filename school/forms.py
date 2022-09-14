@@ -16,8 +16,8 @@ class CreateApplicationForm(ModelForm):
         fields = ['firstLast_name', 'phone_number', 'email', 'city', 'driverschoolunit', 'course']
         widgets = {
             'firstLast_name': TextInput(attrs={'placeholder': 'Input First and Last name'}),
-            'phone_number': TextInput(attrs={'placeholder': 'Input phone number'}),
-            'email': TextInput(attrs={'placeholder': 'Input email'}),
+            'phone_number': TextInput(attrs={'placeholder': '+38XXXXXXXXXX'}),
+            'email': TextInput(attrs={'placeholder': 'email@example.com '}),
         }
 
     def clean_firstLast_name(self):
@@ -46,6 +46,11 @@ class PartnershipForm(ModelForm):
     class Meta:
         model = Partnership
         fields = ['firstLast_name', 'phone_number', 'email', 'description']
+        widgets = {
+            'firstLast_name': TextInput(attrs={'placeholder': 'Input First and Last name'}),
+            'phone_number': TextInput(attrs={'placeholder': '+38XXXXXXXXXX'}),
+            'email': TextInput(attrs={'placeholder': 'email@example.com'}),
+        }
 
     def clean_firstLast_name(self):
         fl_name = self.cleaned_data.get('firstLast_name')

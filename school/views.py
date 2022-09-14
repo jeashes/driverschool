@@ -138,8 +138,7 @@ def filtered(request, city):
         if request.GET.get('filtered') == 'price-up-low' or request.GET.get('filtered') == 'rating':
 
             ordered_schools = filtered_schools.order_by(
-                '-' + filter_value_in_key[request.GET.get('filtered')]).distinct(
-                filter_value_in_key[request.GET.get('filtered')])
+                '-' + filter_value_in_key[request.GET.get('filtered')])
 
             dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
                                       'count': len(ordered_schools),
@@ -239,7 +238,7 @@ def create_driver_application(request):
 
     else:
         schools, areas = DriverSchoolUnit.objects.all(), Area.objects.all()
-        return render(request, 'school/error404.html',
+        return render(request, 'school/footer.html',
                       {'areas': areas, 'schools': schools, 'create_application_form': CreateApplicationForm(),
                        'partnership_form': PartnershipForm()})
 
