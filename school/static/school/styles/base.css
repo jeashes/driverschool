@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: "Mulish";
-    src: url("{% static 'autoschools/fonts/Mulish-VariableFont_wght' %}");
+    src: url(../fonts/Mulish-VariableFont_wght.ttf);
 }
 
 .header {

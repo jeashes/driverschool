@@ -25,18 +25,21 @@ function showAreaLetter() {
 function hideShow (result, i) {
     let block =  document.getElementsByClassName("result-block"),
         results = document.getElementsByClassName(result)[0],
-        active = document.getElementsByClassName("active-find")[0];
+        active = document.getElementsByClassName("active-find")[0],
+        close = document.getElementsByClassName("active-close")[0];
 
-
-    results.children[i].classList.add("active-find");
-    active.classList.add("active-close");
-
-    setTimeout(function() {
+        if (close) {setTimeout(function() {
         for (let k = 0; k < block.length; k++) {
             block[k].classList.remove("active-find");
             block[k].classList.remove("active-close");
         }
-    }, 1000);
+    }, 1000);}
+
+        if (active) {active.classList.add("active-close");}
+
+        if (!active) {results.children[i].classList.add("active-find")};
+
+
 
 
 }
@@ -67,9 +70,10 @@ function closeTabs(result) {
 
     for (let i=0; i < iconArrow.length; i++) {
         iconArrow[i].onclick = function () {
-            for (let k=0; k < results.length; k++) {
-                hideShow("result", k);
-            }
+                i > 22
+                ? hideShow(result, i-22)
+                : hideShow(result, i);
+
         }
     }
 
