@@ -1,5 +1,4 @@
 from django.db import models
-from django import forms
 from django import core
 from smart_selects.db_fields import ChainedManyToManyField, ChainedForeignKey
 
@@ -98,6 +97,7 @@ class DriverSchool(models.Model):
 
 
 class DriverSchoolUnit(models.Model):
+    driverschool_name = models.CharField(max_length=250, verbose_name='For application', default='!')
     name = models.CharField(max_length=250, verbose_name='Назва філії')
     address = models.CharField(max_length=400, verbose_name='Адреса автошколи')
     driverschool = models.ForeignKey(DriverSchool, on_delete=models.CASCADE, verbose_name='Головний офіс')
@@ -110,7 +110,7 @@ class DriverSchoolUnit(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.name
+        return self.driverschool_name
 
     class Meta:
         verbose_name = 'Філія автошколи'

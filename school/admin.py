@@ -73,7 +73,7 @@ class DriverSchoolUnitAdmin(admin.ModelAdmin):
     list_display_links = ('name', 'address')
     search_fields = ('name', 'address',)
     list_filter = ('city_of_unit',)
-    fields = ('name', 'address', 'driverschool', 'url', 'category', 'cources', 'contact', 'city_of_unit')
+    fields = ('driverschool_name', 'name', 'address', 'driverschool', 'url', 'category', 'cources', 'contact', 'city_of_unit')
 
 
 class PartnershipAdminForm(forms.ModelForm):

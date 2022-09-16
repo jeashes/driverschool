@@ -65,7 +65,7 @@
                     <i class="fa-solid fa-location-dot"></i>
                     <div class="school-info">
                         <a href="{% url 'view_school' info.id %}">
-                            {{ info.name }}
+                            {{ info.driverschool }}
                         </a>
                         <a href="{% url 'search_authoschool' info.city_of_unit.name %}">
                             {{ info.city_of_unit.name }} - {{ info.city_of_unit.post_code }}
