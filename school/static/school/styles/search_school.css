@@ -118,6 +118,7 @@
 .filters {
     max-width: 290px;
     position: relative;
+    padding: 20px 0 0;
 }
 
 .filters  > form {
@@ -274,6 +275,14 @@ input[type="radio"]{
 .slide {
     display: flex;
     flex-direction: column;
+    padding: 20px 40px;
+}
+
+
+.slider__btn {
+    border: none;
+    background: none !important;
+    color: #F28800 !important;
 }
 
 
@@ -455,7 +464,89 @@ input[type="radio"]{
         margin: 0 0 60px;
     }
 
-    .
+    .slider {
+        height: 4025px !important;
+    }
+
+    .slide {
+        padding: 20px 16px 0;
+    }
+
+    .school-info {
+        position: relative;
+        max-width: 288px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: #FFFFFF;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        padding: 20px 16px 40px;
+        margin: 0 0 40px;
+    }
+
+    .school-text {
+        max-width: 100%;
+    }
+
+    .school-score {
+        margin: 0 0 5px;
+    }
+
+    .school-text > h3 {
+        font-size: 16px;
+        line-height: 20px;
+        margin: 0 0 300px;
+    }
+
+    .school-address {
+        font-size: 10px;
+        line-height: 13px;
+    }
+
+    .school-address > i {
+        margin: 0 10px 0 0;
+        font-size: 16px;
+    }
+
+    .school-phone {
+        font-size: 10px;
+        line-height: 13px;
+        margin: 0 0 40px;
+    }
+
+    .school-phone > i {
+        transform: rotate(270deg);
+        margin: 0 10px 0 0;
+        font-size: 16px;
+    }
+
+    .school-text > a {
+        width: fit-content;
+    }
+
+    .school-text > a:hover {
+        text-decoration: none;
+    }
+
+    .school-img-category {
+        position: absolute;
+            top: 165px;
+            right: 0;
+            left: 0;
+    }
+
+    .button--submit {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .school-text  .button--submit  i,
+    .school-text  .button--submit  .fa-angle-right {
+        display: none !important;
+    }
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 1919px) {
@@ -545,6 +636,17 @@ input[type="radio"]{
 
     .other-filter > label{
         margin: 0 10px 0;
+    }
+
+    .slider {
+        height: 2650px !important;
+    }
+
+
+
+    .school-text > h3 {
+        font-size: 20px;
+        line-height: 25px;
     }
 
 }
