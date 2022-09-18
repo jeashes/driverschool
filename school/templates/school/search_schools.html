@@ -143,15 +143,23 @@
                             </label>
 
                         </div>
-
+                        {% if error %}
+                        <button type='submit' value="Підібрати" disabled>
+                            Застосувати
+                        </button>
+                        {% else %}
                         <button type='submit' value="Підібрати">
                             Застосувати
                         </button>
+                        {% endif %}
 
                     </form>
                 </div>
 
                 <div class="result-wrapper">
+                    {% if error %}
+                    {{ error }}
+                    {% else %}
                     <div class="slider">
 
                         <div class="slide">
@@ -269,11 +277,11 @@
                         </div>
                         {% endif %}
 
-
                         <button class="slider__btn slider__btn&#45;&#45;left">&#10094;</button>
                         <button class="slider__btn slider__btn&#45;&#45;right">&#10095;</button>
                         <div class="dots"></div>
                     </div>
+                    {% endif %}
 
                 </div>
 
