@@ -1,19 +1,23 @@
-<footer>
-    {% load static %}
+{% load static %}
 {% load bootstrap3 %}
 {% bootstrap_messages %}
 
-    <div class="content-wrapper">
-        <div class="footer-content">
-            <div class="top">
-                <div class="logo-wrapper">
-                    <div class="logo">
-                        <span> Лого </span>
+<footer class="footer">
+
+    <div class="content--wrapper">
+        <div class="footer__content">
+
+            <div class="footer__top">
+
+                <div class="brand">
+                    <div class="brand__logo">
+                        <span class="logo__name">Лого</span>
                     </div>
-                    <h6>Автошкола.Ua</h6>
+                    <h6 class="brand__name">Автошкола.Ua</h6>
                 </div>
 
-                <div class="footer-links">
+                <div class="links footer__links">
+
                     <a href="#" class="link">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
@@ -25,9 +29,13 @@
                     <a class="link">
                         <i class="cust-icon icon-people"></i>
                     </a>
+
                 </div>
+
             </div>
-            <div class="footer-middle">
+
+            <div class="footer__middle">
+
                 <div class="cards-wrapper">
                     <a>
                         <span>Стати водієм</span>
@@ -38,63 +46,69 @@
                         <i class="fa-solid fa-chevron-right"></i>
                     </a>
                 </div>
-                <div class="footer-contacts">
+
+                <div class="footer__contacts">
                         <span>Контакти</span>
                         <a href="tel:+380956675370">+380(95)667-53-70</a>
                         <span>Email</span>
                         <a href="mailto:google89@gmail.com">google89@gmail.com</a>
                 </div>
-                <div class="footer-areas-wrapper">
+
+                <div class="footer__areas-wrapper">
                     <h6> Області </h6>
-                    <div class="footer-areas">
+                    <div class="footer__areas">
                         {% for area in areas|slice:":24" %}
                             <span>{{ area.name }}</span>
                         {% endfor %}
                     </div>
                 </div>
+
             </div>
-            <div class="footer-politic">
+
+            <div class="footer__politic">
                 <a href="#">Користувацька угода</a>
-                <a href="#">Політика конфеденційності</a>
+                <a href="#">Політика конфіденційності</a>
             </div>
+
         </div>
     </div>
 
-            <div class="modal-wrapper">
-                <div class="modal-content">
+    <div class="modal-wrapper">
+        <div  class="modal__content">
 
-                    <h2>Заповніть анкету</h2>
-                    <p>
-                        З вами з’яжуться, щоб допомогти підібрати автошколу
-                    </p>
+            <h2>Заповніть анкету</h2>
+            <p>
+                З вами зв'яжуться, щоб допомогти підібрати автошколу
+            </p>
 
-                    <form action="{% url 'driver_app' %}" method="post">
-                        {% csrf_token %}
-                        {% bootstrap_form create_application_form %}
-                        {{ create_application_form.media }}
-                        <button type="submit" class="model-submit">Відправити</button>
-                    </form>
+            <form action="{% url 'driver_app' %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form create_application_form %}
+                {{ create_application_form.media }}
+                <button type="submit" class="modal__button button--submit">Відправити</button>
+            </form>
 
-                </div>
-            </div>
-            <div class="modal-wrapper">
-                <div class="modal-content">
+        </div>
+    </div>
 
-                    <h2>Заповніть анкету</h2>
-                    <p>
-                        Ми завжди раді новим партнерам. Будь ласка внесіть данні
-                        з вами зв’яжуться найближчим часом
-                    </p>
+    <div class="modal-wrapper">
+        <div class="modal__content">
 
-                    <form method="post">
-                        {% csrf_token %}
-                        {% bootstrap_form partnership_form %}
-                        {{ partnership_form.media }}
-                        <button type="submit" class="model-submit">Submit</button>
-                    </form>
+            <h2>Заповніть анкету</h2>
+            <p>
+                Ми завжди раді новим партнерам. Будь ласка внесіть данні
+                з вами зв'яжуться найближчим часом
+            </p>
 
-                </div>
-            </div>
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form partnership_form %}
+                {{ partnership_form.media }}
+                <button type="submit" class="modal__button button--submit">Submit</button>
+            </form>
+
+        </div>
+    </div>
 
 </footer>
 
@@ -109,5 +123,3 @@
 {% block content %}
 {% endblock %}
 
-</body>
-</html>

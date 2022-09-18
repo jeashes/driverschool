@@ -55,10 +55,16 @@
     letter-spacing: 0.015em;
 }
 
-.city-info-content a {
+.city-info__button--back-home {
     position: absolute;
     top: 375px;
     right: 350px;
+    display: flex;
+    align-items: center;
+}
+
+.city-info__button--back-home > span {
+    margin: 0 10px;
 }
 
 .city-info-content a span {
@@ -231,10 +237,14 @@ label {
 }
 
 .filters button {
-    background: #f9f9fc;
+    border: none;
     border-radius: 0;
+    outline: none;
+
+    background: #f9f9fc;
     border-bottom: 2px solid #F28800;
 }
+
 
 button:focus {
     outline: none;
@@ -255,6 +265,17 @@ input[type="radio"]{
     max-width: 950px;
     width: 100%;
 }
+
+.slider {
+    max-width: 950px !important;
+    height: 2500px !important;
+}
+
+.slide {
+    display: flex;
+    flex-direction: column;
+}
+
 
 .school-info {
     display: flex;
@@ -322,6 +343,39 @@ input[type="radio"]{
     border-radius: 12px;
 }
 
+.button--submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    padding: 11px 20px;
+    text-align: center;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #F28800;
+}
+
+.button--submit > span {
+    font-size: 18px;
+    line-height: 23px;
+    color: #FFFFFF;
+}
+
+.button--submit > i {
+    display: flex !important;
+    margin: 0 0 0 20px;
+    width: 35px;
+    height: 35px;
+    color: #F28800;
+    background: #fff;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+
 .img-category-wrapper {
     width: 100%;
     font-weight: 700;
@@ -336,3 +390,162 @@ input[type="radio"]{
 .all-maps {
     margin: 160px 0 20px;
 }
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .city-info-content > h1 {
+        font-size: 28px;
+        line-height: 35px;
+    }
+
+    .city-info-content > p{
+        width: 90%;
+        font-weight: 100;
+        font-size: 10px;
+        line-height: 22px;
+
+        text-align: center;
+        letter-spacing: 0.015em;
+
+        color: #FFFFFF;
+    }
+
+    .city-info__button--back-home {
+        top: 270px;
+        right: 16px;
+    }
+
+    .city-info__button--back-home >span {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .city-info-content > p:last-of-type {
+        display: none;
+    }
+
+    .area-map {
+        max-height: 125px;
+    }
+
+    .breadcrumbs > a{
+        font-size: 9px;
+        line-height: 11px;
+    }
+
+    .breadcrumbs > span{
+        font-size: 9px;
+        line-height: 11px;
+    }
+
+    .results-content > h2 {
+        font-size: 22px;
+        line-height: 28px;
+    }
+
+    .main-category > label {
+        font-size: 15px;
+    }
+
+    .filter-result-wrapper {
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .filters {
+        margin: 0 0 60px;
+    }
+
+    .
+}
+
+@media screen and (min-width: 768px) and (max-width: 1919px) {
+
+    .city-info-content > p{
+
+        width: 90%;
+        font-weight: 100;
+        font-size: 12px;
+        line-height: 22px;
+
+        text-align: center;
+        letter-spacing: 0.015em;
+
+        color: #FFFFFF;
+    }
+
+    .city-info__button--back-home {
+        top: 400px;
+        right: 34px;
+        margin: 0 15px 0 0;
+    }
+
+    .city-info__button--back-home > span {
+        font-weight: 100 !important;
+        font-size: 15px;
+        line-height: 23px;
+        text-decoration: none;
+    }
+
+    .area-map {
+        max-height: 240px;
+    }
+
+
+    .filter-result-wrapper {
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .filters {
+        max-width: 100%;
+        width: 100%;
+        margin: 0 0 50px;
+    }
+
+    .category-wrapper {
+        width: 100%;
+    }
+
+    .category-wrapper > h6 {
+        text-align: center;
+    }
+
+    .category {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-category {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        grid-template-columns: none;
+        grid-template-rows: none;
+        grid-row-gap: 0;
+        grid-column-gap: 0;
+        margin: 0 0 15px;
+    }
+
+    .main-category > label {
+        padding: 10px 20px;
+        font-size: 15px;
+        width: fit-content;
+    }
+
+    .other-category {
+        display: flex;
+        justify-content: space-evenly;
+        width: 50%;
+    }
+
+    .other-filter {
+        display: flex;
+    }
+
+    .other-filter > label{
+        margin: 0 10px 0;
+    }
+
+}
+@media screen and (min-width: 1919px) {}

@@ -26,10 +26,10 @@
 
     function clickOnButton(buttons) {
         let modalWrapper = $(".modal-wrapper"),
-            modalButton = $(".modal-button");
+            modalButton = $(".button--modal");
 
         for (let i = 0; i < 2; i++) {
-            if (buttons[i] == modalButton[i]) {
+            if (buttons[i] === modalButton[i]) {
                 buttons[i].onclick = function () {
                     showModal(i);
                                 modalWrapper[i].onclick = function(event) {
@@ -53,5 +53,5 @@
         }
     }
 
-    clickOnButton($(".modal-button"));
+    clickOnButton($(".button--modal"));
 

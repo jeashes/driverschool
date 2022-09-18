@@ -37,11 +37,7 @@ function hideShow (result, i) {
 
         if (active) {active.classList.add("active-close");}
 
-        if (!active) {results.children[i].classList.add("active-find")};
-
-
-
-
+        if (!active) {results.children[i].classList.add("active-find")}
 }
 
 function showResult(result, wrapper) {
@@ -64,8 +60,7 @@ function showResult(result, wrapper) {
     }
 }
 function closeTabs(result) {
-    let iconArrow = document.getElementsByClassName("icon-arrow"),
-        results = document.getElementsByClassName(result)[0];
+    let iconArrow = document.getElementsByClassName("icon-arrow");
 
 
     for (let i=0; i < iconArrow.length; i++) {

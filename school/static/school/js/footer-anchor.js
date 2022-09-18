@@ -1,4 +1,4 @@
-let footerWrapper = document.getElementsByClassName("footer-areas")[0],
+let footerWrapper = document.getElementsByClassName("footer__areas")[0],
     areaWrapper = document.getElementsByClassName("areas-block")[0];
 
     function clickButton(item) {

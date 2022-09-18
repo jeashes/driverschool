@@ -1,6 +1,7 @@
  <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta charset="UTF-8">
     <title>Title</title>
     {% load static %}
@@ -8,7 +9,7 @@
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- custom css & js -->
-    <link rel="stylesheet" href="{% static 'school/styles/style.css' %}" >
+    <link rel="stylesheet" href="{% static "school/styles/style.css" %}" >
     <link rel="stylesheet" href="{% static 'school/styles/base.css' %}" >
     <link rel="stylesheet" href="{% static 'school/styles/home.css' %}" >
     <link rel="stylesheet" href="{% static 'school/styles/itc-slider.css' %}" >
@@ -17,56 +18,56 @@
 </head>
 <body>
 
-    <header class="header">
+<header class="header">
 
-        <img class="header-background desktop-background"
-             src="{% static 'school/desktop-drive-girl.png' %}"
-             alt="Desktop background">
-        <img class="header-background tablet-background"
-             src="{% static 'school/tablet-drive-girl.png' %}"
-             alt="Tablet background">
-        <img class="header-background mobile-background"
-             src="{% static 'school/mobile-drive-girl.png' %}"
-             alt="Mobile background">
+    <img class="header__background header__background--desktop"
+         src="{% static 'school/background--desktop.png' %}"
+         alt="Desktop background">
+    <img class="header__background header__background--tablet"
+         src="{% static 'school/background--tablet.png' %}"
+         alt="Tablet background">
+    <img class="header__background header__background--mobile"
+         src="{% static 'school/background--mobile.png' %}"
+         alt="Mobile background">
 
-        <div class="content-wrapper header-content-wrapper">
-            <div class="header-content">
+    <div class="content--wrapper header__content--wrapper">
+        <div class="header__content">
 
-                    <div class="logo-wrapper">
-                        <div class="logo">
-                            <span class="logo-name">Лого</span>
-                        </div>
-                        <span class="logo-title">Автошкола.Ua</span>
-                    </div>
+            <div class="brand">
+                <div class="brand__logo">
+                    <span class="logo__name">Лого</span>
+                </div>
+                <h6 class="brand__name">Автошкола.Ua</h6>
+            </div>
 
-                    <div class="contacts header-contacts">
-                        <div class="icon-wrapper header-icons">
-                            <a href="#" class="icon icon-header">
-                                <i class="fa-brands fa-instagram"></i>
-                            </a>
-                            <a href="#" class="icon icon-header">
-                                <i class="fa-brands fa-facebook-f"></i>
-                            </a>
+            <div class="contacts header__contacts">
 
+                <div class="links header__links">
 
-                            <a class="icon icon-header">
-                                <i class="cust-icon icon-people"></i>
-                            </a>
+                    <a href="#" class="link">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
 
+                    <a href="#" class="link">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
 
-                        </div>
-                        <div class="header-login">
-                            <span class="login-text">Вхід/Реєстрація</span>
-                        </div>
-                    </div>
+                    <a href="#" class="link">
+                        <i class="cust-icon icon-people"></i>
+                    </a>
 
                 </div>
 
+                <span class="header__login">Вхід/Реєстрація</span>
+
             </div>
+
         </div>
-    </header>
-    {% block content %}
-    {% endblock %}
-    {% include 'school/footer.html' %}
+    </div>
+
+</header>
+{% block content %}
+{% endblock %}
+{% include 'school/footer.html' %}
 
 

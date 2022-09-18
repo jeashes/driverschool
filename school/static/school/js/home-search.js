@@ -1,9 +1,9 @@
-let inputWrapper = document.getElementsByClassName("home-search")[0],
-    input = document.getElementById("home-search"),
-    searchResult = document.getElementById("search-result"),
+let inputWrapper = document.getElementsByClassName("search__form")[0],
+    input = document.getElementById("search__field"),
+    searchResult = document.getElementById("search__result"),
     delayInMilliseconds = 200, // 0.20 second
-    abcBlock = document.getElementsByClassName("abc-icon-wrapper")[0],
-    abcWrapper = document.getElementsByClassName("abc-block-wrapper")[0];
+    abcBlock = document.getElementsByClassName("search__letters")[0],
+    abcWrapper = document.getElementsByClassName("search__letters-block")[0];
 
 
 
@@ -28,7 +28,7 @@ input.onblur = function () {
 function homeSearch() {
 
     let filter = input.value.toLowerCase(),
-        wrapper = document.getElementById("search-result"),
+        wrapper = document.getElementById("search__result"),
         item = wrapper.children;
 
     for (let i = 0; i < item.length; i++) {

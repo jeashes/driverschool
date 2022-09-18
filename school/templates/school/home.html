@@ -10,62 +10,64 @@
 {% load bootstrap3 %}
 {% bootstrap_messages %}
 
-<section class="home-search">
-    <div class="content-wrapper">
-        <div class="search-content">
+<section class="search">
+    <div class="content--wrapper">
+        <div class="search__content">
 
-            <h1>Заголовок H1</h1>
+            <h1 class="search__headline">Заголовок H1</h1>
 
             <p> It is a long-established fact that a reader will be distracted </p>
             <p> by the readable content of a page when looking at its layout </p>
 
-            <form  class="search-wrapper" action="{% url 'search' %}" method="get">
+            <form  class="search__form" action="{% url 'search' %}" method="get">
 
                 <i class="fa-solid fa-location-dot"></i>
 
                 {% csrf_token %}
 
-                <input id="home-search"
+                <input id="search__field"
+                      onkeyup="homeSearch()"
                        name="searched"
                        type="text"
-                       onkeyup="homeSearch()"
                        placeholder="Пошук:  містом, кодом міста та автошколи"
                        autocomplete="off">
 
-                <div class="abc-icon-wrapper">
+                <div class="search__letters">
                     <i class="cust-icon icon-abc"></i>
                     <i class="fa-solid fa-caret-up"></i>
                 </div>
 
-                <button class="icon-search" type="submit">
+                <button class="search__button" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
 
             </form>
+
             {% if error %}
             {{ error }}
             {% endif %}
-            <div class="politic-wrapper">
+
+            <div class="site-politic">
                 <i class="fa-solid fa-check"></i>
                 <span>Користувацька угода</span>
             </div>
 
-            <div class="abc-block-wrapper">
-                <div class="abc-block">
+            <div class="search__letters-block">
+                <div class="letters-block__content">
                     {% for letter in letters %}
                         <span>{{ letter.letter }}</span>
                     {% endfor %}
                 </div>
-                <div class="black-block"></div>
+                <div class="letters-block--black"></div>
             </div>
 
-            <div id="search-result">
+            <div id="search__result">
                 {% for info in schools %}
-                <div class="search-item">
+                <div class="search__item">
                     <i class="fa-solid fa-location-dot"></i>
                     <div class="school-info">
                         <a href="{% url 'view_school' info.id %}">
-                            {{ info.driverschool }}
+                            {{ info.name }}
                         </a>
                         <a href="{% url 'search_authoschool' info.city_of_unit.name %}">
                             {{ info.city_of_unit.name }} - {{ info.city_of_unit.post_code }}
@@ -79,7 +81,7 @@
 </section>
 
 <section class="cards">
-    <div class="content-wrapper">
+    <div class="content--wrapper">
         <div class="cards-content">
 
             <div class="card">
@@ -88,7 +90,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Nunc id nisi id justo malesuada pellentesque.
                 </p>
-                <button class="modal-button">
+                <button class="button--submit button--modal">
                     <span> Стати водієм </span>
                     <i class="fa-solid fa-angle-right"></i>
                 </button>
@@ -100,7 +102,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Nunc id nisi id justo malesuada pellentesque.
                 </p>
-                <button class="modal-button">
+                <button class="button--submit button--modal">
                     <span> Стати партнером </span>
                     <i class="fa-solid fa-angle-right"></i>
                 </button>
@@ -110,7 +112,7 @@
     </div>
 </section>
 
-<section class="find-city"  >
+<section class="find-city">
 
     <div class="find-background">
         <img src="{% static 'school/map-ukraine.png' %}"
@@ -118,10 +120,10 @@
              width="915px" height="620px">
     </div>
 
-    <div class="content-wrapper">
+    <div class="content--wrapper">
         <div class="find-content">
             <div class="find-filter">
-                <h3> Знайди своє </h3>
+                <h3> Знайди своє місто</h3>
                 <p>
                     Щоб здійснити пошук свого міста ви можете
                     скористуватися пошуком по областях або літерах
@@ -292,73 +294,85 @@
 </section>
 
 <section class="statistics">
-    <div class="content-wrapper">
-        <div class="statistic-content">
-            <div class="statistic ">
+    <div class="content--wrapper">
+        <div class="statistic__content">
+
+            <div class="statistic-info">
                 <i class="cust-icon icon-two-people"></i>
                 <p> {{ len_apps }} </p>
                 <span> Подали заявок </span>
             </div>
-            <div class="statistic">
-                <i class="cust-icon icon-city"></i>
-                <p> {{ len_cities }} </p>
-                <span> Міст по Україні </span>
-            </div>
-            <div class="statistic">
+
+            <div class="statistic-info statistic-info--schools">
                 <i class="cust-icon icon-graduation-cap"></i>
                 <p> {{ len_schools }} </p>
                 <span> Автошкіл по Україні </span>
             </div>
+
+            <div class="statistic-info">
+                <i class="cust-icon icon-city"></i>
+                <p> {{ len_cities }} </p>
+                <span> Міст по Україні </span>
+            </div>
+
         </div>
     </div>
 </section>
 
 <section class="catalog">
-    <div class="content-wrapper">
-        <div class="catalog-content">
+    <div class="content--wrapper">
+        <div class="catalog__content">
 
-            <img class="desktop-road"
-                 src="{% static 'school/desktop-road.png' %}"
-                 alt="Not found" width="620px" height="590px">
+            <img class="catalog__photo catalog__photo--desktop"
+                 src="{% static 'school/catalog__photo-desktop.png' %}"
+                 alt="Not found" width="620px" height="587px">
 
-            <img class="tablet-road"
-                 src="{% static 'school/tablet-road.png' %}"
-                 alt="Not found" width="760px" height="424px">
+            <img class="catalog__photo catalog__photo--tablet"
+                 src="{% static 'school/catalog__photo-tablet.png' %}"
+                 alt="Not found" width="700px" height="364px">
 
-<!--
-            <img class="mobile-road"
-                 src="{% static 'school/mobile-road.png' %}"
-                 alt="Not found" width="620px" height="590px">
--->
+            <img class="catalog__photo catalog__photo--mobile"
+                 src="{% static 'school/catalog__photo-mobile.png' %}"
+                 alt="Not found" width="228px" height="187px">
 
-            <div class="catalog-text">
-                <h2> Каталог автошкіл по Україні </h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Sed ornare, libero at mattis gravida, lacus libero maximus sem,
-                    in fringilla sapien tortor non magna. Vestibulum porttitor
-                    lacinia augue id gravida. Quisque venenatis consequat dictum.
-                </p>
+            <div class="catalog__text">
 
-                <span>Більше...</span>
+                <div class="text--mobile">
 
-                <p>
-                    Mauris quis nisl auctor, laoreet libero a, ultrices mi.
-                    Nullam fringilla justo sit amet nibh aliquet, et volutpat ante posuere.
-                    Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                    Phasellus tempus lacinia orci at ullamcorper. Donec non hendrerit quam.
-                    Aenean suscipit condimentum arcu at condimentum.
-                </p>
+                    <h2> Каталог автошкіл по Україні </h2>
 
-                <h3>Заголовок H3</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Sed ornare, libero at mattis gravida, lacus libero maximus sem,
+                        in fringilla sapien tortor non magna. Vestibulum porttitor
+                        lacinia augue id gravida. Quisque venenatis consequat dictum.
+                    </p>
 
-                <p>
-                    Nullam volutpat purus eu purus euismod, sed consequat massa facilisis.
-                    Etiam placerat, odio bibendum pellentesque vestibulum, eros odio ultricies justo,
-                    vel tincidunt nunc odio at mi. Ut tortor dui, posuere ac scelerisque ut, hendrerit ut dolor.
-                    Aenean nec luctus lacus. Integer neque augue, vulputate quis tellus id,
-                    pulvinar ullamcorper quam.
-                </p>
+                    <span class="text--more">Більше...</span>
+
+                    <p>
+                        Mauris quis nisl auctor, laoreet libero a, ultrices mi.
+                        Nullam fringilla justo sit amet nibh aliquet, et volutpat ante posuere.
+                        Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                        Phasellus tempus lacinia orci at ullamcorper. Donec non hendrerit quam.
+                        Aenean suscipit condimentum arcu at condimentum.
+                    </p>
+
+                </div>
+
+                <div class="text--desktop">
+
+                    <h3>Заголовок H3</h3>
+
+                    <p>
+                        Nullam volutpat purus eu purus euismod, sed consequat massa facilisis.
+                        Etiam placerat, odio bibendum pellentesque vestibulum, eros odio ultricies justo,
+                        vel tincidunt nunc odio at mi. Ut tortor dui, posuere ac scelerisque ut, hendrerit ut dolor.
+                        Aenean nec luctus lacus. Integer neque augue, vulputate quis tellus id,
+                        pulvinar ullamcorper quam.
+                    </p>
+
+                </div>
 
             </div>
         </div>
@@ -366,19 +380,19 @@
 </section>
 
 <section class="add-school">
-    <div class="content-wrapper add-school-wrapper">
-        <div class="add-school-content">
+    <div class="content--wrapper add-school-wrapper">
+        <div class="add-school__content">
 
-            <h2> Додати автошколу </h2>
+            <h2 class="add-school__headline"> Додати автошколу </h2>
 
-            <p>
+            <p class="add-school__description">
                 Якщо бажаєте додати школу якої нема на нашому
                 сайті присилайте дані на нашу електронну пошту.
             </p>
 
             <a href="mailto:google89@gmail.com">google89@gmail.com</a>
 
-            <p>
+            <p class="add-school__description">
                 Ми обов'язково перевіримо їх та розмістимо в нашій базі.
             </p>
 

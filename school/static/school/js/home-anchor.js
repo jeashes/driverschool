@@ -1,4 +1,4 @@
-let abc_wrapper = document.getElementsByClassName("abc-block")[0],
+let abc_wrapper = document.getElementsByClassName("letters-block__content")[0],
     lettersWrapper = document.getElementsByClassName("letters-block")[0];
 
 
