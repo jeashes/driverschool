@@ -192,6 +192,10 @@ a > span{
     margin: 0 0 25px;
 }
 
+.modal__form {
+    color: #000000;
+}
+
 @media screen and (min-width: 320px) and (max-width: 767px) {
 
     .footer {

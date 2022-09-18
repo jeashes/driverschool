@@ -81,7 +81,7 @@
                 З вами зв'яжуться, щоб допомогти підібрати автошколу
             </p>
 
-            <form action="{% url 'driver_app' %}" method="post">
+            <form class="modal__form" action="{% url 'driver_app' %}" method="post">
                 {% csrf_token %}
                 {% bootstrap_form create_application_form %}
                 {{ create_application_form.media }}
@@ -100,7 +100,7 @@
                 з вами зв'яжуться найближчим часом
             </p>
 
-            <form method="post">
+            <form class="modal__form" action="{% url 'partnership_app' %}" method="post">
                 {% csrf_token %}
                 {% bootstrap_form partnership_form %}
                 {{ partnership_form.media }}
