@@ -210,7 +210,7 @@
                             {% endfor %}
 
                         </div>
-
+                        {% if info|length > 6 %}
                         <div class="slide">
 
                             {% for res in info|slice:'6:12' %}
@@ -267,6 +267,7 @@
                             {% endfor %}
 
                         </div>
+                        {% endif %}
 
 
                         <button class="slider__btn slider__btn&#45;&#45;left">&#10094;</button>

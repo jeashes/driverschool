@@ -210,7 +210,7 @@
                             {% endfor %}
 
                         </div>
-
+                        {% if filtered_schools|length > 6 %}
                         <div class="slide">
 
                             {% for res in filtered_schools|slice:'6:12' %}
@@ -267,6 +267,7 @@
                             {% endfor %}
 
                         </div>
+                        {% endif %}
 
 
 
