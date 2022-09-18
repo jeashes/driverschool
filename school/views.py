@@ -150,8 +150,7 @@ def filtered(request, city):
             return render(request, 'school/filtered_schools.html',
                           dict_filter_order_code)
         else:
-            ordered_schools = filtered_schools.order_by(filter_value_in_key[request.GET.get('filtered')]).distinct(
-                filter_value_in_key[request.GET.get('filtered')])
+            ordered_schools = filtered_schools.order_by(filter_value_in_key[request.GET.get('filtered')])
 
             dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
                                       'count': len(ordered_schools),
