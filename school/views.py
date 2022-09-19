@@ -139,8 +139,8 @@ def filtered(request, city):
 
             ordered_schools = filtered_schools.order_by(
                 '-' + filter_value_in_key[request.GET.get('filtered')])
-            if ordered_schools:
 
+            if ordered_schools:
                 dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
                                           'count': len(ordered_schools),
                                           'url_city': ''.join([ukraine_map, ordered_schools[0].city_of_unit.url][
@@ -151,11 +151,16 @@ def filtered(request, city):
                 return render(request, 'school/filtered_schools.html',
                               dict_filter_order_code)
             else:
+                dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
+                                          'count': len(ordered_schools),
+                                          'url_city': ukraine_map,
+
+                                          'create_application_form': CreateApplicationForm(),
+                                          'partnership_form': PartnershipForm(), 'searched': city,
+                                          'error': 'Not found result'}
+
                 return render(request, 'school/search_schools.html',
-                              {'areas': areas, 'error': 'Not found results', 'searched': 'Error',
-                               'create_application_form': CreateApplicationForm(),
-                               'partnership_form': PartnershipForm(),
-                               'url_city': ukraine_map, 'count': 0})
+                              dict_filter_order_code)
         else:
             ordered_schools = filtered_schools.order_by(filter_value_in_key[request.GET.get('filtered')])
             if ordered_schools:
@@ -171,11 +176,16 @@ def filtered(request, city):
                 return render(request, 'school/filtered_schools.html',
                               dict_filter_order_code)
             else:
+                dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
+                                          'count': len(ordered_schools),
+                                          'url_city': ukraine_map,
+
+                                          'create_application_form': CreateApplicationForm(),
+                                          'partnership_form': PartnershipForm(), 'searched': city,
+                                          'error': 'Not found result'}
+
                 return render(request, 'school/search_schools.html',
-                              {'areas': areas, 'error': 'Not found results', 'searched': 'Error',
-                               'create_application_form': CreateApplicationForm(),
-                               'partnership_form': PartnershipForm(),
-                               'url_city': ukraine_map, 'count': 0})
+                              dict_filter_order_code)
     else:
 
         if city[0] == '0':
@@ -196,14 +206,21 @@ def filtered(request, city):
                                                             city in filter_cities or city in filter_post_code]),
                                     'create_application_form': CreateApplicationForm(),
                                     'partnership_form': PartnershipForm(), 'searched': city}
+
             return render(request, 'school/filtered_schools.html',
                           dict_category_filter)
         else:
+            dict_filter_order_code = {'areas': areas, 'filtered_schools': category_filtered,
+                                      'count': len(category_filtered),
+                                      'url_city': ukraine_map,
+
+                                      'create_application_form': CreateApplicationForm(),
+                                      'partnership_form': PartnershipForm(), 'searched': city,
+                                      'error': 'Not found result'}
+
             return render(request, 'school/search_schools.html',
-                          {'areas': areas, 'error': 'Not found results', 'searched': 'Error',
-                           'create_application_form': CreateApplicationForm(),
-                           'partnership_form': PartnershipForm(),
-                           'url_city': ukraine_map, 'count': 0})
+                          dict_filter_order_code)
+
 
 # Info about school
 def info_about_authoschool(request, school_pk):

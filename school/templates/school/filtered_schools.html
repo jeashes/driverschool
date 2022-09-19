@@ -144,15 +144,9 @@
 
                         </div>
 
-                        {% if error %}
-                        <button type='submit' value="Підібрати" disabled>
+                        <button type='submit' value="Підібрати">
                             Застосувати
                         </button>
-                        {% else %}
-                        <button type='submit' value="Підібрати" disabled>
-                            Застосувати
-                        </button>
-                        {% endif %}
 
                     </form>
                 </div>
@@ -165,7 +159,7 @@
 
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:':6' %}
+                            {% for res in filtered_schools|slice:':3' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -219,10 +213,68 @@
                             {% endfor %}
 
                         </div>
+                        {% if filtered_schools|length > 3 %}
+                        <div class="slide">
+
+                            {% for res in filtered_schools|slice:'3:6' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.driverschool }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{% static 'school/test-image.jpg' %}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
                         {% if filtered_schools|length > 6 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'6:12' %}
+                            {% for res in filtered_schools|slice:'6:9' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
