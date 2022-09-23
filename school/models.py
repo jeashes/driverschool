@@ -70,15 +70,15 @@ class DriverSchool(models.Model):
     email = models.CharField(max_length=200, verbose_name='Контактний email', blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Місто')
     description = models.TextField(blank=True, verbose_name='Опис')
-    image1 = models.ImageField(upload_to='school/images/', default='schoolua/images/test-image1.jpg',
+    image1 = models.ImageField(upload_to='school/images/', default='school/images/test-image1.jpg',
                                verbose_name='Фото головне')
-    image2 = models.ImageField(upload_to='school/images/', default='schoolua/images/test-image2.jpg',
+    image2 = models.ImageField(upload_to='school/images/', default='school/images/test-image2.jpg',
                                verbose_name='Фото 2')
-    image3 = models.ImageField(upload_to='school/images/', default='schoolua/images/test-image3.jpg',
+    image3 = models.ImageField(upload_to='school/images/', default='school/images/test-image3.jpg',
                                verbose_name='Фото 3')
-    image4 = models.ImageField(upload_to='school/images/', default='schoolua/images/test-image4.jpg',
+    image4 = models.ImageField(upload_to='school/images/', default='school/images/test-image4.jpg',
                                verbose_name='Фото 4')
-    image5 = models.ImageField(upload_to='school/images/', default='schoolua/images/test-image5.jpg',
+    image5 = models.ImageField(upload_to='school/images/', default='school/images/test-image5.jpg',
                                verbose_name='Фото 5')
     score = models.IntegerField(validators=[
         core.validators.MaxValueValidator(5),
