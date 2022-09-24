@@ -37,11 +37,11 @@
             <div class="footer__middle">
 
                 <div class="cards-wrapper">
-                    <a>
+                    <a onclick="showModal(0)">
                         <span>Стати водієм</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </a>
-                    <a>
+                    <a onclick="showModal(1)">
                         <span>Стати партнером</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </a>
@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <div class="modal-wrapper">
+    <div class="modal-wrapper" onclick="hideModal(0)">
         <div  class="modal__content">
 
             <h2>Заповніть анкету</h2>
@@ -91,7 +91,7 @@
         </div>
     </div>
 
-    <div class="modal-wrapper">
+    <div class="modal-wrapper" onclick="hideModal(1)">
         <div class="modal__content">
 
             <h2>Заповніть анкету</h2>
