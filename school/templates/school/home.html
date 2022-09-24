@@ -22,9 +22,6 @@
             <form  class="search__form" action="{% url 'search' %}" method="get">
 
                 <i class="fa-solid fa-location-dot"></i>
-
-                {% csrf_token %}
-
                 <input id="search__field"
                       onkeyup="homeSearch()"
                        name="searched"
