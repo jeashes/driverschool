@@ -1,5 +1,5 @@
 
-from django.contrib import admin
+
 from django.urls import path
 from . import views
 from django.conf.urls.static import static
@@ -9,8 +9,8 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     # Info about school
-    path('search/', views.search, name='search'),
-    path('search/<str:searched>', views.search_authoschool, name='search_authoschool'),
+    path('search/', views.Search.home_search, name='search'),
+    path('search/<str:searched>', views.Search.main_search, name='search_authoschool'),
 
     # Search on city/city_code/name and area
     path('school/<int:school_pk>', views.info_about_authoschool, name='view_school'),

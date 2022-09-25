@@ -1,3 +1,4 @@
+import django
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, DriverSchool
 from .forms import CreateApplicationForm, PartnershipForm
@@ -12,103 +13,88 @@ def home(request):
     return render(request, 'school/home.html', dict_home)
 
 
-# Search schools code_city/city
-def search_authoschool(request, searched):
-    areas = Area.objects.all()
-
-    django_search_city = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched.capitalize())
-    django_search_code = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
-
+class Search:
+    schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
     ukraine_map = 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2375030.7670806646!2d31.679159930216635!3d49.268812139128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1663054580432!5m2!1sru!2sua'
 
-    if django_search_city:
-        city_autoschools = django_search_city
+    @classmethod
+    def django_dict_search(cls, info, searched, cities_of_unit=None, error=None):
+        match error:
+            case 'Not found, please input another word':
+                return {'areas': cls.areas, 'info': info, 'count': len(info),
+                        'create_application_form': CreateApplicationForm(),
+                        'partnership_form': PartnershipForm(), 'searched': searched,
+                        'error': error}
 
-        cities_of_unit = [_.city_of_unit.name for _ in city_autoschools]
+            case _:
+                return {'areas': cls.areas, 'info': info, 'count': len(info),
+                        'create_application_form': CreateApplicationForm(),
+                        'partnership_form': PartnershipForm(), 'searched': searched,
+                        'url_city': ''.join([cls.ukraine_map, info[0].city_of_unit.url][searched in cities_of_unit]),
+                        'error': error}
 
-        dict_search_city = {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                            'create_application_form': CreateApplicationForm(),
-                            'partnership_form': PartnershipForm(), 'searched': searched,
-                            'url_city': ''.join([ukraine_map, city_autoschools[0].city_of_unit.url][
-                                                    searched in cities_of_unit])}
+    @classmethod
+    def django_home_dict(cls, error=None):
 
-        return render(request, 'school/search_schools.html',
-                      dict_search_city)
+        return {'areas': cls.areas, 'schools': cls.schools, 'letters': cls.letters,
+                'create_application_form': CreateApplicationForm(),
+                'partnership_form': PartnershipForm(), 'len_apps': len(cls.application),
+                'len_schools': len(cls.schools), 'len_cities': len(cls.cities), 'error': error}
 
-    if django_search_code:
-
-        city_autoschools = django_search_code
-
-        post_code_of_unit = [_.city_of_unit.post_code for _ in city_autoschools]
-
-        dict_search_code = {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                            'url_city': ''.join([ukraine_map, city_autoschools[0].city_of_unit.url][
-                                                    searched in post_code_of_unit]),
-                            'create_application_form': CreateApplicationForm(),
-                            'partnership_form': PartnershipForm(), 'searched': searched}
-
-        return render(request, 'school/search_schools.html',
-                      dict_search_code)
-
-    else:
-        return render(request, 'school/error404.html')
-
-
-def search(request):
-    if request.GET['searched']:
-        areas, searched = Area.objects.all(), request.GET['searched']
+    @classmethod
+    def search_city(cls, request, searched):
 
         django_search_city = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched.capitalize())
-        django_search_code = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
-
-        ukraine_map = 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2375030.7670806646!2d31.679159930216635!3d49.268812139128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1663054580432!5m2!1sru!2sua'
 
         if django_search_city:
-            city_autoschools = django_search_city
-
-            cities_of_unit = [city.city_of_unit.name for city in city_autoschools]
-
-            dict_search_city = {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                                'create_application_form': CreateApplicationForm(),
-                                'partnership_form': PartnershipForm(), 'searched': searched,
-                                'url_city': ''.join([ukraine_map, city_autoschools[0].city_of_unit.url][
-                                                        searched in cities_of_unit])}
+            cities_of_unit = [_.city_of_unit.name for _ in django_search_city]
 
             return render(request, 'school/search_schools.html',
-                          dict_search_city)
+                          cls.django_dict_search(django_search_city, searched, cities_of_unit))
 
-        if django_search_code:
+        return render(request, 'school/search_schools.html',
+                      cls.django_dict_search(django_search_city, searched,
+                                             error='Not found, please input another word'))
 
-            city_autoschools = django_search_code
+    @classmethod
+    def search_post_code(cls, request, searched):
 
-            post_code_of_unit = [city.city_of_unit.post_code for city in city_autoschools]
+        django_search_code = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
 
-            dict_search_code = {'areas': areas, 'info': city_autoschools, 'count': len(city_autoschools),
-                                'url_city': ''.join([ukraine_map, city_autoschools[0].city_of_unit.url][
-                                                        searched in post_code_of_unit]),
-                                'create_application_form': CreateApplicationForm(),
-                                'partnership_form': PartnershipForm(), 'searched': searched}
+        match searched[0]:
+            case '0':
+                post_code_of_unit = [_.city_of_unit.post_code for _ in django_search_code]
 
-            return render(request, 'school/search_schools.html',
-                          dict_search_code)
-        else:
+                return render(request, 'school/search_schools.html',
+                              cls.django_dict_search(django_search_code, searched, post_code_of_unit))
 
-            return render(request, 'school/search_schools.html',
-                          {'areas': areas, 'error': 'Not found, please input another word', 'searched': 'Error',
-                           'create_application_form': CreateApplicationForm(),
-                           'partnership_form': PartnershipForm(),
-                           'url_city': ukraine_map, 'count': 0})
-    else:
+            case _:
+                return render(request, 'school/search_schools.html',
+                              cls.django_dict_search(django_search_code, searched,
+                                                     error='Not found, please input another word'))
 
-        schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
+    @classmethod
+    def home_search(cls, request):
+        if request.GET['searched']:
+            searched = request.GET['searched']
+            match searched[0]:
+                case '0':
+                    return cls.search_post_code(request, searched)
 
-        dict_search_error = {'areas': areas, 'schools': schools, 'letters': letters,
-                             'error': 'Please input',
-                             'create_application_form': CreateApplicationForm(),
-                             'partnership_form': PartnershipForm(), 'len_apps': len(application),
-                             'len_schools': len(schools), 'len_cities': len(cities)}
+                case _:
+                    return cls.search_city(request, searched)
 
-        return render(request, 'school/home.html', dict_search_error)
+        home_dict = cls.django_home_dict('Please input')
+        return render(request, 'school/home.html', home_dict)
+
+    @classmethod
+    def main_search(cls, request, searched):
+        match searched[0]:
+            case '0':
+                return cls.search_post_code(request, searched)
+
+            case _:
+                return cls.search_city(request, searched)
 
 
 # for big filter
