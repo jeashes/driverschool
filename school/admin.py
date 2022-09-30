@@ -56,7 +56,7 @@ class DriverSchoolAdmin(admin.ModelAdmin):
     search_fields = ('name', 'address',)
     list_filter = ('city',)
     fields = (
-        'name', 'address', 'unit', 'contact', 'email', 'city', 'description', 'image1', 'image2', 'image3',
+        'name', 'address', 'unit', 'contact', 'email', 'area', 'city', 'description', 'image1', 'image2', 'image3',
         'image4',
         'image5', 'score')
 
@@ -73,7 +73,9 @@ class DriverSchoolUnitAdmin(admin.ModelAdmin):
     list_display_links = ('name', 'address')
     search_fields = ('name', 'address',)
     list_filter = ('city_of_unit',)
-    fields = ('driverschool_name', 'name', 'address', 'driverschool', 'url', 'category', 'cources', 'contact', 'city_of_unit')
+    fields = (
+        'name', 'address', 'driverschool', 'url', 'category', 'cources', 'contact', 'area',
+        'city_of_unit')
 
 
 class PartnershipAdminForm(forms.ModelForm):
@@ -85,7 +87,7 @@ class PartnershipAdminForm(forms.ModelForm):
 class PartnershipAdmin(admin.ModelAdmin):
     form = PartnershipAdminForm
     list_display = ('firstLast_name',)
-    list_display_links = ('firstLast_name', )
+    list_display_links = ('firstLast_name',)
     search_fields = ('firstLast_name',)
     fields = ('firstLast_name', 'phone_number', 'email', 'description')
 
@@ -99,7 +101,7 @@ class DriverApplicationAdminForm(forms.ModelForm):
 class DriverApplicationAdmin(admin.ModelAdmin):
     form = DriverApplicationAdminForm
     list_display = ('firstLast_name',)
-    list_display_links = ('firstLast_name', )
+    list_display_links = ('firstLast_name',)
     search_fields = ('firstLast_name',)
     list_filter = ('driverschoolunit',)
     fields = ('firstLast_name', 'phone_number', 'email', 'city', 'driverschoolunit', 'course')

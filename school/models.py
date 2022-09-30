@@ -68,17 +68,18 @@ class DriverSchool(models.Model):
     unit = models.BooleanField(verbose_name='Наявність філій', default=False)
     contact = models.CharField(max_length=200, verbose_name='Контактний номер тел.')
     email = models.CharField(max_length=200, verbose_name='Контактний email', blank=True)
-    city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Місто')
+    area = models.ForeignKey(Area, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Область')
+    city = ChainedForeignKey(City, chained_field='area', chained_model_field='area', on_delete=models.CASCADE, verbose_name='Місто')
     description = models.TextField(blank=True, verbose_name='Опис')
-    image1 = models.ImageField(upload_to='school/images/', default='school/images/test-image1.jpg',
+    image1 = models.ImageField(upload_to='school/images/', default='school/images/test-image.jpg',
                                verbose_name='Фото головне')
-    image2 = models.ImageField(upload_to='school/images/', default='school/images/test-image2.jpg',
+    image2 = models.ImageField(upload_to='school/images/', default='school/images/test-image.jpg',
                                verbose_name='Фото 2')
-    image3 = models.ImageField(upload_to='school/images/', default='school/images/test-image3.jpg',
+    image3 = models.ImageField(upload_to='school/images/', default='school/images/test-image.jpg',
                                verbose_name='Фото 3')
-    image4 = models.ImageField(upload_to='school/images/', default='school/images/test-image4.jpg',
+    image4 = models.ImageField(upload_to='school/images/', default='school/images/test-image.jpg',
                                verbose_name='Фото 4')
-    image5 = models.ImageField(upload_to='school/images/', default='school/images/test-image5.jpg',
+    image5 = models.ImageField(upload_to='school/images/', default='school/images/test-image.jpg',
                                verbose_name='Фото 5')
     score = models.IntegerField(validators=[
         core.validators.MaxValueValidator(5),
@@ -88,7 +89,7 @@ class DriverSchool(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.name
+        return self.address
 
     class Meta:
         verbose_name = 'Автошкола'
@@ -97,7 +98,6 @@ class DriverSchool(models.Model):
 
 
 class DriverSchoolUnit(models.Model):
-    driverschool_name = models.CharField(max_length=250, verbose_name='For application', default='!')
     name = models.CharField(max_length=250, verbose_name='Назва філії')
     address = models.CharField(max_length=400, verbose_name='Адреса автошколи')
     driverschool = models.ForeignKey(DriverSchool, on_delete=models.CASCADE, verbose_name='Головний офіс')
@@ -106,11 +106,12 @@ class DriverSchoolUnit(models.Model):
     cources = ChainedManyToManyField(Courses, chained_field='category', chained_model_field='category',
                                      verbose_name='Курси', blank='True')
     contact = models.CharField(max_length=200, verbose_name='Контактний номер тел.')
-    city_of_unit = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Місто')
+    area = models.ForeignKey(Area, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Область')
+    city_of_unit = ChainedForeignKey(City, chained_field='area', chained_model_field='area', on_delete=models.CASCADE, verbose_name='Місто')
     objects = models.Manager()
 
     def __str__(self):
-        return self.driverschool_name
+        return self.name
 
     class Meta:
         verbose_name = 'Філія автошколи'

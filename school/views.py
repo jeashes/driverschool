@@ -1,4 +1,4 @@
-import django
+import random
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, DriverSchool
 from .forms import CreateApplicationForm, PartnershipForm
@@ -74,6 +74,20 @@ class Search:
                                                      error='Not found, please input another word'))
 
     @classmethod
+    def search_school(cls, request, searched):
+        django_search_school = DriverSchoolUnit.objects.filter(name__contains=searched)
+
+        if django_search_school:
+            cities_of_unit = [_.city_of_unit.name for _ in django_search_school]
+
+            return render(request, 'school/search_schools.html',
+                          cls.django_dict_search(django_search_school, searched, cities_of_unit))
+
+        return render(request, 'school/search_schools.html',
+                      cls.django_dict_search(django_search_school, searched,
+                                             error='Not found, please input another word'))
+
+    @classmethod
     def home_search(cls, request):
         if request.GET['searched']:
             searched = request.GET['searched']
@@ -82,6 +96,8 @@ class Search:
                     return cls.search_post_code(request, searched)
 
                 case _:
+                    if cls.search_school(request, searched):
+                        return cls.search_school(request, searched)
                     return cls.search_city(request, searched)
 
         home_dict = cls.django_home_dict('Please input')
@@ -97,7 +113,6 @@ class Search:
                 return cls.search_city(request, searched)
 
 
-# for big filter
 def filtered(request, city):
     areas, schools, letter = Area.objects.all(), DriverSchoolUnit.objects.all(), request.GET.get('category')
     ukraine_map = 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2375030.7670806646!2d31.679159930216635!3d49.268812139128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1663054580432!5m2!1sru!2sua'
@@ -109,7 +124,10 @@ def filtered(request, city):
     }
 
     if request.GET.get('filtered'):
-        if city[0] == '0':
+        if DriverSchoolUnit.objects.filter(name__contains=city):
+            filtered_schools = DriverSchoolUnit.objects.filter(name__contains=city).filter(
+                cources__category__name__contains=letter)
+        elif city[0] == '0':
             filtered_schools = DriverSchoolUnit.objects.filter(
                 cources__category__name__contains=letter).filter(
                 city_of_unit__post_code__contains=city)
@@ -174,14 +192,13 @@ def filtered(request, city):
                               dict_filter_order_code)
     else:
 
-        if city[0] == '0':
+        if DriverSchoolUnit.objects.filter(name__contains=city):
+            category_filtered = DriverSchoolUnit.objects.filter(name__contains=city).filter(
+                cources__category__name__contains=letter)
+        elif city[0] == '0':
             category_filtered = DriverSchoolUnit.objects.filter(
                 cources__category__name__contains=letter).filter(
                 city_of_unit__post_code__contains=city)
-        else:
-            category_filtered = DriverSchoolUnit.objects.filter(
-                cources__category__name__contains=letter).filter(
-                city_of_unit__name__contains=city)
         filter_cities = [_.city_of_unit.name for _ in category_filtered]
 
         filter_post_code = [_.city_of_unit.post_code for _ in category_filtered]
@@ -210,14 +227,15 @@ def filtered(request, city):
 
 # Info about school
 def info_about_authoschool(request, school_pk):
-    areas, school_unit, app_form, partnership_form, school = Area.objects.all(), \
-                                                             get_object_or_404(DriverSchoolUnit, pk=school_pk), \
-                                                             CreateApplicationForm(), PartnershipForm(), \
-                                                             get_object_or_404(DriverSchool, pk=school_pk)
+    areas, school_unit, app_form, partnership_form = Area.objects.all(), \
+                                                     get_object_or_404(DriverSchoolUnit, pk=school_pk), \
+                                                     CreateApplicationForm(), PartnershipForm()
+    school = DriverSchool.objects.filter(name__contains=school_unit.name)
+    other_school = DriverSchoolUnit.objects.all()
     return render(request, 'school/school_info.html',
-                  {'areas': areas, 'school_unit': school_unit, 'url_address': school_unit.url, 'school': school,
+                  {'areas': areas, 'school_unit': school_unit, 'url_address': school_unit.url, 'school': school[0],
                    'create_application_form': app_form,
-                   'partnership_form': partnership_form})
+                   'partnership_form': partnership_form, 'other_school': other_school})
 
 
 # just html page
