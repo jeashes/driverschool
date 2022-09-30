@@ -55,7 +55,7 @@
     letter-spacing: 0.015em;
 }
 
-.city-info__button--back-home {
+.button--back-home {
     position: absolute;
     top: 375px;
     right: 350px;
@@ -63,15 +63,15 @@
     align-items: center;
 }
 
-.city-info__button--back-home > span {
+.button--back-home > span {
     margin: 0 10px;
 }
 
-.city-info-content a span {
+.button--back-home > span {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.city-info-content > a > i {
+.button--back-home > i {
     color: rgba(255, 255, 255, 0.8);
     transform: rotate(180deg);
 }
@@ -269,7 +269,6 @@ input[type="radio"]{
 
 .slider {
     max-width: 950px !important;
-    height: 1330px !important;
 }
 
 .slide {
@@ -290,6 +289,7 @@ input[type="radio"]{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
     background: #FFFFFF;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
@@ -418,12 +418,12 @@ input[type="radio"]{
         color: #FFFFFF;
     }
 
-    .city-info__button--back-home {
+    .button--back-home {
         top: 270px;
         right: 16px;
     }
 
-    .city-info__button--back-home >span {
+    .button--back-home >span {
         font-size: 12px;
         line-height: 14px;
     }
@@ -464,9 +464,7 @@ input[type="radio"]{
         margin: 0 0 60px;
     }
 
-    .slider {
-        height: 4025px !important;
-    }
+
 
     .slide {
         padding: 20px 16px 0;
@@ -549,7 +547,7 @@ input[type="radio"]{
 
 }
 
-@media screen and (min-width: 768px) and (max-width: 1919px) {
+@media screen and (min-width: 768px) and (max-width: 1279px) {
 
     .city-info-content > p{
 
@@ -564,13 +562,13 @@ input[type="radio"]{
         color: #FFFFFF;
     }
 
-    .city-info__button--back-home {
+    .button--back-home {
         top: 400px;
         right: 34px;
         margin: 0 15px 0 0;
     }
 
-    .city-info__button--back-home > span {
+    .button--back-home > span {
         font-weight: 100 !important;
         font-size: 15px;
         line-height: 23px;
@@ -638,11 +636,6 @@ input[type="radio"]{
         margin: 0 10px 0;
     }
 
-    .slider {
-        height: 2650px !important;
-    }
-
-
 
     .school-text > h3 {
         font-size: 20px;
@@ -650,4 +643,3 @@ input[type="radio"]{
     }
 
 }
-@media screen and (min-width: 1919px) {}

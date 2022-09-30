@@ -90,6 +90,7 @@
 
     .content--wrapper{
         max-width: 288px;
+        width: 100%;
     }
 
     .header-content {
@@ -117,7 +118,7 @@
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1919px){
+@media screen and (min-width: 768px) and (max-width: 1279px){
 
     .header__background--tablet {
         display: block;
@@ -125,6 +126,7 @@
 
     .content--wrapper{
         max-width: 700px;
+        width: 100%;
     }
 
 
@@ -146,7 +148,7 @@
     }
 }
 
-@media screen and (min-width: 1920px){
+@media screen and (min-width: 1280px){
 
     .header__background--desktop {
         display: block;
@@ -154,6 +156,7 @@
 
     .content--wrapper{
         max-width: 1280px;
+        width: 100%;
     }
 
     .header-content {

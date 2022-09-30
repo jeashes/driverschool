@@ -26,7 +26,7 @@
                 scrambled it to make a type specimen book.
             </p>
 
-            <a class="city-info__button--back-home" href="{% url 'home' %}">
+            <a class="button--back-home" href="{% url 'home' %}">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 <span>Назад</span>
             </a>
@@ -159,7 +159,7 @@
 
                         <div class="slide">
 
-                            {% for res in info|slice:':3' %}
+                            {% for res in info|slice:':6' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -169,7 +169,7 @@
                                         <span> {{ res.driverschool.score }} </span>
                                     </div>
 
-                                    <h3>{{ res.driverschool }}</h3>
+                                    <h3>{{ res.name }}</h3>
 
                                     <div class="school-address">
                                         <i class="fa-solid fa-location-dot"></i>
@@ -213,10 +213,10 @@
                             {% endfor %}
 
                         </div>
-                        {% if info|length > 3 %}
+                        {% if info|length > 6 %}
                         <div class="slide">
 
-                            {% for res in info|slice:'3:6' %}
+                            {% for res in info|slice:'6:12' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -226,7 +226,7 @@
                                         <span> {{ res.driverschool.score }} </span>
                                     </div>
 
-                                    <h3>{{ res.driverschool }}</h3>
+                                    <h3>{{ res.name }}</h3>
 
                                     <div class="school-address">
                                         <i class="fa-solid fa-location-dot"></i>
@@ -271,10 +271,10 @@
 
                         </div>
                         {% endif %}
-                        {% if info|length > 6 %}
+                        {% if info|length > 12 %}
                         <div class="slide">
 
-                            {% for res in info|slice:'6:9' %}
+                            {% for res in info|slice:'12:18' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -284,7 +284,7 @@
                                         <span> {{ res.driverschool.score }} </span>
                                     </div>
 
-                                    <h3>{{ res.driverschool }}</h3>
+                                    <h3>{{ res.name }}</h3>
 
                                     <div class="school-address">
                                         <i class="fa-solid fa-location-dot"></i>
@@ -343,10 +343,6 @@
         </div>
     </div>
 </section>
-
-{% comment %}
-<p class="all-maps"><a href="{{ url_city }}">Карта міста зі школами</a></p>
-{% endcomment %}
 
 <iframe class="area-map"
         src="{{ url_city }}"

@@ -133,7 +133,7 @@ span {
 .search__letters-block {
     position: absolute;
     top: 213px;
-    max-width: 543px;
+    max-width: 549px;
     width: 100%;
     background: #fff;
     color: #000;
@@ -142,7 +142,8 @@ span {
 }
 
 .letters-block__content {
-    max-width: 497px;
+    max-width: 502px;
+    width: 100%;
     padding: 8px 15px;
 }
 
@@ -281,6 +282,7 @@ span {
 
 .modal__content {
     max-width: 450px;
+    width: 100%;
     margin: 0 auto;
     padding: 25px 30px 40px;
     background: #FFFFFF;
@@ -367,6 +369,7 @@ span {
 .find-filter {
     z-index: 1;
     max-width: 730px;
+    width: 100%;
     padding: 40px 50px 0;
     background: #fff;
     filter: drop-shadow(0px 0px 32px rgba(0, 0, 0, 0.1));
@@ -551,12 +554,16 @@ span {
 
 .slider {
     max-width: 550px !important;
+    width: 100%;
 }
 
+.slider__btn {
+    border: none;
+}
 
 .slider__btn:hover {
     background: #F28800;
-    outline: none;
+    outline: #F28800;
 }
 
 .dots {
@@ -742,6 +749,7 @@ span {
 
     .content--wrapper {
         max-width: 288px;
+        width: 100%;
     }
 
     .search {
@@ -801,6 +809,7 @@ span {
 
     #search__result {
         max-width: 288px;
+        width: 100%;
         max-height: 155px;
         height: fit-content;
         top: 225px;
@@ -843,6 +852,7 @@ span {
         border-radius: 12px;
         margin: 0 auto 40px;
         max-width: 288px;
+        width: 100%;
     }
 
     .card > h3 {
@@ -888,6 +898,7 @@ span {
 
     .find-filter {
         max-width: 320px;
+        width: 100%;
     }
 
     .areas-block {
@@ -932,6 +943,7 @@ span {
         display: block;
         animation: none;
         max-width: 320px;
+        width: 100%;
     }
 
     .active-close {
@@ -1016,6 +1028,7 @@ span {
 
     .add-school-wrapper {
         max-width: 100%;
+        width: 100%;
         margin: 0;
         padding: 65px 0 60px;
         border-radius: 0;
@@ -1023,6 +1036,7 @@ span {
 
     .add-school__content {
         max-width: 320px;
+        width: 100%;
         padding: 25px 0 40px;
         border-radius: 0;
     }
@@ -1045,7 +1059,7 @@ span {
 
 
 }
-@media screen and (min-width: 768px) and (max-width: 1919px) {
+@media screen and (min-width: 768px) and (max-width: 1279px) {
 
     .search {
         top: 305px;
@@ -1128,11 +1142,11 @@ span {
 
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1280px) {
 
     .search {
         padding: 0 0 0 110px;
-        top: 250px;
+        top: 30vh;
     }
 
 
