@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
+
 urlpatterns = [
     # Home
     path('', views.home, name='home'),
@@ -14,7 +15,7 @@ urlpatterns = [
     path('school/<int:school_pk>', views.info_about_authoschool, name='view_school'),
 
     # Filter on category/price/letters/score
-    path('filtered/<str:city>', views.filtered, name='filtered'),
+    path('filtered/<str:city>', views.Filter.main_filter, name='filtered'),
 
     # header + footer
     path('base', views.base, name='base'),

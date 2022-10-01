@@ -1,4 +1,3 @@
-import random
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, DriverSchool
 from .forms import CreateApplicationForm, PartnershipForm
@@ -113,8 +112,8 @@ class Search:
                 return cls.search_city(request, searched)
 
 
-def filtered(request, city):
-    areas, schools, letter = Area.objects.all(), DriverSchoolUnit.objects.all(), request.GET.get('category')
+class Filter:
+    schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
     ukraine_map = 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2375030.7670806646!2d31.679159930216635!3d49.268812139128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1663054580432!5m2!1sru!2sua'
     filter_value_in_key = {
         "price-low-up": 'cources__price',
@@ -123,106 +122,115 @@ def filtered(request, city):
         'rating': 'driverschool__score',
     }
 
-    if request.GET.get('filtered'):
-        if DriverSchoolUnit.objects.filter(name__contains=city):
-            filtered_schools = DriverSchoolUnit.objects.filter(name__contains=city).filter(
-                cources__category__name__contains=letter)
-        elif city[0] == '0':
-            filtered_schools = DriverSchoolUnit.objects.filter(
-                cources__category__name__contains=letter).filter(
-                city_of_unit__post_code__contains=city)
-        else:
-            filtered_schools = DriverSchoolUnit.objects.filter(
-                cources__category__name__contains=letter).filter(
-                city_of_unit__name__contains=city)
+    @classmethod
+    def django_dict_filter(cls, info, city, cities_of_unit=None, error=None):
+        match error:
+            case 'Not found result':
+                return {'areas': cls.areas, 'filtered_schools': info,
+                        'count': len(info),
+                        'url_city': cls.ukraine_map,
+                        'create_application_form': CreateApplicationForm(),
+                        'partnership_form': PartnershipForm(), 'searched': city,
+                        'error': error}
 
-        filter_cities = [_.city_of_unit.name for _ in filtered_schools]
-        filter_post_code = [_.city_of_unit.post_code for _ in filtered_schools]
+            case _:
+                return {'areas': cls.areas,
+                        'filtered_schools': info, 'count': len(info),
+                        'url_city': ''.join([cls.ukraine_map, info[0].city_of_unit.url][
+                                                city in cities_of_unit]),
+                        'create_application_form': CreateApplicationForm(),
+                        'partnership_form': PartnershipForm(), 'searched': city, 'error': error}
 
-        if request.GET.get('filtered') == 'price-up-low' or request.GET.get('filtered') == 'rating':
+    @classmethod
+    def filter_item(cls, item):
+        name = DriverSchoolUnit.objects.filter(name__contains=item)
+        city = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=item)
+        post_code = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=item)
 
-            ordered_schools = filtered_schools.order_by(
-                '-' + filter_value_in_key[request.GET.get('filtered')])
+        match item[0]:
+            case '0':
 
-            if ordered_schools:
-                dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
-                                          'count': len(ordered_schools),
-                                          'url_city': ''.join([ukraine_map, ordered_schools[0].city_of_unit.url][
-                                                                  city in filter_cities or city in filter_post_code]),
-                                          'create_application_form': CreateApplicationForm(),
-                                          'partnership_form': PartnershipForm(), 'searched': city}
+                return post_code
+            case _:
+                if name:
 
-                return render(request, 'school/filtered_schools.html',
-                              dict_filter_order_code)
-            else:
-                dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
-                                          'count': len(ordered_schools),
-                                          'url_city': ukraine_map,
+                    return name
 
-                                          'create_application_form': CreateApplicationForm(),
-                                          'partnership_form': PartnershipForm(), 'searched': city,
-                                          'error': 'Not found result'}
+                return city
 
-                return render(request, 'school/search_schools.html',
-                              dict_filter_order_code)
-        else:
-            ordered_schools = filtered_schools.order_by(filter_value_in_key[request.GET.get('filtered')])
-            if ordered_schools:
+    @classmethod
+    def category(cls, request, filter_item, item):
+        category = request.GET.get('category')
+        filter_category = filter_item.filter(cources__category__name__contains=category)
 
-                dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
-                                          'count': len(ordered_schools),
-                                          'url_city': ''.join([ukraine_map, ordered_schools[0].city_of_unit.url][
-                                                                  city in filter_cities or city in filter_post_code]),
-
-                                          'create_application_form': CreateApplicationForm(),
-                                          'partnership_form': PartnershipForm(), 'searched': city}
-
-                return render(request, 'school/filtered_schools.html',
-                              dict_filter_order_code)
-            else:
-                dict_filter_order_code = {'areas': areas, 'filtered_schools': ordered_schools,
-                                          'count': len(ordered_schools),
-                                          'url_city': ukraine_map,
-
-                                          'create_application_form': CreateApplicationForm(),
-                                          'partnership_form': PartnershipForm(), 'searched': city,
-                                          'error': 'Not found result'}
-
-                return render(request, 'school/search_schools.html',
-                              dict_filter_order_code)
-    else:
-
-        if DriverSchoolUnit.objects.filter(name__contains=city):
-            category_filtered = DriverSchoolUnit.objects.filter(name__contains=city).filter(
-                cources__category__name__contains=letter)
-        elif city[0] == '0':
-            category_filtered = DriverSchoolUnit.objects.filter(
-                cources__category__name__contains=letter).filter(
-                city_of_unit__post_code__contains=city)
-        filter_cities = [_.city_of_unit.name for _ in category_filtered]
-
-        filter_post_code = [_.city_of_unit.post_code for _ in category_filtered]
-        if category_filtered:
-            dict_category_filter = {'areas': areas,
-                                    'filtered_schools': category_filtered, 'count': len(category_filtered),
-                                    'url_city': ''.join([ukraine_map, category_filtered[0].city_of_unit.url][
-                                                            city in filter_cities or city in filter_post_code]),
-                                    'create_application_form': CreateApplicationForm(),
-                                    'partnership_form': PartnershipForm(), 'searched': city}
+        if filter_category:
+            cities_of_unit = [_.city_of_unit.name for _ in filter_category]
 
             return render(request, 'school/filtered_schools.html',
-                          dict_category_filter)
-        else:
-            dict_filter_order_code = {'areas': areas, 'filtered_schools': category_filtered,
-                                      'count': len(category_filtered),
-                                      'url_city': ukraine_map,
+                          cls.django_dict_filter(filter_category, item, cities_of_unit))
 
-                                      'create_application_form': CreateApplicationForm(),
-                                      'partnership_form': PartnershipForm(), 'searched': city,
-                                      'error': 'Not found result'}
+        return render(request, 'school/search_schools.html',
+                      cls.django_dict_filter(filter_category, item, error='Not found result'))
 
-            return render(request, 'school/search_schools.html',
-                          dict_filter_order_code)
+    @classmethod
+    def category_filters(cls, request, filter_item, item):
+        category, filters = request.GET.get('category'), request.GET.get('filtered')
+        match filters:
+
+            case 'price-up-low':
+
+                ordered_schools = filter_item.filter(cources__category__name__contains=category).order_by(
+                    '-' + cls.filter_value_in_key[filters])
+
+                if ordered_schools:
+
+                    cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
+
+                    return render(request, 'school/filtered_schools.html',
+                                  cls.django_dict_filter(ordered_schools, item, cities_of_unit))
+
+                return render(request, 'school/search_schools.html',
+                              cls.django_dict_filter(ordered_schools, item, error='Not found result'))
+
+            case 'rating':
+
+                ordered_schools = filter_item.filter(cources__category__name__contains=category).order_by(
+                    '-' + cls.filter_value_in_key[filters])
+
+                if ordered_schools:
+
+                    cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
+
+                    return render(request, 'school/filtered_schools.html',
+                                  cls.django_dict_filter(ordered_schools, item, cities_of_unit))
+
+                return render(request, 'school/search_schools.html',
+                              cls.django_dict_filter(ordered_schools, item, error='Not found result'))
+
+            case _:
+
+                ordered_schools = filter_item.filter(cources__category__name__contains=category).order_by(
+                    cls.filter_value_in_key[filters])
+
+                if ordered_schools:
+
+                    cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
+
+                    return (request, 'school/filtered_schools.html',
+                            cls.django_dict_filter(ordered_schools, item, cities_of_unit))
+
+                return (request, 'school/search_schools.html',
+                        cls.django_dict_filter(ordered_schools, item, error='Not found result'))
+
+    @classmethod
+    def main_filter(cls, request, city):
+
+        filter_item = cls.filter_item(city)
+
+        if request.GET.get('filtered'):
+            return cls.category_filters(request, filter_item, city)
+
+        return cls.category(request, filter_item, city)
 
 
 # Info about school

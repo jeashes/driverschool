@@ -6,12 +6,13 @@ const slideContainer = document.querySelectorAll('.slider');
 // lets put your function to every one of them
 for(let i = 0; i < slideContainer.length; i++){
 
-    const slider = function () {
+    const slider = function (numberSlide) {
         // const this_slider = this;
         const slides = slideContainer[i].querySelectorAll('.slide');  // Your code was : const slides = document.querySelectorAll('.slide');  don't search the entire document, only search the slider
         const btnLeft = slideContainer[i].querySelector('.slider__btn--left');
         const btnRight = slideContainer[i].querySelector('.slider__btn--right');
         const dotContainer = slideContainer[i].querySelector('.dots');
+
 
         let curSlide = 0;
         const maxSlide = slides.length;
@@ -49,9 +50,9 @@ for(let i = 0; i < slideContainer.length; i++){
             } else {
                 curSlide++;
             }
-
             goToSlide(curSlide);
             activateDot(curSlide);
+            culcSliderHeight(curSlide);
         };
 
         const prevSlide = function () {
@@ -62,6 +63,7 @@ for(let i = 0; i < slideContainer.length; i++){
             }
             goToSlide(curSlide);
             activateDot(curSlide);
+            culcSliderHeight(curSlide);
         };
 
         const init = function () {
@@ -86,8 +88,22 @@ for(let i = 0; i < slideContainer.length; i++){
                 const { slide } = e.target.dataset;
                 goToSlide(slide);
                 activateDot(slide);
+                culcSliderHeight();
             }
         });
+        const culcSliderHeight = (curSlide) => {
+            if (slideContainer[0].parentNode.classList.contains("result-wrapper")) {
+                console.log(slides[curSlide].clientHeight)
+                const sliderHeight = slides[curSlide].clientHeight;
+                slideContainer[i].style.height = `${sliderHeight}px`;
+                window.scrollTo(0, 701)
+            } else {
+                btnLeft.style.bottom = "60px"
+                btnRight.style.bottom = "60px"
+            }
+
+        }
+        culcSliderHeight(curSlide);
     };
     slider();
 }
