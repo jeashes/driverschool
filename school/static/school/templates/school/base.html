@@ -1,0 +1,73 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- custom css & js -->
+    <link rel="stylesheet" href="{% static "school/styles/style.css" %}" >
+    <link rel="stylesheet" href="{% static 'school/styles/base.css' %}" >
+    <link rel="stylesheet" href="{% static 'school/styles/home.css' %}" >
+    <link rel="stylesheet" href="{% static 'school/styles/itc-slider.css' %}" >
+    <link rel="stylesheet" href="{% static 'school/styles/rating_style.css' %}">
+    <link rel="stylesheet" href="{% static 'school/styles/simple-adaptive-slider.css' %}">
+</head>
+<body>
+
+<header class="header">
+
+    <img class="header__background header__background--desktop"
+         src="{% static 'school/background--desktop.png' %}"
+         alt="Desktop background">
+    <img class="header__background header__background--tablet"
+         src="{% static 'school/background--tablet.png' %}"
+         alt="Tablet background">
+    <img class="header__background header__background--mobile"
+         src="{% static 'school/background--mobile.png' %}"
+         alt="Mobile background">
+
+    <div class="content--wrapper header__content--wrapper">
+        <div class="header__content">
+
+            <div class="brand">
+                <div class="brand__logo">
+                    <span class="logo__name">Лого</span>
+                </div>
+                <h6 class="brand__name">Автошкола.Ua</h6>
+            </div>
+
+            <div class="contacts header__contacts">
+
+                <div class="links header__links">
+
+                    <a href="#" class="link">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" class="link">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" class="link">
+                        <i class="cust-icon icon-people"></i>
+                    </a>
+
+                </div>
+
+                <span class="header__login">Вхід/Реєстрація</span>
+
+            </div>
+
+        </div>
+    </div>
+
+</header>
+{% block content %}
+{% endblock %}
+{% include 'school/footer.html' %}
+
+

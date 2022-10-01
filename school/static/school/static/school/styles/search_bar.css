@@ -1,0 +1,12 @@
+.site-search {
+  width: 100%;
+}
+
+.hide {
+	visibility: hidden;
+	position: absolute;
+}
+
+.show {
+	visibility: visible;
+}

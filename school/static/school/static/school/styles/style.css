@@ -1,0 +1,166 @@
+@import url(footer.css);
+@import url(base.css);
+@import "base.css";
+@import "footer.css";
+@import "home.css";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    border-radius: 16px;
+    border: 2px solid #f9f9f9;
+}
+
+@font-face {
+    font-family: "Mulish";
+    src: url(../fonts/Mulish-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: 'icomoon';
+    src:  url('../fonts/icomoon.eot?vz7pb1');
+    src:  url('../fonts/icomoon.eot?vz7pb1#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?vz7pb1') format('truetype'),
+    url('../fonts/icomoon.woff?vz7pb1') format('woff'),
+    url('../fonts/icomoon.svg?vz7pb1#icomoon') format('svg');
+
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+body {
+    background-color: #f9f9fc;
+}
+
+
+.icon-abc:before {
+  content: "\e903";
+}
+.icon-city:before {
+  content: "\e901";
+}
+.icon-graduation-cap:before {
+  content: "\e902";
+}
+.icon-people:before {
+  content: "\e904";
+  color: #fff;
+}
+.icon-two-people:before {
+  content: "\e905";
+}
+.icon-arrow:before {
+  content: "\e900";
+}
+
+
+.cust-icon {
+    font-family: 'icomoon', Arial, sans-serif !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.button--submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    padding: 11px 20px;
+    text-align: center;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #F28800;
+}
+
+.button--submit > span {
+    font-size: 18px;
+    line-height: 23px;
+    color: #FFFFFF;
+}
+
+.button--submit > i {
+    display: none !important;
+    margin: 0 0 0 20px;
+    width: 35px;
+    height: 35px;
+    color: #F28800;
+    background: #fff;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+
+/*---- start logo----*/
+
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+
+    background: #000;
+    border-radius: 6px;
+}
+
+.logo__name {
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+}
+
+.brand__name {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .brand__logo {
+        width: 34px;
+        height: 34px;
+    }
+    .logo__name {
+        font-size: 6px;
+        line-height: 7px;
+    }
+    .brand__name {
+        margin: 0 10px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+/*---- end logo----*/

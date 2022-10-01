@@ -1,0 +1,183 @@
+@import "footer.css";
+
+@font-face {
+    font-family: "Mulish";
+    src: url(../fonts/Mulish-VariableFont_wght.ttf);
+}
+
+.header {
+    position: relative;
+    font-family: "Mulish", sans-serif;
+    font-style: normal;
+    color: #fff;
+}
+
+
+.header__background {
+    display: none;
+    width: 100%;
+}
+
+.content--wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header__content--wrapper {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    left: 0;
+}
+
+.header__content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.links {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    margin: 0 10px;
+
+    text-decoration: none;
+    font-size: 20px;
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+.login-text {
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.header__login {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 13px;
+
+    color: rgba(255, 255, 255, 0.6);
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+
+    .header__background--mobile {
+        display: block;
+        max-height: 575px;
+        object-fit: cover;
+    }
+
+    .content--wrapper{
+        max-width: 288px;
+        width: 100%;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 0 600px;
+    }
+
+    .contacts {
+        width: 34%;
+        justify-content: flex-end;
+    }
+
+    .link {
+        width: 22px;
+        height: 22px;
+        font-size: 15px;
+        margin: 0 5px;
+    }
+
+    .header__login {
+        font-size: 6px;
+        line-height: 8px;
+        text-decoration: none;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px){
+
+    .header__background--tablet {
+        display: block;
+        max-heights: 1024px;
+        object-fit: cover;
+    }
+
+    .content--wrapper{
+        max-width: 700px;
+        width: 100%;
+    }
+
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 0 1024px;
+    }
+
+    .logo-wrapper {
+        width: 34%;
+    }
+
+    /*------------*/
+
+
+    .header-contacts {
+        width: 24%;
+    }
+}
+
+@media screen and (min-width: 1280px){
+
+    .header__background--desktop {
+        display: block;
+    }
+
+    .content--wrapper{
+        max-width: 1280px;
+        width: 100%;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 0 860px;
+    }
+
+    .logo-wrapper {
+        width: 18%;
+    }
+
+    /*------------*/
+
+
+    .header-contacts {
+        width: 13%;
+    }
+}
+

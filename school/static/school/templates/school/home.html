@@ -1,0 +1,409 @@
+
+{% extends 'school/base.html' %}
+{% block content %}
+
+    <link rel="stylesheet" href="../../static/school/styles/simple-adaptive-slider.css">
+
+
+
+{% load static %}
+{% load bootstrap3 %}
+{% bootstrap_messages %}
+
+<section class="search">
+    <div class="content--wrapper">
+        <div class="search__content">
+
+            <h1 class="search__headline">Заголовок H1</h1>
+
+            <p> It is a long-established fact that a reader will be distracted </p>
+            <p> by the readable content of a page when looking at its layout </p>
+
+            <form  class="search__form" action="{% url 'search' %}" method="get">
+
+                <i class="fa-solid fa-location-dot"></i>
+                <input id="search__field"
+                      onkeyup="homeSearch()"
+                       name="searched"
+                       type="text"
+                       placeholder="Пошук:  містом, кодом міста та автошколи"
+                       autocomplete="off">
+
+                <div class="search__letters">
+                    <i class="cust-icon icon-abc"></i>
+                    <i class="fa-solid fa-caret-up"></i>
+                </div>
+
+                <button class="search__button" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+            </form>
+
+            {% if error %}
+            {{ error }}
+            {% endif %}
+
+            <div class="site-politic">
+                <i class="fa-solid fa-check"></i>
+                <span>Користувацька угода</span>
+            </div>
+
+            <div class="search__letters-block">
+                <div class="letters-block__content">
+                    {% for letter in letters %}
+                        <span>{{ letter.letter }}</span>
+                    {% endfor %}
+                </div>
+                <div class="letters-block--black"></div>
+            </div>
+
+            <div id="search__result">
+                {% for info in schools %}
+                <div class="search__item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div class="school-info">
+                        <a href="{% url 'view_school' info.id %}">
+                            {{ info.name }}
+                        </a>
+                        <a href="{% url 'search_authoschool' info.city_of_unit.name %}">
+                            {{ info.city_of_unit.name }} - {{ info.city_of_unit.post_code }}
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cards">
+    <div class="content--wrapper">
+        <div class="cards-content">
+
+            <div class="card">
+                <h3> Стати водієм у два кліка </h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nunc id nisi id justo malesuada pellentesque.
+                </p>
+                <button class="button--submit button--modal" onclick="showModal(0)">
+                    <span> Стати водієм </span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </button>
+            </div>
+                
+            <div class="card">
+                <h3> Стати партнером у два кліка </h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nunc id nisi id justo malesuada pellentesque.
+                </p>
+                <button class="button--submit button--modal" onclick="showModal(1)">
+                    <span> Стати партнером </span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="find-city">
+
+    <div class="find-background">
+        <img src="{% static 'school/map-ukraine.png' %}"
+             alt="Ukraine map"
+             width="915px" height="620px">
+    </div>
+
+    <div class="content--wrapper">
+        <div class="find-content">
+            <div class="find-filter">
+                <h3> Знайди своє місто</h3>
+                <p>
+                    Щоб здійснити пошук свого міста ви можете
+                    скористуватися пошуком по областях або літерах
+                </p>
+
+                <div class="title-wrapper">
+                    <div class="find-title active-title">
+                        <span> Області </span>
+                        <i class="fa-regular fa-map"></i>
+                    </div>
+
+                    <div class="find-title">
+                        <span> Літери </span>
+                        <i class="cust-icon icon-abc"></i>
+                    </div>
+                </div>
+
+                <div class="city">
+                    <div class="areas-block">
+                        {% load new_tags %}
+
+                        {% for area in areas|slice:":24" %}
+                            <div class="area-wrapper">
+                                <span>{{ area.name }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="letters-block">
+                        {% for letter in letters %}
+                        <div class="letter-wrapper">
+                            <span>{{ letter.letter }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="find-result">
+                <div class="areas-result">
+                    {% load new_tags %}
+                    {% for area in areas|slice:":24" %}
+                        <div class="result-block">
+                            <h3> Знайдені міста "{{ area.name }}" </h3>
+
+                                <div class="slider">
+
+                                    <div class="slide">
+                                        <div class="city-result">
+                                            {% load new_tags %}
+
+                                            {% for lcity in area.cities|split:'|'|slice:":22" %}
+                                                <a href="{% url 'search_authoschool' lcity  %}">
+                                                    <li>{{ lcity }}</li>
+                                                </a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% if area.cities|split:'|'|length > 22 %}
+                                    <div class="slide">
+                                            <div class="city-result">
+                                                {% load new_tags %}
+                                                {% for lcity in area.cities|split:'|'|slice:"22:44" %}
+                                                    <a href="{% url 'search_authoschool' lcity  %}">
+                                                        <li>{{ lcity }}</li>
+                                                    </a>
+                                                {% endfor %}
+                                            </div>
+                                    </div>
+                                {% endif %}
+                                 {% if area.cities|split:'|'|length > 44 %}
+                                        <div class="slide">
+                                               <div class="city-result">
+                                                    {% load new_tags %}
+                                                    {% for lcity in area.cities|split:'|'|slice:"44:66" %}
+                                                        <a href="{% url 'search_authoschool' lcity  %}">
+                                                            <li>{{ lcity }}</li>
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                        </div>
+                                {% endif %}
+                                    <button class="slider__btn slider__btn--left">&#10094;</button>
+                                    <button class="slider__btn slider__btn--right">&#10095;</button>
+                                    <div class="dots"></div>
+                                </div>
+
+                            <i class="cust-icon icon-arrow"></i>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="letters-result">
+                    {% for letter in letters %}
+                    <div class="result-block">
+                        <h3> Знайдені міста за літерою "{{ letter.letter }}" </h3>
+
+                        <div class="slider">
+
+                            <div class="slide">
+                                <div class="city-result">
+                                    {% load new_tags %}
+
+                                    {% for acity in letter.city_of_alphabet|split:'|'|slice:":22" %}
+                                        <a href="{% url 'search_authoschool' acity  %}">
+                                            <li>{{ acity }}</li>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% if letter.city_of_alphabet|split:'|'|length > 22 %}
+                            <div class="slide">
+                                    <div class="city-result">
+                                        {% load new_tags %}
+                                        {% for acity in letter.city_of_alphabet|split:'|'|slice:"22:44" %}
+                                            <a href="{% url 'search_authoschool' acity  %}">
+                                                <li>{{ acity }}</li>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                            </div>
+                        {% endif %}
+                         {% if letter.city_of_alphabet|split:'|'|length > 44 %}
+                            <div class="slide">
+                                       <div class="city-result">
+                                            {% load new_tags %}
+                                            {% for acity in letter.city_of_alphabet|split:'|'|slice:"44:66" %}
+                                                <a href="{% url 'search_authoschool' acity  %}">
+                                                    <li>{{ acity }}</li>
+                                                </a>
+                                            {% endfor %}
+                                        </div>
+                                </div>
+                        {% endif %}
+                         {% if letter.city_of_alphabet|split:'|'|length > 66 %}
+                            <div class="slide">
+                                       <div class="city-result">
+                                            {% load new_tags %}
+                                            {% for acity in letter.city_of_alphabet|split:'|'|slice:"66:88" %}
+                                                <a href="{% url 'search_authoschool' acity  %}">
+                                                    <li>{{ acity }}</li>
+                                                </a>
+                                            {% endfor %}
+                                        </div>
+                                </div>
+                        {% endif %}
+
+                            <button class="slider__btn slider__btn--left">&#10094;</button>
+                            <button class="slider__btn slider__btn--right">&#10095;</button>
+                            <div class="dots"></div>
+
+                        </div>
+
+<!--                        <div class="city-result">
+                            {% load new_tags %}
+                            {% for acity in letter.city_of_alphabet|split:'|' %}
+                                <a href="{% url 'search_authoschool' acity  %}">
+                                    <li>{{ acity }}</li>
+                                </a>
+                            {% endfor %}
+                        </div>-->
+                        <i class="cust-icon icon-arrow"></i>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="statistics">
+    <div class="content--wrapper">
+        <div class="statistic__content">
+
+            <div class="statistic-info">
+                <i class="cust-icon icon-two-people"></i>
+                <p> {{ len_apps }} </p>
+                <span> Подали заявок </span>
+            </div>
+
+            <div class="statistic-info statistic-info--schools">
+                <i class="cust-icon icon-graduation-cap"></i>
+                <p> {{ len_schools }} </p>
+                <span> Автошкіл по Україні </span>
+            </div>
+
+            <div class="statistic-info">
+                <i class="cust-icon icon-city"></i>
+                <p> {{ len_cities }} </p>
+                <span> Міст по Україні </span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="catalog">
+    <div class="content--wrapper">
+        <div class="catalog__content">
+
+            <img class="catalog__photo catalog__photo--desktop"
+                 src="{% static 'school/catalog__photo-desktop.png' %}"
+                 alt="Not found" width="620px" height="587px">
+
+            <img class="catalog__photo catalog__photo--tablet"
+                 src="{% static 'school/catalog__photo-tablet.png' %}"
+                 alt="Not found" width="700px" height="364px">
+
+            <img class="catalog__photo catalog__photo--mobile"
+                 src="{% static 'school/catalog__photo-mobile.png' %}"
+                 alt="Not found" width="228px" height="187px">
+
+            <div class="catalog__text">
+
+                <div class="text--mobile">
+
+                    <h2> Каталог автошкіл по Україні </h2>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Sed ornare, libero at mattis gravida, lacus libero maximus sem,
+                        in fringilla sapien tortor non magna. Vestibulum porttitor
+                        lacinia augue id gravida. Quisque venenatis consequat dictum.
+                    </p>
+
+                    <span class="text--more">Більше...</span>
+
+                    <p>
+                        Mauris quis nisl auctor, laoreet libero a, ultrices mi.
+                        Nullam fringilla justo sit amet nibh aliquet, et volutpat ante posuere.
+                        Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                        Phasellus tempus lacinia orci at ullamcorper. Donec non hendrerit quam.
+                        Aenean suscipit condimentum arcu at condimentum.
+                    </p>
+
+                </div>
+
+                <div class="text--desktop">
+
+                    <h3>Заголовок H3</h3>
+
+                    <p>
+                        Nullam volutpat purus eu purus euismod, sed consequat massa facilisis.
+                        Etiam placerat, odio bibendum pellentesque vestibulum, eros odio ultricies justo,
+                        vel tincidunt nunc odio at mi. Ut tortor dui, posuere ac scelerisque ut, hendrerit ut dolor.
+                        Aenean nec luctus lacus. Integer neque augue, vulputate quis tellus id,
+                        pulvinar ullamcorper quam.
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="add-school">
+    <div class="content--wrapper add-school-wrapper">
+        <div class="add-school__content">
+
+            <h2 class="add-school__headline"> Додати автошколу </h2>
+
+            <p class="add-school__description">
+                Якщо бажаєте додати школу якої нема на нашому
+                сайті присилайте дані на нашу електронну пошту.
+            </p>
+
+            <a href="mailto:google89@gmail.com">google89@gmail.com</a>
+
+            <p class="add-school__description">
+                Ми обов'язково перевіримо їх та розмістимо в нашій базі.
+            </p>
+
+        </div>
+    </div>
+</section>
+
+
+<script defer  src="{% static 'school/js/simple-adaptive-slider.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{% static 'school/js/home-search.js' %}"></script>
+<script src="{% static 'school/js/home-find.js' %}"></script>
+<script src="{% static 'school/js/home-anchor.js' %}"></script>
+<script src="{% static 'school/js/home-form.js' %}"></script>
+
+{% endblock %}
+

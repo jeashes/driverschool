@@ -1,0 +1,125 @@
+{% load static %}
+{% load bootstrap3 %}
+{% bootstrap_messages %}
+
+<footer class="footer">
+
+    <div class="content--wrapper">
+        <div class="footer__content">
+
+            <div class="footer__top">
+
+                <div class="brand">
+                    <div class="brand__logo">
+                        <span class="logo__name">Лого</span>
+                    </div>
+                    <h6 class="brand__name">Автошкола.Ua</h6>
+                </div>
+
+                <div class="links footer__links">
+
+                    <a href="#" class="link">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" class="link">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a class="link">
+                        <i class="cust-icon icon-people"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="footer__middle">
+
+                <div class="cards-wrapper">
+                    <a onclick="showModal(0)">
+                        <span>Стати водієм</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                    <a onclick="showModal(1)">
+                        <span>Стати партнером</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+
+                <div class="footer__contacts">
+                        <span>Контакти</span>
+                        <a href="tel:+380956675370">+380(95)667-53-70</a>
+                        <span>Email</span>
+                        <a href="mailto:google89@gmail.com">google89@gmail.com</a>
+                </div>
+
+                <div class="footer__areas-wrapper">
+                    <h6> Області </h6>
+                    <div class="footer__areas">
+                        {% for area in areas|slice:":24" %}
+                            <span>{{ area.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer__politic">
+                <a href="#">Користувацька угода</a>
+                <a href="#">Політика конфіденційності</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-wrapper" onclick="hideModal(0)">
+        <div  class="modal__content">
+
+            <h2>Заповніть анкету</h2>
+            <p>
+                З вами зв'яжуться, щоб допомогти підібрати автошколу
+            </p>
+
+            <form class="modal__form" action="{% url 'driver_app' %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form create_application_form %}
+                {{ create_application_form.media }}
+                <button type="submit" class="modal__button button--submit">Відправити</button>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="modal-wrapper" onclick="hideModal(1)">
+        <div class="modal__content">
+
+            <h2>Заповніть анкету</h2>
+            <p>
+                Ми завжди раді новим партнерам. Будь ласка внесіть данні
+                з вами зв'яжуться найближчим часом
+            </p>
+
+            <form class="modal__form" action="{% url 'partnership_app' %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form partnership_form %}
+                {{ partnership_form.media }}
+                <button type="submit" class="modal__button button--submit">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+</footer>
+
+<script src="https://kit.fontawesome.com/e23493b56f.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script defer src="{% static 'school/js/footer-anchor.js' %}"></script>
+<script src="{% static 'school/js/home-form.js' %}"></script>
+<script src="{% static 'school/js/footer-form.js' %}"></script>
+
+{% block content %}
+{% endblock %}
+
