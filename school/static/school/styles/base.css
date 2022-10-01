@@ -86,6 +86,8 @@
 
     .header__background--mobile {
         display: block;
+        max-heights: 575px;
+        object-fit: cover;
     }
 
     .content--wrapper{
@@ -122,6 +124,8 @@
 
     .header__background--tablet {
         display: block;
+        max-heights: 1024px;
+        object-fit: cover;
     }
 
     .content--wrapper{

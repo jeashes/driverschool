@@ -41,11 +41,20 @@ class Search:
                 'len_schools': len(cls.schools), 'len_cities': len(cls.cities), 'error': error}
 
     @classmethod
-    def search_city(cls, request, searched):
+    def search_city_or_school(cls, request, searched):
 
         django_search_city = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched.capitalize())
 
-        if django_search_city:
+        django_search_school = DriverSchoolUnit.objects.filter(name__contains=searched)
+
+        if django_search_school:
+
+            cities_of_unit = [_.city_of_unit.name for _ in django_search_school]
+
+            return render(request, 'school/search_schools.html',
+                          cls.django_dict_search(django_search_school, searched, cities_of_unit))
+        elif django_search_city:
+
             cities_of_unit = [_.city_of_unit.name for _ in django_search_city]
 
             return render(request, 'school/search_schools.html',
@@ -73,20 +82,6 @@ class Search:
                                                      error='Not found, please input another word'))
 
     @classmethod
-    def search_school(cls, request, searched):
-        django_search_school = DriverSchoolUnit.objects.filter(name__contains=searched)
-
-        if django_search_school:
-            cities_of_unit = [_.city_of_unit.name for _ in django_search_school]
-
-            return render(request, 'school/search_schools.html',
-                          cls.django_dict_search(django_search_school, searched, cities_of_unit))
-
-        return render(request, 'school/search_schools.html',
-                      cls.django_dict_search(django_search_school, searched,
-                                             error='Not found, please input another word'))
-
-    @classmethod
     def home_search(cls, request):
         if request.GET['searched']:
             searched = request.GET['searched']
@@ -95,9 +90,7 @@ class Search:
                     return cls.search_post_code(request, searched)
 
                 case _:
-                    if cls.search_school(request, searched):
-                        return cls.search_school(request, searched)
-                    return cls.search_city(request, searched)
+                    return cls.search_city_or_school(request, searched)
 
         home_dict = cls.django_home_dict('Please input')
         return render(request, 'school/home.html', home_dict)
@@ -109,7 +102,7 @@ class Search:
                 return cls.search_post_code(request, searched)
 
             case _:
-                return cls.search_city(request, searched)
+                return cls.search_city_or_school(request, searched)
 
 
 class Filter:
@@ -153,7 +146,6 @@ class Filter:
                 return post_code
             case _:
                 if name:
-
                     return name
 
                 return city
@@ -183,7 +175,6 @@ class Filter:
                     '-' + cls.filter_value_in_key[filters])
 
                 if ordered_schools:
-
                     cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
 
                     return render(request, 'school/filtered_schools.html',
@@ -198,7 +189,6 @@ class Filter:
                     '-' + cls.filter_value_in_key[filters])
 
                 if ordered_schools:
-
                     cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
 
                     return render(request, 'school/filtered_schools.html',
@@ -213,14 +203,13 @@ class Filter:
                     cls.filter_value_in_key[filters])
 
                 if ordered_schools:
-
                     cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
 
-                    return (request, 'school/filtered_schools.html',
-                            cls.django_dict_filter(ordered_schools, item, cities_of_unit))
+                    return render(request, 'school/filtered_schools.html',
+                                  cls.django_dict_filter(ordered_schools, item, cities_of_unit))
 
-                return (request, 'school/search_schools.html',
-                        cls.django_dict_filter(ordered_schools, item, error='Not found result'))
+                return render(request, 'school/search_schools.html',
+                              cls.django_dict_filter(ordered_schools, item, error='Not found result'))
 
     @classmethod
     def main_filter(cls, request, city):

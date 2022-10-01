@@ -897,7 +897,6 @@ span {
     }
 
     .find-filter {
-        max-width: 320px;
         width: 100%;
     }
 
@@ -1035,7 +1034,6 @@ span {
     }
 
     .add-school__content {
-        max-width: 320px;
         width: 100%;
         padding: 25px 0 40px;
         border-radius: 0;
