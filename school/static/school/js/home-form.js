@@ -25,6 +25,7 @@ function showModal (index) {
 function hideModal(index) {
     const body = document.getElementsByTagName("body")[0];
     const modalWrapper = document.getElementsByClassName("modal-wrapper");
+    const buttons = document.getElementsByClassName("button--close-modal")
 
     window.onclick = function(event) {
       if (event.target === modalWrapper[index]) {
@@ -33,4 +34,12 @@ function hideModal(index) {
         return localStorage.removeItem('numberModul');
       }
     }
+
+    buttons[index].onclick = function() {
+        modalWrapper[index].style.display = "none";
+        body.style.overflow = "auto";
+        return localStorage.removeItem('numberModul');
+    }
+
 }
+

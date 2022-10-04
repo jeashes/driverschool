@@ -11,8 +11,8 @@
 <body>
 <section class="headline">
     <h1>{{ school_unit.driverschool.name }}</h1>
-    <span>Автошколи міста {{ school.city }}</span>
-    <a class="button--back-home" href="{% url 'search_authoschool' school.city %}">
+    <span>Автошколи міста {{ school_unit.city_of_unit.name }}</span>
+    <a class="button--back-home" href="{% url 'search_authoschool' school_unit.city_of_unit.name %}">
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
         <span>Назад</span>
     </a>
@@ -22,7 +22,7 @@
 
     <div class="content--wrapper">
         <a class="breadcrumbs__home" href="/"> Головна </a>
-        <a class="breadcrumbs__city" href="{% url 'search_authoschool' school.city %}"> > {{ school.city }}</a>
+        <a class="breadcrumbs__city" href="{% url 'search_authoschool' school_unit.city_of_unit.name %}"> > {{ school_unit.city_of_unit.name }}</a>
         <span class="breadcrumbs__school-name"> > {{ school_unit.driverschool.name }}</span>
     </div>
 
@@ -230,34 +230,34 @@
         <h3> Інші автошколи </h3>
 
         <div class="schools--desktop">
-        {% for school in other_school|slice:":3" %}
+        {% for drive in other_school|slice:":3" %}
             <div class="school-info">
 
                 <div class="school-text">
 
                 <div class="school-score">
                     <span>Рейтинг</span>
-                    <span> {{ school.driverschool.score }} </span>
+                    <span> {{ drive.driverschool.score }} </span>
                 </div>
 
-                <h3>{{ school_unit.driverschool.name }}</h3>
+                <h3>{{ drive.driverschool.name }}</h3>
 
                 <div class="school-address">
                     <i class="fa-solid fa-location-dot"></i>
-                    <span>{{ school.address }}</span>
+                    <span>{{ drive.address }}</span>
                 </div>
 
 
                 <div class="school-phone">
                     <i class="fa-solid fa-phone"></i>
                     {% load new_tags %}
-                    {% for contact in school_unit.contact|split:',' %}
+                    {% for contact in drive.contact|split:',' %}
                         <a href="tel:{{ contact }}"> {{ contact }} </a>
                     {% endfor %}
                 </div>
 
 
-                <a href="{% url 'view_school' school.id %}">
+                <a href="{% url 'view_school' drive.id %}">
                     <button class="button--submit">
                         <span>Ознайомитись</span>
                         <i class="fa-solid fa-angle-right"></i>
@@ -273,7 +273,7 @@
 
                 <div class="img-category-wrapper">
                     {% load new_tags %}
-                    {% for course in school_unit.cources.all %}
+                    {% for course in drive.cources.all %}
                         <span>{{ course.category }}</span>
                     {% endfor %}
                 </div>
@@ -286,15 +286,15 @@
 
         <div class="schools--mobile">
 
-        {% for school in other_school|slice:":3" %}
+        {% for drive in other_school|slice:":3" %}
             <div class="school-info">
 
                 <div class="school-score">
                     <span>Рейтинг</span>
-                    <span> {{ school.driverschool.score }} </span>
+                    <span> {{ drive.driverschool.score }} </span>
                 </div>
 
-                <h3>{{ school_unit.driverschool.name }}</h3>
+                <h3>{{ drive.driverschool.name }}</h3>
 
                 <div class="school-img-category">
 
@@ -303,7 +303,7 @@
 
                     <div class="img-category-wrapper">
                         {% load new_tags %}
-                        {% for course in school_unit.cources.all %}
+                        {% for course in drive.cources.all %}
                             <span>{{ course.category }}</span>
                         {% endfor %}
                     </div>
@@ -312,18 +312,18 @@
 
                 <div class="school-address">
                     <i class="fa-solid fa-location-dot"></i>
-                    <span>{{ school.address }}</span>
+                    <span>{{ drive.address }}</span>
                 </div>
 
                 <div class="school-phone">
                     <i class="fa-solid fa-phone"></i>
                     {% load new_tags %}
-                    {% for contact in school_unit.contact|split:',' %}
+                    {% for contact in drive.contact|split:',' %}
                         <a href="tel:{{ contact }}"> {{ contact }} </a>
                     {% endfor %}
                 </div>
 
-                <a href="{% url 'view_school' school.id %}">
+                <a href="{% url 'view_school' drive.id %}">
                     <button class="button--submit">
                         <span>Ознайомитись</span>
                         <i class="fa-solid fa-angle-right"></i>

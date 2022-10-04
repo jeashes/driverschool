@@ -68,7 +68,7 @@ class DriverSchool(models.Model):
     unit = models.BooleanField(verbose_name='Наявність філій', default=False)
     contact = models.CharField(max_length=200, verbose_name='Контактний номер тел.')
     email = models.CharField(max_length=200, verbose_name='Контактний email', blank=True)
-    area = models.ForeignKey(Area, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Область')
+    area = models.ForeignKey(Area, on_delete=models.CASCADE, blank=True, verbose_name='Область')
     city = ChainedForeignKey(City, chained_field='area', chained_model_field='area', on_delete=models.CASCADE, verbose_name='Місто')
     description = models.TextField(blank=True, verbose_name='Опис')
     image1 = models.ImageField(upload_to='school/images/', default='school/images/test-image.jpg',
@@ -106,7 +106,7 @@ class DriverSchoolUnit(models.Model):
     cources = ChainedManyToManyField(Courses, chained_field='category', chained_model_field='category',
                                      verbose_name='Курси', blank='True')
     contact = models.CharField(max_length=200, verbose_name='Контактний номер тел.')
-    area = models.ForeignKey(Area, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Область')
+    area = models.ForeignKey(Area, on_delete=models.CASCADE, blank=True, verbose_name='Область')
     city_of_unit = ChainedForeignKey(City, chained_field='area', chained_model_field='area', on_delete=models.CASCADE, verbose_name='Місто')
     objects = models.Manager()
 

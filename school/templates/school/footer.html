@@ -36,7 +36,7 @@
 
             <div class="footer__middle">
 
-                <div class="cards-wrapper">
+                <div class="cards-wrapper" >
                     <a onclick="showModal(0)">
                         <span>Стати водієм</span>
                         <i class="fa-solid fa-chevron-right"></i>
@@ -81,13 +81,16 @@
                 З вами зв'яжуться, щоб допомогти підібрати автошколу
             </p>
 
-            <form class="modal__form" action="{% url 'driver_app' %}" method="post">
+            <form action="{% url 'driver_app' %}" method="post">
                 {% csrf_token %}
                 {% bootstrap_form create_application_form %}
                 {{ create_application_form.media }}
                 <button type="submit" class="modal__button button--submit">Відправити</button>
             </form>
 
+            <button class="button--close-modal" onclick="hideModal(0)">
+                <i class="fa-solid fa-x"></i>
+            </button>
         </div>
     </div>
 
@@ -100,13 +103,15 @@
                 з вами зв'яжуться найближчим часом
             </p>
 
-            <form class="modal__form" action="{% url 'partnership_app' %}" method="post">
+            <form method="post">
                 {% csrf_token %}
                 {% bootstrap_form partnership_form %}
                 {{ partnership_form.media }}
-                <button type="submit" class="modal__button button--submit">Submit</button>
+                <button type="submit" class="modal__button button--submit">Відправити</button>
             </form>
-
+            <button class="button--close-modal" onclick="hideModal(1)">
+                <i class="fa-solid fa-x"></i>
+            </button>
         </div>
     </div>
 
@@ -118,7 +123,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script defer src="{% static 'school/js/footer-anchor.js' %}"></script>
 <script src="{% static 'school/js/home-form.js' %}"></script>
-<script src="{% static 'school/js/footer-form.js' %}"></script>
 
 {% block content %}
 {% endblock %}

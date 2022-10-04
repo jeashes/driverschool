@@ -23,7 +23,7 @@ class Search:
                 return {'areas': cls.areas, 'info': info, 'count': len(info),
                         'create_application_form': CreateApplicationForm(),
                         'partnership_form': PartnershipForm(), 'searched': searched,
-                        'error': error}
+                        'error': 'Нічого не знайдено, будь ласка введіть інший запит'}
 
             case _:
                 return {'areas': cls.areas, 'info': info, 'count': len(info),
@@ -43,7 +43,7 @@ class Search:
     @classmethod
     def search_city_or_school(cls, request, searched):
 
-        django_search_city = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched.capitalize())
+        django_search_city = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched)
 
         django_search_school = DriverSchoolUnit.objects.filter(name__contains=searched)
 
@@ -53,6 +53,7 @@ class Search:
 
             return render(request, 'school/search_schools.html',
                           cls.django_dict_search(django_search_school, searched, cities_of_unit))
+
         elif django_search_city:
 
             cities_of_unit = [_.city_of_unit.name for _ in django_search_city]
@@ -90,9 +91,10 @@ class Search:
                     return cls.search_post_code(request, searched)
 
                 case _:
+                    print('shool or city')
                     return cls.search_city_or_school(request, searched)
 
-        home_dict = cls.django_home_dict('Please input')
+        home_dict = cls.django_home_dict('Будь ласка введіть запит')
         return render(request, 'school/home.html', home_dict)
 
     @classmethod
@@ -124,7 +126,7 @@ class Filter:
                         'url_city': cls.ukraine_map,
                         'create_application_form': CreateApplicationForm(),
                         'partnership_form': PartnershipForm(), 'searched': city,
-                        'error': error}
+                        'error': 'Нічого не знайдено'}
 
             case _:
                 return {'areas': cls.areas,

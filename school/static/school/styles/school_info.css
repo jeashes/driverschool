@@ -509,7 +509,8 @@
         margin: 0;
     }
 
-    .schools-category > span{
+    .schools-category > span {
+        font-size: 14px;
         margin: 0 8px 0 0;
         padding: 5px 8px;
     }
@@ -524,17 +525,6 @@
     .schools-category > span:nth-child(2){
         margin: 0 39px;
     }
-
-    .schools-category > span:nth-child(4){
-        margin: 15px 0;
-    }
-    .schools-category > span:nth-child(5){
-        margin: 15px 39px;
-    }
-    .schools-category > span:nth-child(6){
-        margin: 15px 0;
-    }
-
 
     .schools-price__content > h3 {
         font-size: 16px;

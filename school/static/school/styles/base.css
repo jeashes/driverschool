@@ -86,7 +86,7 @@
 
     .header__background--mobile {
         display: block;
-        max-heights: 575px;
+        max-height: 575px;
         object-fit: cover;
     }
 

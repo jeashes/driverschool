@@ -267,6 +267,11 @@ input[type="radio"]{
     width: 100%;
 }
 
+.result--mobile {
+    display: none;
+}
+
+
 .slider {
     max-width: 950px !important;
 }
@@ -287,9 +292,9 @@ input[type="radio"]{
 
 .school-info {
     display: flex;
+    width: 100%;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
     background: #FFFFFF;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
@@ -396,11 +401,12 @@ input[type="radio"]{
     margin: 10px 0 0;
 }
 
-.all-maps {
+.area-map {
     margin: 160px 0 20px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
+
     .city-info-content > h1 {
         font-size: 28px;
         line-height: 35px;
@@ -452,7 +458,7 @@ input[type="radio"]{
     }
 
     .main-category > label {
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .filter-result-wrapper {
@@ -462,6 +468,14 @@ input[type="radio"]{
 
     .filters {
         margin: 0 0 60px;
+    }
+
+    .result--desktop {
+        display: none;
+    }
+
+    .result--mobile {
+        display: none;
     }
 
 
@@ -494,7 +508,8 @@ input[type="radio"]{
     .school-text > h3 {
         font-size: 16px;
         line-height: 20px;
-        margin: 0 0 360px;
+        calc(var(this. height) - 1);
+        margin: 0 0 300px;
     }
 
     .school-address {
@@ -529,7 +544,7 @@ input[type="radio"]{
 
     .school-img-category {
         position: absolute;
-            top: 165px;
+            top: 115px;
             right: 0;
             left: 0;
     }
