@@ -10,7 +10,7 @@
 </head>
 <body>
 <section class="headline">
-    <h1>{{ school_unit.driverschool.name }}</h1>
+    <h1>{{ school_unit.name }}</h1>
     <span>Автошколи міста {{ school_unit.city_of_unit.name }}</span>
     <a class="button--back-home" href="{% url 'search_authoschool' school_unit.city_of_unit.name %}">
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
@@ -23,7 +23,7 @@
     <div class="content--wrapper">
         <a class="breadcrumbs__home" href="/"> Головна </a>
         <a class="breadcrumbs__city" href="{% url 'search_authoschool' school_unit.city_of_unit.name %}"> > {{ school_unit.city_of_unit.name }}</a>
-        <span class="breadcrumbs__school-name"> > {{ school_unit.driverschool.name }}</span>
+        <span class="breadcrumbs__school-name"> > {{ school_unit.name }}</span>
     </div>
 
 </section>
@@ -38,26 +38,26 @@
 
                     <div class="more-photo">
 
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image2.url }}"
                          alt="School image"
                          width="180px"
                          height="95px"
                     >
 
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image3.url }}"
                          alt="School image"
                          width="180px"
                          height="95px"
                     >
 
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image4.url }}"
                          alt="School image"
                          width="180px"
                          height="95px"
                     >
 
                     </div>
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image5.url }}"
                          alt="School image"
                          width="330px"
                          height="365px"
@@ -66,22 +66,22 @@
                 </div>
 
                 <div class="photo--tablet">
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image2.url }}"
                          alt="School image"
                          width="460px"
                          height="325px"
                     >
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image3.url }}"
                          alt="School image"
                          width=460px"
                          height="325px"
                     >
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image4.url }}"
                          alt="School image"
                          width="460px"
                          height="325px"
                     >
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image5.url }}"
                          alt="School image"
                          width="460px"
                          height="325px"
@@ -89,22 +89,22 @@
                 </div>
 
                 <div class="photo--mobile">
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image2.url }}"
                          alt="School image"
                          width="288px"
                          height="205px"
                     >
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image3.url }}"
                          alt="School image"
                          width=288px"
                          height=205px"
                     >
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image4.url }}"
                          alt="School image"
                          width="288px"
                          height="205px"
                     >
-                    <img src="{% static 'school/test-image.jpg' %}"
+                    <img src="{{ school_unit.driverschool.image5.url }}"
                          alt="School image"
                          width="288px"
                          height="205px"
@@ -117,15 +117,15 @@
 
                 <div class="school-score">
                     <span>Рейтинг</span>
-                    <span> {{ school.score }} </span>
+                    <span> {{ school_unit.driverschool.score }} </span>
                 </div>
 
                 <h3 class="school-name">
-                    {{ school_unit.driverschool.name }}
+                    {{ school_unit.name }}
                 </h3>
 
                 <p class="school-description">
-                    {{ school.description }}
+                    {{ school_unit.driverschool.description }}
                 </p>
 
             </div>
@@ -230,7 +230,7 @@
         <h3> Інші автошколи </h3>
 
         <div class="schools--desktop">
-        {% for drive in other_school|slice:":3" %}
+        {% for drive in other_school|slice:"1:4" %}
             <div class="school-info">
 
                 <div class="school-text">
@@ -240,7 +240,7 @@
                     <span> {{ drive.driverschool.score }} </span>
                 </div>
 
-                <h3>{{ drive.driverschool.name }}</h3>
+                <h3>{{ drive.name }}</h3>
 
                 <div class="school-address">
                     <i class="fa-solid fa-location-dot"></i>

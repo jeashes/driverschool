@@ -229,10 +229,9 @@ def info_about_authoschool(request, school_pk):
     areas, school_unit, app_form, partnership_form = Area.objects.all(), \
                                                      get_object_or_404(DriverSchoolUnit, pk=school_pk), \
                                                      CreateApplicationForm(), PartnershipForm()
-    school = DriverSchool.objects.filter(name__contains=school_unit.name)
-    other_school = DriverSchoolUnit.objects.all()
+    other_school = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=school_unit.city_of_unit.name)
     return render(request, 'school/school_info.html',
-                  {'areas': areas, 'school_unit': school_unit, 'url_address': school_unit.url, 'school': school[0],
+                  {'areas': areas, 'school_unit': school_unit, 'url_address': school_unit.url,
                    'create_application_form': app_form,
                    'partnership_form': partnership_form, 'other_school': other_school})
 

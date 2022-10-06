@@ -108,7 +108,7 @@
                                     </label>
 
                                     <label for="T">
-                                        T
+                                        T - T1
                                         <input id="T" type="radio" name="category" value="T">
                                     </label>
 
@@ -197,7 +197,7 @@
 
                                 <div class="school-img-category">
 
-                                    <img src="{% static 'school/test-image.jpg' %}"
+                                    <img src="{{ res.driverschool.image1.url }}"
                                          alt="School image" width="188px" height="214px">
 
                                     <div class="img-category-wrapper">
@@ -213,6 +213,7 @@
                             {% endfor %}
 
                         </div>
+
                         {% if info|length > 6 %}
                         <div class="slide">
 
@@ -254,7 +255,7 @@
 
                                 <div class="school-img-category">
 
-                                    <img src="{% static 'school/test-image.jpg' %}"
+                                    <img src="{{ res.driverschool.image1.url }}"
                                          alt="School image" width="188px" height="214px">
 
                                     <div class="img-category-wrapper">
@@ -271,6 +272,7 @@
 
                         </div>
                         {% endif %}
+
                         {% if info|length > 12 %}
                         <div class="slide">
 
@@ -312,6 +314,1186 @@
 
                                 <div class="school-img-category">
 
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 18 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'18:24' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 24 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'24:30' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 30 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'30:36' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 36 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'36:42' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 42 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'42:48' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 48 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'48:54' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 54 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'54:60' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 60 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'60:66' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 66 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'66:72' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 72 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'72:78' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 78 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'78:84' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 84 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'84:90' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 90 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'90:96' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 96 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'96:102' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 102 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'102:108' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 108 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'108:114' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 114 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'114:120' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 120 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'120:126' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 126 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'126:132' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 132 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'132:138' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{{ res.driverschool.image1.url }}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
                                     <img src="{% static 'school/test-image.jpg' %}"
                                          alt="School image" width="188px" height="214px">
 
@@ -329,6 +1511,125 @@
 
                         </div>
                         {% endif %}
+
+                        {% if info|length > 138 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'138:144' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{{ res.driverschool.image1.url }}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{% static 'school/test-image.jpg' %}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
+                        {% if info|length > 144 %}
+                        <div class="slide">
+
+                            {% for res in info|slice:'144:150' %}
+                                <div class="school-info">
+
+                                <div class="school-text">
+
+                                    <div class="school-score">
+                                        <span>Рейтинг</span>
+                                        <span> {{ res.driverschool.score }} </span>
+                                    </div>
+
+                                    <h3>{{ res.name }}</h3>
+
+                                    <div class="school-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>{{ res.address }}</span>
+                                    </div>
+
+
+                                    <div class="school-phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        {% load new_tags %}
+                                        {% for contact in res.contact|split:',' %}
+                                            <a href="tel:{{ contact }}"> {{ contact }} </a>
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <a href="{% url 'view_school' res.id %}">
+                                        <button class="button--submit">
+                                            <span>Ознайомитись</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </a>
+
+                                </div>
+
+                                <div class="school-img-category">
+
+                                    <img src="{{ res.driverschool.image1.url }}"
+                                         alt="School image" width="188px" height="214px">
+
+                                    <div class="img-category-wrapper">
+                                        {% load new_tags %}
+                                        {% for course in res.cources.all %}
+                                            <span>{{ course.category }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+
 
                         <button class="slider__btn slider__btn&#45;&#45;left">&#10094;</button>
                         <button class="slider__btn slider__btn&#45;&#45;right">&#10095;</button>
