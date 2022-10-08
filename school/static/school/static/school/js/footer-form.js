@@ -1,1 +1,0 @@
-    clickOnButton($(".cards-wrapper"));
