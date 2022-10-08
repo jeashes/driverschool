@@ -230,7 +230,7 @@
         <h3> Інші автошколи </h3>
 
         <div class="schools--desktop">
-        {% for drive in other_school %}
+        {% for drive in other_school|slice:"1:4" %}
             <div class="school-info">
 
                 <div class="school-text">
@@ -286,7 +286,7 @@
 
         <div class="schools--mobile">
 
-        {% for drive in other_school %}
+        {% for drive in other_school|slice:":3" %}
             <div class="school-info">
 
                 <div class="school-score">

@@ -78,4 +78,3 @@ $("#filter-price").on('change','input[type=radio]',(function () {
 
 chooseCategory();
 lastChooseCategory();
-

@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'driverschool.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'driverschool',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
+        'NAME': 'd5sg112pb4ob83',
+        'USER': 'qmljuzvajhkttl',
+        'PASSWORD': '6d72cf1f4d2c7436240e636fa8095a88cfbdb62b84865f3561784ec45f5c0233',
+        'HOST': 'ec2-18-204-36-213.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

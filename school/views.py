@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, DriverSchool
+from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City
 from .forms import CreateApplicationForm, PartnershipForm
 
 
@@ -70,17 +70,15 @@ class Search:
 
         django_search_code = DriverSchoolUnit.objects.filter(city_of_unit__post_code__contains=searched)
 
-        match searched[0]:
-            case '0':
-                post_code_of_unit = [_.city_of_unit.post_code for _ in django_search_code]
+        if django_search_code:
+            post_code_of_unit = [_.city_of_unit.post_code for _ in django_search_code]
 
-                return render(request, 'school/search_schools.html',
-                              cls.django_dict_search(django_search_code, searched, post_code_of_unit))
+            return render(request, 'school/search_schools.html',
+                          cls.django_dict_search(django_search_code, searched, post_code_of_unit))
 
-            case _:
-                return render(request, 'school/search_schools.html',
-                              cls.django_dict_search(django_search_code, searched,
-                                                     error='Not found, please input another word'))
+        return render(request, 'school/search_schools.html',
+                      cls.django_dict_search(django_search_code, searched,
+                                             error='Not found, please input another word'))
 
     @classmethod
     def home_search(cls, request):
@@ -232,11 +230,10 @@ def info_about_authoschool(request, school_pk):
     other_school = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=school_unit.city_of_unit.name)
 
     other_school = list(filter(lambda x: x.address != school_unit.address, other_school))
-    print(type(other_school))
     return render(request, 'school/school_info.html',
                   {'areas': areas, 'school_unit': school_unit, 'url_address': school_unit.url,
                    'create_application_form': app_form,
-                   'partnership_form': partnership_form, 'other_school': other_school[:3]})
+                   'partnership_form': partnership_form, 'other_school': other_school[:4]})
 
 
 # just html page
