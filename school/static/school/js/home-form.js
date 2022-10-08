@@ -1,21 +1,18 @@
-function getCurrentURL () {
-  return window.location.href
+
+
+function showModalError() {
+    const fullUrls = window.location.href;
+    const urls = fullUrls.split("/");
+    const urlPage = urls[urls.length - 1];
+    const indexModul = parseInt(localStorage.getItem('numberModul'));
+
+    if (urlPage === "create_driver_app" || urlPage === "create_partnership_app") {
+        setTimeout(function () {
+            showModal(indexModul)
+        }, 10);
+    }
 }
 
-const url = getCurrentURL().split("/");
-const urlPage = url[url.length - 1];
-const indexModul = localStorage.getItem('numberModul');
-const currentApplication = document.getElementById("counter-application").textContent;
-const oldApplication = parseInt(localStorage.getItem("application"));
-const currentPartnership = document.getElementById("counter-partnership").textContent;
-const oldPartnership = parseInt(localStorage.getItem("partnership"));
-
-
-if (urlPage === "create_driver_app" || urlPage === "create_partnership_app") {
-    setTimeout(function () {
-        showModal(indexModul)
-    }, 10);
-}
 
 function showModal (index) {
     const body = document.getElementsByTagName("body")[0];
@@ -48,16 +45,35 @@ function hideModal(index) {
 
 }
 
-localStorage.setItem("application", currentApplication)
-localStorage.setItem("partnership", currentPartnership)
 
-if (oldApplication < parseInt(currentApplication)) {
-    alert("Форма успішно відправлено")
-    localStorage.removeItem("application")
+function ApplicationForm() {
+    const currentApplication = document.getElementById("counter-application").textContent;
+    const oldApplication = parseInt(localStorage.getItem("application"));
+
+    localStorage.setItem("application", currentApplication)
+
+    if (oldApplication < parseInt(currentApplication)) {
+        alert("Форма успішно відправлено")
+        localStorage.removeItem("application")
+    }
+}
+
+function PartnershipForm() {
+
+    const currentPartnership = document.getElementById("counter-partnership").textContent;
+    const oldPartnership = parseInt(localStorage.getItem("partnership"));
+
+
+    localStorage.setItem("partnership", currentPartnership)
+
+
+    if (oldPartnership < parseInt(currentPartnership)) {
+        alert("Форма успішно відправлено")
+        localStorage.removeItem("partnership")
+    }
 
 }
 
-if (oldPartnership < parseInt(currentPartnership)) {
-    alert("Форма успішно відправлено")
-    localStorage.removeItem("partnership")
-}
+showModalError()
+ApplicationForm()
+PartnershipForm()
