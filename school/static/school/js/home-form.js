@@ -12,9 +12,9 @@ const oldPartnership = parseInt(localStorage.getItem("partnership"));
 
 
 if (urlPage === "create_driver_app" || urlPage === "create_partnership_app") {
-    setTimeout(function() {
+    setTimeout(function () {
         showModal(indexModul)
-        }, 10);
+    }, 10);
 }
 
 function showModal (index) {
@@ -49,12 +49,15 @@ function hideModal(index) {
 }
 
 localStorage.setItem("application", currentApplication)
-localStorage.setItem("partnership", currentApplication)
+localStorage.setItem("partnership", currentPartnership)
 
 if (oldApplication < parseInt(currentApplication)) {
     alert("Форма успішно відправлено")
+    localStorage.removeItem("application")
+
 }
 
 if (oldPartnership < parseInt(currentPartnership)) {
     alert("Форма успішно відправлено")
+    localStorage.removeItem("partnership")
 }
