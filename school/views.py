@@ -8,7 +8,7 @@ def home(request):
     dict_home = {'areas': areas, 'schools': schools, 'letters': letters,
                  'create_application_form': CreateApplicationForm(),
                  'partnership_form': PartnershipForm(), 'len_apps': len(application),
-                 'len_schools': len(schools), 'len_cities': len(cities), 'len_apps_partnership': Partnership.objects.all()}
+                 'len_schools': len(schools), 'len_cities': len(cities), 'len_apps_partnership': len(Partnership.objects.all())}
     return render(request, 'school/home.html', dict_home)
 
 
