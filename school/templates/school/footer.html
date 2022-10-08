@@ -103,7 +103,7 @@
                 з вами зв'яжуться найближчим часом
             </p>
 
-            <form method="post">
+            <form action="{% url 'partnership_app' %}" method="post">
                 {% csrf_token %}
                 {% bootstrap_form partnership_form %}
                 {{ partnership_form.media }}
