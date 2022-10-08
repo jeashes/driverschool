@@ -230,10 +230,13 @@ def info_about_authoschool(request, school_pk):
                                                      get_object_or_404(DriverSchoolUnit, pk=school_pk), \
                                                      CreateApplicationForm(), PartnershipForm()
     other_school = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=school_unit.city_of_unit.name)
+
+    other_school = list(filter(lambda x: x.address != school_unit.address, other_school))
+    print(type(other_school))
     return render(request, 'school/school_info.html',
                   {'areas': areas, 'school_unit': school_unit, 'url_address': school_unit.url,
                    'create_application_form': app_form,
-                   'partnership_form': partnership_form, 'other_school': other_school})
+                   'partnership_form': partnership_form, 'other_school': other_school[:3]})
 
 
 # just html page

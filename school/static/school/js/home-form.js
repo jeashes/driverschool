@@ -1,10 +1,13 @@
 function getCurrentURL () {
   return window.location.href
 }
+
 const url = getCurrentURL().split("/");
 const urlPage = url[url.length - 1];
-
 const indexModul = localStorage.getItem('numberModul');
+const currentApplication = document.getElementById("counter-application").textContent;
+const oldApplication = parseInt(localStorage.getItem("application"));
+
 
 if (urlPage === "create_driver_app" || urlPage === "create_partnership_app") {
     setTimeout(function() {
@@ -27,15 +30,15 @@ function hideModal(index) {
     const modalWrapper = document.getElementsByClassName("modal-wrapper");
     const buttons = document.getElementsByClassName("button--close-modal")
 
-    window.onclick = function(event) {
-      if (event.target === modalWrapper[index]) {
-        modalWrapper[index].style.display = "none";
-        body.style.overflow = "auto";
-        return localStorage.removeItem('numberModul');
-      }
+    window.onclick = function (event) {
+        if (event.target === modalWrapper[index]) {
+            modalWrapper[index].style.display = "none";
+            body.style.overflow = "auto";
+            return localStorage.removeItem('numberModul');
+        }
     }
 
-    buttons[index].onclick = function() {
+    buttons[index].onclick = function () {
         modalWrapper[index].style.display = "none";
         body.style.overflow = "auto";
         return localStorage.removeItem('numberModul');
@@ -43,3 +46,8 @@ function hideModal(index) {
 
 }
 
+localStorage.setItem("application", currentApplication)
+
+if (oldApplication < parseInt(currentApplication)) {
+    alert("Форма успішно відправлено")
+}
