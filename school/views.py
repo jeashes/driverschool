@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City
+from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, Partnership
 from .forms import CreateApplicationForm, PartnershipForm
 
 
@@ -8,7 +8,7 @@ def home(request):
     dict_home = {'areas': areas, 'schools': schools, 'letters': letters,
                  'create_application_form': CreateApplicationForm(),
                  'partnership_form': PartnershipForm(), 'len_apps': len(application),
-                 'len_schools': len(schools), 'len_cities': len(cities)}
+                 'len_schools': len(schools), 'len_cities': len(cities), 'len_apps_partnership': Partnership.objects.all()}
     return render(request, 'school/home.html', dict_home)
 
 

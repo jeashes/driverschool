@@ -7,6 +7,8 @@ const urlPage = url[url.length - 1];
 const indexModul = localStorage.getItem('numberModul');
 const currentApplication = document.getElementById("counter-application").textContent;
 const oldApplication = parseInt(localStorage.getItem("application"));
+const currentPartnership = document.getElementById("counter-partnership").textContent;
+const oldPartnership = parseInt(localStorage.getItem("partnership"));
 
 
 if (urlPage === "create_driver_app" || urlPage === "create_partnership_app") {
@@ -47,7 +49,12 @@ function hideModal(index) {
 }
 
 localStorage.setItem("application", currentApplication)
+localStorage.setItem("partnership", currentApplication)
 
 if (oldApplication < parseInt(currentApplication)) {
+    alert("Форма успішно відправлено")
+}
+
+if (oldPartnership < parseInt(currentPartnership)) {
     alert("Форма успішно відправлено")
 }
