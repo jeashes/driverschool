@@ -334,10 +334,10 @@ span {
 
 .modal__button{
     color: #fff;
-    width: 72%;
+    width: 72% !important;
     display: flex;
-    justify-content: center;
-    margin: 0 54px 0;
+    justify-content: center !important;
+    margin: 0 auto;
 }
 
 /*
