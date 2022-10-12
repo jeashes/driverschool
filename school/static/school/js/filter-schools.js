@@ -25,10 +25,10 @@ const lastChooseCategory = () => {
             element => {
                 if (element.htmlFor === getCategory) {
                     element.className = "active"
-                    element.children.checked = true
+                    element.getElementsByTagName("input")[0].setAttribute("checked", "")
                 } else {
                     element.className = ""
-                    element.children.checked = false
+                    element.getElementsByTagName("input")[0].removeAttribute("checked")
                 }
             }
         )
