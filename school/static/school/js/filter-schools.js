@@ -1,6 +1,6 @@
 const allCategory  = document.getElementsByClassName("category")[0];
 const categoryLabels = allCategory.getElementsByTagName("label");
-const getCategory = localStorage.getItem('chooseCategory');
+
 
 
 const removeAllActive = () => {
@@ -79,8 +79,8 @@ $("#filter-price").on('change','input[type=radio]',(function () {
 chooseCategory();
 lastChooseCategory();
 if (getCategory === null) {
-    alert('1')
+    let getCategory = 'B-B1'
 }
 else{
-    alert('0')
+    let getCategory = localStorage.getItem('chooseCategory');
 }
