@@ -22,12 +22,15 @@ const chooseCategory = () => {
 const lastChooseCategory = () => {
     if (window.location.href.includes("filtered")) {
         [...categoryLabels].map(
-            element => element.htmlFor ===
-            getCategory
-                ?
-                element.className = "active"
-                :
-                element.className = ""
+            element => {
+                if (element.htmlFor === getCategory) {
+                    element.className = "active"
+                    element.children.checked = true
+                } else {
+                    element.className = ""
+                    element.children.checked = false
+                }
+            }
         )
     }
 }
