@@ -54,7 +54,7 @@ class PartnershipForm(ModelForm):
 
     def clean_firstLast_name(self):
         fl_name = self.cleaned_data.get('firstLast_name')
-        if re.findall(r"(^[А-ЩЬЮЯҐЄІЇа-щьюяґєії][А-ЩЬЮЯҐЄІЇа-щьюяґєії\s]{0,20}[А-ЩЬЮЯҐЄІЇа-щьюяґєії]$)", fl_name):
+        if re.findall(r"(^[А-ЩЬЮЯҐЄІЇа-щьюяґєії'][А-ЩЬЮЯҐЄІЇа-щьюяґєі'ї\s]{0,20}[А-ЩЬЮЯҐЄІЇа-щьюяґєі'ї]$)", fl_name):
             return fl_name
         else:
             raise ValidationError("Прізвище та Ім'я введені не корректно")
