@@ -202,8 +202,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
