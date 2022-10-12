@@ -153,7 +153,7 @@ class Filter:
     @classmethod
     def category(cls, request, filter_item, item):
         category = request.GET.get('category')
-        filter_category = filter_item.filter(cources__category__name__contains=category)
+        filter_category = filter_item.filter(cources__category__name__contains=category).distinct()
 
         if filter_category:
             cities_of_unit = [_.city_of_unit.name for _ in filter_category]
@@ -172,7 +172,7 @@ class Filter:
             case 'price-up-low':
 
                 ordered_schools = filter_item.filter(cources__category__name__contains=category).order_by(
-                    '-' + cls.filter_value_in_key[filters])
+                    '-' + cls.filter_value_in_key[filters]).distinct()
 
                 if ordered_schools:
                     cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
@@ -186,7 +186,7 @@ class Filter:
             case 'rating':
 
                 ordered_schools = filter_item.filter(cources__category__name__contains=category).order_by(
-                    '-' + cls.filter_value_in_key[filters])
+                    '-' + cls.filter_value_in_key[filters]).distinct()
 
                 if ordered_schools:
                     cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
@@ -200,7 +200,7 @@ class Filter:
             case _:
 
                 ordered_schools = filter_item.filter(cources__category__name__contains=category).order_by(
-                    cls.filter_value_in_key[filters])
+                    cls.filter_value_in_key[filters]).distinct()
 
                 if ordered_schools:
                     cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
