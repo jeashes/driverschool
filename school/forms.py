@@ -15,7 +15,7 @@ class CreateApplicationForm(ModelForm):
         model = DriverApplication
         fields = ['firstLast_name', 'phone_number', 'email', 'city', 'driverschoolunit', 'course']
         widgets = {
-            'firstLast_name': TextInput(attrs={'placeholder': 'Введіть ПІБ'}),
+            'firstLast_name': TextInput(attrs={'placeholder': "Введіть Прізвище Ім'я"}),
             'phone_number': TextInput(attrs={'placeholder': '+38XXXXXXXXXX'}),
             'email': TextInput(attrs={'placeholder': 'email@example.com '}),
         }
@@ -25,7 +25,7 @@ class CreateApplicationForm(ModelForm):
         if re.findall(r"(^[А-ЩЬЮЯҐЄІЇа-щьюяґєії][А-ЩЬЮЯҐЄІЇа-щьюяґєії\s]{0,20}[А-ЩЬЮЯҐЄІЇа-щьюяґєії]$)", fl_name):
             return fl_name
         else:
-            raise ValidationError('ПІБ введений не корректно')
+            raise ValidationError("Прізвище та Ім'я введені не корректно")
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data['phone_number']
@@ -47,7 +47,7 @@ class PartnershipForm(ModelForm):
         model = Partnership
         fields = ['firstLast_name', 'phone_number', 'email', 'description']
         widgets = {
-            'firstLast_name': TextInput(attrs={'placeholder': 'Введіть ПІБ'}),
+            'firstLast_name': TextInput(attrs={'placeholder': "Введіть Прізвище Ім'я"}),
             'phone_number': TextInput(attrs={'placeholder': '+38XXXXXXXXXX'}),
             'email': TextInput(attrs={'placeholder': 'email@example.com'}),
         }
@@ -57,7 +57,7 @@ class PartnershipForm(ModelForm):
         if re.findall(r"(^[А-ЩЬЮЯҐЄІЇа-щьюяґєії][А-ЩЬЮЯҐЄІЇа-щьюяґєії\s]{0,20}[А-ЩЬЮЯҐЄІЇа-щьюяґєії]$)", fl_name):
             return fl_name
         else:
-            raise ValidationError('ПІБ введений не корректно')
+            raise ValidationError("Прізвище та Ім'я введені не корректно")
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data.get('phone_number')
