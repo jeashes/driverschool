@@ -1,20 +1,44 @@
+from typing import Any, Dict
+
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, Partnership
 from .forms import CreateApplicationForm, PartnershipForm
+from dataclasses import dataclass, field
 
 
 def home(request):
-    schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
-    dict_home = {'areas': areas, 'schools': schools, 'letters': letters,
+    data_home = DataForHomeSearchFilterApp
+    dict_home = {'areas': data_home.areas, 'schools': data_home.schools, 'letters': data_home.letters,
                  'create_application_form': CreateApplicationForm(),
-                 'partnership_form': PartnershipForm(), 'len_apps': len(application),
-                 'len_schools': len(schools), 'len_cities': len(cities), 'len_apps_partnership': len(Partnership.objects.all())}
+                 'partnership_form': PartnershipForm(), 'len_apps': len(data_home.application),
+                 'len_schools': len(data_home.schools), 'len_cities': len(data_home.cities),
+                 'len_apps_partnership': len(Partnership.objects.all())}
     return render(request, 'school/home.html', dict_home)
 
 
-class Search:
-    schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
-    ukraine_map = 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2375030.7670806646!2d31.679159930216635!3d49.268812139128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1663054580432!5m2!1sru!2sua'
+@dataclass()
+class DataForHomeSearchFilterApp:
+    ukraine_map: str = 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2375030.7670806646!2d31.679159930216635!3d49.268812139128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1663054580432!5m2!1sru!2sua'
+
+    filter_value_in_key: Dict[str, str] = field(default_factory=lambda: {
+        "price-low-up": 'cources__price',
+        "price-up-low": 'cources__price',
+        'alphabet': 'driverschool__name',
+        'rating': 'driverschool__score',
+    })
+
+    schools: Any = DriverSchoolUnit.objects.all()
+
+    areas: Any = Area.objects.all()
+
+    letters: Any = Alphabet.objects.all()
+
+    application: Any = DriverApplication.objects.all()
+
+    cities: Any = City.objects.all()
+
+
+class Search(DataForHomeSearchFilterApp):
 
     @classmethod
     def django_dict_search(cls, info, searched, cities_of_unit=None, error=None):
@@ -105,16 +129,7 @@ class Search:
                 return cls.search_city_or_school(request, searched)
 
 
-class Filter:
-    schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
-    ukraine_map = 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2375030.7670806646!2d31.679159930216635!3d49.268812139128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1663054580432!5m2!1sru!2sua'
-    filter_value_in_key = {
-        "price-low-up": 'cources__price',
-        "price-up-low": 'cources__price',
-        'alphabet': 'driverschool__name',
-        'rating': 'driverschool__score',
-    }
-
+class Filter(DataForHomeSearchFilterApp):
     @classmethod
     def django_dict_filter(cls, info, city, cities_of_unit=None, error=None):
         match error:
@@ -238,25 +253,21 @@ def info_about_authoschool(request, school_pk):
 
 # just html page
 def base(request):
-    schools, areas = DriverSchoolUnit.objects.all(), Area.objects.all()
-    return render(request, 'school/base.html', {'areas': areas, 'schools': schools})
+    data_base = DataForHomeSearchFilterApp
+    return render(request, 'school/base.html', {'areas': data_base.areas, 'schools': data_base.schools})
 
 
 # just html page
 def footer(request):
-    areas = Area.objects.all()
+    data_footer = DataForHomeSearchFilterApp
     create_application_form, partnership_form = CreateApplicationForm(), PartnershipForm()
-    return render(request, 'school/footer.html', {'areas': areas, 'create_application_form': CreateApplicationForm(),
+    return render(request, 'school/footer.html', {'areas': data_footer.areas, 'create_application_form': CreateApplicationForm(),
                                                   'partnership_form': partnership_form})
 
 
 # just html page
 def error404(request):
-    schools, areas, create_application_form, partnership_form = DriverSchoolUnit.objects.all(), Area.objects.all(), \
-                                                                CreateApplicationForm(), PartnershipForm()
-    return render(request, 'school/error404.html',
-                  {'areas': areas, 'schools': schools, 'create_application_form': create_application_form,
-                   'partnership_form': partnership_form})
+    return render(request, 'school/error404.html')
 
 
 def create_driver_application(request):
@@ -268,18 +279,20 @@ def create_driver_application(request):
             new_app.save()
             return redirect('home')
         else:
-            schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
-            dict_home = {'areas': areas, 'schools': schools, 'letters': letters,
+            data_driver_app = DataForHomeSearchFilterApp
+            dict_home = {'areas': data_driver_app.areas, 'schools': data_driver_app.schools,
+                         'letters': data_driver_app.letters,
                          'create_application_form': form,
-                         'partnership_form': PartnershipForm(), 'len_apps': len(application),
-                         'len_schools': len(schools), 'len_cities': len(cities)}
+                         'partnership_form': PartnershipForm(), 'len_apps': len(data_driver_app.application),
+                         'len_schools': len(data_driver_app.schools), 'len_cities': len(data_driver_app.cities)}
             return render(request, 'school/home.html', dict_home)
     else:
-        schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
-        dict_home = {'areas': areas, 'schools': schools, 'letters': letters,
+        data_driver_app = DataForHomeSearchFilterApp
+        dict_home = {'areas': data_driver_app.areas, 'schools': data_driver_app.schools,
+                     'letters': data_driver_app.letters,
                      'create_application_form': CreateApplicationForm(),
-                     'partnership_form': PartnershipForm(), 'len_apps': len(application),
-                     'len_schools': len(schools), 'len_cities': len(cities)}
+                     'partnership_form': PartnershipForm(), 'len_apps': len(data_driver_app.application),
+                     'len_schools': len(data_driver_app.schools), 'len_cities': len(data_driver_app.cities)}
         return render(request, 'school/home.html', dict_home)
 
 
@@ -292,16 +305,19 @@ def create_partnership_app(request):
             new_app.save()
             return redirect('home')
         else:
-            schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
-            dict_home = {'areas': areas, 'schools': schools, 'letters': letters,
+            data_for_partnership = DataForHomeSearchFilterApp
+            dict_home = {'areas': data_for_partnership.areas, 'schools': data_for_partnership.schools,
+                         'letters': data_for_partnership.letters,
                          'create_application_form': CreateApplicationForm(),
-                         'partnership_form': form, 'len_apps': len(application),
-                         'len_schools': len(schools), 'len_cities': len(cities)}
+                         'partnership_form': form, 'len_apps': len(data_for_partnership.application),
+                         'len_schools': len(data_for_partnership.schools),
+                         'len_cities': len(data_for_partnership.cities)}
             return render(request, 'school/home.html', dict_home)
     else:
-        schools, areas, letters, application, cities = DriverSchoolUnit.objects.all(), Area.objects.all(), Alphabet.objects.all(), DriverApplication.objects.all(), City.objects.all()
-        dict_home = {'areas': areas, 'schools': schools, 'letters': letters,
+        data_for_partnership = DataForHomeSearchFilterApp
+        dict_home = {'areas': data_for_partnership.areas, 'schools': data_for_partnership.schools,
+                     'letters': data_for_partnership.letters,
                      'create_application_form': CreateApplicationForm(),
-                     'partnership_form': PartnershipForm(), 'len_apps': len(application),
-                     'len_schools': len(schools), 'len_cities': len(cities)}
+                     'partnership_form': PartnershipForm(), 'len_apps': len(data_for_partnership.application),
+                     'len_schools': len(data_for_partnership.schools), 'len_cities': len(data_for_partnership.cities)}
         return render(request, 'school/home.html', dict_home)
