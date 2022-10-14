@@ -62,6 +62,7 @@ class DriverSchoolAdmin(admin.ModelAdmin):
 
 
 class DriverSchoolUnitAdminForm(forms.ModelForm):
+
     class Meta:
         model = DriverSchoolUnit
         fields = '__all__'

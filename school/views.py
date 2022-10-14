@@ -1,5 +1,4 @@
 from typing import Any, Dict
-
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, Partnership
 from .forms import CreateApplicationForm, PartnershipForm
@@ -20,12 +19,7 @@ def home(request):
 class DataForHomeSearchFilterApp:
     ukraine_map: str = 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2375030.7670806646!2d31.679159930216635!3d49.268812139128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1663054580432!5m2!1sru!2sua'
 
-    filter_value_in_key: Dict[str, str] = field(default_factory=lambda: {
-        "price-low-up": 'cources__price',
-        "price-up-low": 'cources__price',
-        'alphabet': 'driverschool__name',
-        'rating': 'driverschool__score',
-    })
+    filter_value_in_key: Dict[str, str] = field(default_factory=dict)
 
     schools: Any = DriverSchoolUnit.objects.all()
 
@@ -113,7 +107,6 @@ class Search(DataForHomeSearchFilterApp):
                     return cls.search_post_code(request, searched)
 
                 case _:
-                    print('shool or city')
                     return cls.search_city_or_school(request, searched)
 
         home_dict = cls.django_home_dict('Будь ласка введіть запит')
@@ -121,6 +114,7 @@ class Search(DataForHomeSearchFilterApp):
 
     @classmethod
     def main_search(cls, request, searched):
+
         match searched[0]:
             case '0':
                 return cls.search_post_code(request, searched)
@@ -181,14 +175,19 @@ class Filter(DataForHomeSearchFilterApp):
 
     @classmethod
     def category_filters(cls, request, filter_item, item):
+        cls.filter_value_in_key = {
+            "price-low-up": 'cources__price',
+            "price-up-low": 'cources__price',
+            'alphabet': 'driverschool__name',
+            'rating': 'driverschool__score',
+        }
         category, filters = request.GET.get('category'), request.GET.get('filtered')
         match filters:
 
             case 'price-up-low':
 
                 ordered_schools = filter_item.filter(cources__category__name__contains=category).order_by(
-                    '-' + cls.filter_value_in_key[filters]).distinct()
-
+                    '-' + cls.filter_value_in_key[filters]).distinct(cls.filter_value_in_key[filters])
                 if ordered_schools:
                     cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
 
@@ -215,7 +214,7 @@ class Filter(DataForHomeSearchFilterApp):
             case _:
 
                 ordered_schools = filter_item.filter(cources__category__name__contains=category).order_by(
-                    cls.filter_value_in_key[filters]).distinct()
+                    cls.filter_value_in_key[filters]).distinct(cls.filter_value_in_key[filters])
 
                 if ordered_schools:
                     cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
@@ -228,7 +227,6 @@ class Filter(DataForHomeSearchFilterApp):
 
     @classmethod
     def main_filter(cls, request, city):
-
         filter_item = cls.filter_item(city)
 
         if request.GET.get('filtered'):
@@ -261,8 +259,9 @@ def base(request):
 def footer(request):
     data_footer = DataForHomeSearchFilterApp
     create_application_form, partnership_form = CreateApplicationForm(), PartnershipForm()
-    return render(request, 'school/footer.html', {'areas': data_footer.areas, 'create_application_form': CreateApplicationForm(),
-                                                  'partnership_form': partnership_form})
+    return render(request, 'school/footer.html',
+                  {'areas': data_footer.areas, 'create_application_form': CreateApplicationForm(),
+                   'partnership_form': partnership_form})
 
 
 # just html page
