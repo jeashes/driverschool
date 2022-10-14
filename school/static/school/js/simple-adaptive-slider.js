@@ -94,7 +94,7 @@ for(let i = 0; i < slideContainer.length; i++){
         const culcSliderHeight = (curSlide) => {
             if (slideContainer[0].parentNode.classList.contains("result-wrapper")) {
                 console.log(slides[curSlide].clientHeight)
-                const sliderHeight = slides[curSlide].clientHeight + 25;
+                const sliderHeight = slides[curSlide].clientHeight + 30;
                 slideContainer[i].style.height = `${sliderHeight}px`;
             } else {
                 btnLeft.style.bottom = "60px"
