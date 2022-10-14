@@ -96,7 +96,6 @@ for(let i = 0; i < slideContainer.length; i++){
                 console.log(slides[curSlide].clientHeight)
                 const sliderHeight = slides[curSlide].clientHeight;
                 slideContainer[i].style.height = `${sliderHeight}px`;
-                window.scrollTo(0, 701)
             } else {
                 btnLeft.style.bottom = "60px"
                 btnRight.style.bottom = "60px"
