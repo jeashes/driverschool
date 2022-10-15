@@ -497,6 +497,7 @@ input[type="radio"]{
         border-radius: 12px;
         padding: 20px 16px 40px;
         margin: 0 0 40px;
+        height: 570px;
     }
 
     .school-text {
