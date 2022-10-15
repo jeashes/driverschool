@@ -306,6 +306,9 @@ input[type="radio"]{
 
 .school-text {
     max-width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .school-score {
