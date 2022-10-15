@@ -7,29 +7,27 @@ from dataclasses import dataclass, field
 
 def home(request):
     data_home = DataForHomeSearchFilterApp
-    dict_home = {'areas': data_home.areas, 'schools': data_home.schools, 'letters': data_home.letters,
+    dict_home = {'areas': data_home.areas, 'schools': DriverSchoolUnit.objects.all(), 'letters': data_home.letters,
                  'create_application_form': CreateApplicationForm(),
-                 'partnership_form': PartnershipForm(), 'len_apps': len(data_home.application),
-                 'len_schools': len(data_home.schools), 'len_cities': len(data_home.cities),
+                 'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
+                 'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
                  'len_apps_partnership': len(Partnership.objects.all())}
     return render(request, 'school/home.html', dict_home)
 
 
 @dataclass()
 class DataForHomeSearchFilterApp:
+    # static data
     ukraine_map: str = 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2375030.7670806646!2d31.679159930216635!3d49.268812139128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1663054580432!5m2!1sru!2sua'
 
+    # static data
     filter_value_in_key: Dict[str, str] = field(default_factory=dict)
 
-    schools: Any = DriverSchoolUnit.objects.all()
-
+    # static data
     areas: Any = Area.objects.all()
 
+    # static data
     letters: Any = Alphabet.objects.all()
-
-    application: Any = DriverApplication.objects.all()
-
-    cities: Any = City.objects.all()
 
 
 class Search(DataForHomeSearchFilterApp):
@@ -55,8 +53,9 @@ class Search(DataForHomeSearchFilterApp):
 
         return {'areas': cls.areas, 'schools': cls.schools, 'letters': cls.letters,
                 'create_application_form': CreateApplicationForm(),
-                'partnership_form': PartnershipForm(), 'len_apps': len(cls.application),
-                'len_schools': len(cls.schools), 'len_cities': len(cls.cities), 'error': error}
+                'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
+                'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
+                'len_apps_partnership': len(Partnership.objects.all()), 'error': error}
 
     @classmethod
     def search_city_or_school(cls, request, searched):
@@ -279,19 +278,21 @@ def create_driver_application(request):
             return redirect('home')
         else:
             data_driver_app = DataForHomeSearchFilterApp
-            dict_home = {'areas': data_driver_app.areas, 'schools': data_driver_app.schools,
+            dict_home = {'areas': data_driver_app.areas, 'schools': DriverSchoolUnit.objects.all(),
                          'letters': data_driver_app.letters,
                          'create_application_form': form,
-                         'partnership_form': PartnershipForm(), 'len_apps': len(data_driver_app.application),
-                         'len_schools': len(data_driver_app.schools), 'len_cities': len(data_driver_app.cities)}
+                         'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
+                         'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
+                         'len_apps_partnership': len(Partnership.objects.all())}
             return render(request, 'school/home.html', dict_home)
     else:
         data_driver_app = DataForHomeSearchFilterApp
-        dict_home = {'areas': data_driver_app.areas, 'schools': data_driver_app.schools,
+        dict_home = {'areas': data_driver_app.areas, 'schools': DriverSchoolUnit.objects.all(),
                      'letters': data_driver_app.letters,
                      'create_application_form': CreateApplicationForm(),
-                     'partnership_form': PartnershipForm(), 'len_apps': len(data_driver_app.application),
-                     'len_schools': len(data_driver_app.schools), 'len_cities': len(data_driver_app.cities)}
+                     'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
+                     'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
+                     'len_apps_partnership': len(Partnership.objects.all())}
         return render(request, 'school/home.html', dict_home)
 
 
@@ -305,18 +306,20 @@ def create_partnership_app(request):
             return redirect('home')
         else:
             data_for_partnership = DataForHomeSearchFilterApp
-            dict_home = {'areas': data_for_partnership.areas, 'schools': data_for_partnership.schools,
+            dict_home = {'areas': data_for_partnership.areas, 'schools': DriverSchoolUnit.objects.all(),
                          'letters': data_for_partnership.letters,
                          'create_application_form': CreateApplicationForm(),
-                         'partnership_form': form, 'len_apps': len(data_for_partnership.application),
-                         'len_schools': len(data_for_partnership.schools),
-                         'len_cities': len(data_for_partnership.cities)}
+                         'partnership_form': form, 'len_apps': len(DriverApplication.objects.all()),
+                         'len_schools': len(DriverSchoolUnit.objects.all()),
+                         'len_cities': len(City.objects.all()),
+                         'len_apps_partnership': len(Partnership.objects.all()), }
             return render(request, 'school/home.html', dict_home)
     else:
         data_for_partnership = DataForHomeSearchFilterApp
-        dict_home = {'areas': data_for_partnership.areas, 'schools': data_for_partnership.schools,
+        dict_home = {'areas': data_for_partnership.areas, 'schools': DriverSchoolUnit.objects.all(),
                      'letters': data_for_partnership.letters,
                      'create_application_form': CreateApplicationForm(),
-                     'partnership_form': PartnershipForm(), 'len_apps': len(data_for_partnership.application),
-                     'len_schools': len(data_for_partnership.schools), 'len_cities': len(data_for_partnership.cities)}
+                     'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
+                     'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
+                     'len_apps_partnership': len(Partnership.objects.all())}
         return render(request, 'school/home.html', dict_home)
