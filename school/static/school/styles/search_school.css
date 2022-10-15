@@ -299,7 +299,7 @@ input[type="radio"]{
     background: #FFFFFF;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
-    padding: 30px 40px;
+    padding: 30px 70px 30px 40px;
     margin: 0 0 40px;
 
 }
@@ -660,6 +660,7 @@ input[type="radio"]{
 
     .school-info {
         height: 410px;
+        padding: 30px 40px;
     }
 
     .school-text {
