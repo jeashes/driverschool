@@ -51,7 +51,7 @@ class Search(DataForHomeSearchFilterApp):
     @classmethod
     def django_home_dict(cls, error=None):
 
-        return {'areas': cls.areas, 'schools': cls.schools, 'letters': cls.letters,
+        return {'areas': cls.areas, 'schools': DriverSchoolUnit.objects.all(), 'letters': cls.letters,
                 'create_application_form': CreateApplicationForm(),
                 'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
                 'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
