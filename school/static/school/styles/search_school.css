@@ -319,6 +319,7 @@ input[type="radio"]{
 .school-address {
     display: flex;
     align-items: center;
+    width: 85%;
     margin: 15px 0;
 }
 
