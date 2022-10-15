@@ -63,8 +63,8 @@ class Courses(models.Model):
 
 
 class DriverSchool(models.Model):
-    name = models.CharField(max_length=70, verbose_name='Назва автошколи')
-    address = models.CharField(max_length=80, verbose_name='Адреса головного офісу')
+    name = models.CharField(max_length=46, verbose_name='Назва автошколи')
+    address = models.CharField(max_length=60, verbose_name='Адреса головного офісу')
     unit = models.BooleanField(verbose_name='Наявність філій', default=False)
     contact = models.CharField(max_length=28, verbose_name='Контактний номер тел.')
     email = models.CharField(max_length=30, verbose_name='Контактний email', blank=True)
@@ -98,8 +98,8 @@ class DriverSchool(models.Model):
 
 
 class DriverSchoolUnit(models.Model):
-    name = models.CharField(max_length=70, verbose_name='Назва філії')
-    address = models.CharField(max_length=80, verbose_name='Адреса автошколи')
+    name = models.CharField(max_length=46, verbose_name='Назва філії')
+    address = models.CharField(max_length=60, verbose_name='Адреса автошколи')
     driverschool = models.ForeignKey(DriverSchool, on_delete=models.CASCADE, verbose_name='Головний офіс')
     url = models.URLField(max_length=1500, blank=True, verbose_name='Геопозиція автошколи')
     category = models.ManyToManyField(Category, verbose_name='Категорії', blank=True)
