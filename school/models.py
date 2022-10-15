@@ -63,10 +63,10 @@ class Courses(models.Model):
 
 
 class DriverSchool(models.Model):
-    name = models.CharField(max_length=65, verbose_name='Назва автошколи')
-    address = models.CharField(max_length=65, verbose_name='Адреса головного офісу')
+    name = models.CharField(max_length=35, verbose_name='Назва автошколи')
+    address = models.CharField(max_length=40, verbose_name='Адреса головного офісу')
     unit = models.BooleanField(verbose_name='Наявність філій', default=False)
-    contact = models.CharField(max_length=50, verbose_name='Контактний номер тел.')
+    contact = models.CharField(max_length=28, verbose_name='Контактний номер тел.')
     email = models.CharField(max_length=30, verbose_name='Контактний email', blank=True)
     area = models.ForeignKey(Area, on_delete=models.CASCADE, blank=True, verbose_name='Область')
     city = ChainedForeignKey(City, chained_field='area', chained_model_field='area', on_delete=models.CASCADE, verbose_name='Місто')
@@ -98,14 +98,14 @@ class DriverSchool(models.Model):
 
 
 class DriverSchoolUnit(models.Model):
-    name = models.CharField(max_length=65, verbose_name='Назва філії')
-    address = models.CharField(max_length=65, verbose_name='Адреса автошколи')
+    name = models.CharField(max_length=35, verbose_name='Назва філії')
+    address = models.CharField(max_length=40, verbose_name='Адреса автошколи')
     driverschool = models.ForeignKey(DriverSchool, on_delete=models.CASCADE, verbose_name='Головний офіс')
     url = models.URLField(max_length=1500, blank=True, verbose_name='Геопозиція автошколи')
     category = models.ManyToManyField(Category, verbose_name='Категорії', blank=True)
     cources = ChainedManyToManyField(Courses, chained_field='category', chained_model_field='category',
                                      verbose_name='Курси', blank='True')
-    contact = models.CharField(max_length=50, verbose_name='Контактний номер тел.')
+    contact = models.CharField(max_length=28, verbose_name='Контактний номер тел.')
     area = models.ForeignKey(Area, on_delete=models.CASCADE, blank=True, verbose_name='Область')
     city_of_unit = ChainedForeignKey(City, chained_field='area', chained_model_field='area', on_delete=models.CASCADE, verbose_name='Місто')
     objects = models.Manager()
