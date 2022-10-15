@@ -658,10 +658,27 @@ input[type="radio"]{
         margin: 0 10px 0;
     }
 
+    .school-info {
+        height: 410px;
+    }
+
+    .school-text {
+        max-width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 
     .school-text > h3 {
         font-size: 20px;
         line-height: 25px;
+    }
+
+
+
+    .school-img-category{
+        justify-content: center;
     }
 
 }
