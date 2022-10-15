@@ -545,7 +545,7 @@ input[type="radio"]{
     }
 
     .school-text > a {
-        width: fit-content;
+        width: 100%;
     }
 
     .school-text > a:hover {
