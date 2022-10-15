@@ -128,7 +128,7 @@ class Filter(DataForHomeSearchFilterApp):
     def django_dict_filter(cls, info, city, cities_of_unit=None, error=None):
         match error:
             case 'Not found result':
-                return {'areas': cls.areas, 'filtered_schools': info,
+                return {'areas': cls.areas, 'info': info,
                         'count': len(info),
                         'url_city': cls.ukraine_map,
                         'create_application_form': CreateApplicationForm(),
@@ -137,7 +137,7 @@ class Filter(DataForHomeSearchFilterApp):
 
             case _:
                 return {'areas': cls.areas,
-                        'filtered_schools': info, 'count': len(info),
+                        'info': info, 'count': len(info),
                         'url_city': ''.join([cls.ukraine_map, info[0].city_of_unit.url][
                                                 city in cities_of_unit]),
                         'create_application_form': CreateApplicationForm(),

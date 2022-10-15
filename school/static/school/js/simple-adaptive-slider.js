@@ -50,6 +50,7 @@ for(let i = 0; i < slideContainer.length; i++){
             } else {
                 curSlide++;
             }
+            window.scrollTo(0, 701);
             goToSlide(curSlide);
             activateDot(curSlide);
             culcSliderHeight(curSlide);
@@ -61,6 +62,7 @@ for(let i = 0; i < slideContainer.length; i++){
             } else {
                 curSlide--;
             }
+            window.scrollTo(0, 701);
             goToSlide(curSlide);
             activateDot(curSlide);
             culcSliderHeight(curSlide);

@@ -159,7 +159,7 @@
 
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:':6' %}
+                            {% for res in info|slice:':6' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -214,10 +214,10 @@
 
                         </div>
 
-                        {% if filtered_schools|length > 6 %}
+                        {% if info|length > 6 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'6:12' %}
+                            {% for res in info|slice:'6:12' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -260,8 +260,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -273,10 +273,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 12 %}
+                        {% if info|length > 12 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'12:18' %}
+                            {% for res in info|slice:'12:18' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -319,8 +319,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -332,10 +332,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 18 %}
+                        {% if info|length > 18 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'18:24' %}
+                            {% for res in info|slice:'18:24' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -378,8 +378,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -391,10 +391,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 24 %}
+                        {% if info|length > 24 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'24:30' %}
+                            {% for res in info|slice:'24:30' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -437,8 +437,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -450,10 +450,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 30 %}
+                        {% if info|length > 30 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'30:36' %}
+                            {% for res in info|slice:'30:36' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -496,8 +496,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -509,10 +509,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 36 %}
+                        {% if info|length > 36 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'36:42' %}
+                            {% for res in info|slice:'36:42' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -555,8 +555,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -568,10 +568,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 42 %}
+                        {% if info|length > 42 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'42:48' %}
+                            {% for res in info|slice:'42:48' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -614,8 +614,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -627,10 +627,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 48 %}
+                        {% if info|length > 48 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'48:54' %}
+                            {% for res in info|slice:'48:54' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -673,8 +673,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -686,10 +686,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 54 %}
+                        {% if info|length > 54 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'54:60' %}
+                            {% for res in info|slice:'54:60' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -732,8 +732,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -745,10 +745,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 60 %}
+                        {% if info|length > 60 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'60:66' %}
+                            {% for res in info|slice:'60:66' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -791,8 +791,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -804,10 +804,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 66 %}
+                        {% if info|length > 66 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'66:72' %}
+                            {% for res in info|slice:'66:72' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -850,8 +850,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -863,10 +863,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 72 %}
+                        {% if info|length > 72 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'72:78' %}
+                            {% for res in info|slice:'72:78' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -909,8 +909,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -922,10 +922,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 78 %}
+                        {% if info|length > 78 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'78:84' %}
+                            {% for res in info|slice:'78:84' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -968,8 +968,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -981,10 +981,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 84 %}
+                        {% if info|length > 84 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'84:90' %}
+                            {% for res in info|slice:'84:90' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1027,8 +1027,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -1040,10 +1040,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 90 %}
+                        {% if info|length > 90 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'90:96' %}
+                            {% for res in info|slice:'90:96' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1086,8 +1086,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -1099,10 +1099,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 96 %}
+                        {% if info|length > 96 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'96:102' %}
+                            {% for res in info|slice:'96:102' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1145,8 +1145,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -1158,10 +1158,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 102 %}
+                        {% if info|length > 102 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'102:108' %}
+                            {% for res in info|slice:'102:108' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1204,8 +1204,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -1217,10 +1217,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 108 %}
+                        {% if info|length > 108 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'108:114' %}
+                            {% for res in info|slice:'108:114' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1263,8 +1263,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -1276,10 +1276,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 114 %}
+                        {% if info|length > 114 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'114:120' %}
+                            {% for res in info|slice:'114:120' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1322,8 +1322,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -1335,10 +1335,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 120 %}
+                        {% if info|length > 120 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'120:126' %}
+                            {% for res in info|slice:'120:126' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1381,8 +1381,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -1394,10 +1394,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 126 %}
+                        {% if info|length > 126 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'126:132' %}
+                            {% for res in info|slice:'126:132' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1440,8 +1440,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -1453,10 +1453,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 132 %}
+                        {% if info|length > 132 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'132:138' %}
+                            {% for res in info|slice:'132:138' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1499,8 +1499,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -1512,10 +1512,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 138 %}
+                        {% if info|length > 138 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'138:144' %}
+                            {% for res in info|slice:'138:144' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1558,8 +1558,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
@@ -1571,10 +1571,10 @@
                         </div>
                         {% endif %}
 
-                        {% if filtered_schools|length > 144 %}
+                        {% if info|length > 144 %}
                         <div class="slide">
 
-                            {% for res in filtered_schools|slice:'144:150' %}
+                            {% for res in info|slice:'144:150' %}
                                 <div class="school-info">
 
                                 <div class="school-text">
@@ -1617,8 +1617,8 @@
 
                                     <div class="img-category-wrapper">
                                         {% load new_tags %}
-                                        {% for course in res.cources.all %}
-                                            <span>{{ course.category }}</span>
+                                        {% for cat in res.category.all %}
+                                            <span>{{ cat.name }}</span>
                                         {% endfor %}
                                     </div>
 
