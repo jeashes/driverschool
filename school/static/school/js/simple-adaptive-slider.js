@@ -99,8 +99,15 @@ for(let i = 0; i < slideContainer.length; i++){
                 const sliderHeight = slides[curSlide].clientHeight + 30;
                 slideContainer[i].style.height = `${sliderHeight}px`;
             } else {
-                btnLeft.style.bottom = "60px"
-                btnRight.style.bottom = "60px"
+                if (window.screen.width < 767){
+                    btnLeft.style.bottom = "80px"
+                    btnRight.style.bottom = "80px"
+                }
+                else{
+                    btnLeft.style.bottom = "60px"
+                    btnRight.style.bottom = "60px"
+                }
+
             }
 
         }
