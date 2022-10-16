@@ -100,14 +100,8 @@ for(let i = 0; i < slideContainer.length; i++){
                 slideContainer[i].style.height = `${sliderHeight}px`;
             } else {
                 if (window.screen.width < 767){
-                    if (slideContainer.parentElement.parentElement.classList.contains("areas-result")){
-                        btnLeft.style.bottom = "80px"
-                        btnRight.style.bottom = "80px"
-                    } else {
-                        btnLeft.style.bottom = "100px"
-                        btnRight.style.bottom = "100px"
-                    }
-
+                    btnLeft.style.bottom = "90px"
+                    btnRight.style.bottom = "90px"
                 }
                 else{
                     btnLeft.style.bottom = "60px"
