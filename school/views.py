@@ -268,61 +268,7 @@ def error404(request):
     return render(request, 'school/error404.html')
 
 
-def create_driver_application(request):
-    if request.method == 'POST':
-        form = CreateApplicationForm(request.POST)
-        if form.is_valid():
-            new_app = form.save(commit=False)
-            new_app.user = request.user
-            new_app.save()
-            return redirect('home')
-        else:
-            data_driver_app = DataForHomeSearchFilterApp
-            dict_home = {'areas': data_driver_app.areas, 'schools': DriverSchoolUnit.objects.all(),
-                         'letters': data_driver_app.letters,
-                         'create_application_form': form,
-                         'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
-                         'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
-                         'len_apps_partnership': len(Partnership.objects.all())}
-            return render(request, 'school/home.html', dict_home)
-    else:
-        data_driver_app = DataForHomeSearchFilterApp
-        dict_home = {'areas': data_driver_app.areas, 'schools': DriverSchoolUnit.objects.all(),
-                     'letters': data_driver_app.letters,
-                     'create_application_form': CreateApplicationForm(),
-                     'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
-                     'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
-                     'len_apps_partnership': len(Partnership.objects.all())}
-        return render(request, 'school/home.html', dict_home)
 
-
-def create_partnership_app(request):
-    if request.method == 'POST':
-        form = PartnershipForm(request.POST)
-        if form.is_valid():
-            new_app = form.save(commit=False)
-            new_app.user = request.user
-            new_app.save()
-            return redirect('home')
-        else:
-            data_for_partnership = DataForHomeSearchFilterApp
-            dict_home = {'areas': data_for_partnership.areas, 'schools': DriverSchoolUnit.objects.all(),
-                         'letters': data_for_partnership.letters,
-                         'create_application_form': CreateApplicationForm(),
-                         'partnership_form': form, 'len_apps': len(DriverApplication.objects.all()),
-                         'len_schools': len(DriverSchoolUnit.objects.all()),
-                         'len_cities': len(City.objects.all()),
-                         'len_apps_partnership': len(Partnership.objects.all()), }
-            return render(request, 'school/home.html', dict_home)
-    else:
-        data_for_partnership = DataForHomeSearchFilterApp
-        dict_home = {'areas': data_for_partnership.areas, 'schools': DriverSchoolUnit.objects.all(),
-                     'letters': data_for_partnership.letters,
-                     'create_application_form': CreateApplicationForm(),
-                     'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
-                     'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
-                     'len_apps_partnership': len(Partnership.objects.all())}
-        return render(request, 'school/home.html', dict_home)
 
 
 class Application(DataForHomeSearchFilterApp):
