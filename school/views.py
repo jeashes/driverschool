@@ -268,9 +268,6 @@ def error404(request):
     return render(request, 'school/error404.html')
 
 
-
-
-
 class Application(DataForHomeSearchFilterApp):
 
     @classmethod
