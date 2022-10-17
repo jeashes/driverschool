@@ -251,7 +251,7 @@ def info_about_authoschool(request, school_pk):
 # just html page
 def base(request):
     data_base = DataForHomeSearchFilterApp
-    return render(request, 'school/base.html', {'areas': data_base.areas, 'schools': data_base.schools})
+    return render(request, 'school/base.html', {'areas': data_base.areas, 'schools': DriverSchoolUnit.objects.all()})
 
 
 # just html page
