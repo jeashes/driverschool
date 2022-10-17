@@ -323,3 +323,45 @@ def create_partnership_app(request):
                      'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
                      'len_apps_partnership': len(Partnership.objects.all())}
         return render(request, 'school/home.html', dict_home)
+
+
+class Application(DataForHomeSearchFilterApp):
+
+    @classmethod
+    def application(cls, driver_app=None, partnership=None):
+        dict_app_hone = {'areas': cls.areas, 'schools': DriverSchoolUnit.objects.all(),
+                         'letters': cls.letters,
+                         'create_application_form': driver_app,
+                         'partnership_form': partnership, 'len_apps': len(DriverApplication.objects.all()),
+                         'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
+                         'len_apps_partnership': len(Partnership.objects.all())}
+
+        return dict_app_hone
+
+    @classmethod
+    def create_driver_application(cls, request):
+        if request.method == 'POST':
+            form = CreateApplicationForm(request.POST)
+            if form.is_valid():
+                new_app = form.save(commit=False)
+                new_app.user = request.user
+                new_app.save()
+                return redirect('home')
+
+            return render(request, 'school/home.html', cls.application(form, PartnershipForm()))
+
+        return render(request, 'school/home.html', cls.application(CreateApplicationForm(), PartnershipForm()))
+
+    @classmethod
+    def create_partnership_app(cls, request):
+        if request.method == 'POST':
+            form = PartnershipForm(request.POST)
+            if form.is_valid():
+                new_app = form.save(commit=False)
+                new_app.user = request.user
+                new_app.save()
+                return redirect('home')
+
+            return render(request, 'school/home.html', cls.application(CreateApplicationForm(), form))
+
+        return render(request, 'school/home.html', cls.application(CreateApplicationForm(), PartnershipForm()))

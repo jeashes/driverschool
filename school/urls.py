@@ -25,8 +25,8 @@ urlpatterns = [
     path('error404', views.error404, name='error404'),
 
     # forms
-    path('create_driver_app', views.create_driver_application, name='driver_app'),
-    path('create_partnership_app', views.create_partnership_app, name='partnership_app')
+    path('create_driver_app', views.Application.create_driver_application, name='driver_app'),
+    path('create_partnership_app', views.Application.create_partnership_app, name='partnership_app')
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
