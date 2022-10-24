@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm, TextInput
 from .models import DriverApplication, Partnership
 import re
@@ -5,11 +6,8 @@ from django.core.exceptions import ValidationError
 
 
 class CreateApplicationForm(ModelForm):
-    def __init__(self, *args, **kwargs):
+    def __init__(self,  *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['city'].empty_label = 'Оберіть місто'
-        self.fields['driverschoolunit'].empty_label = 'Drive school not chosen'
-        self.fields['course'].empty_label = 'Course not chosen'
 
     class Meta:
         model = DriverApplication
@@ -18,6 +16,9 @@ class CreateApplicationForm(ModelForm):
             'firstLast_name': TextInput(attrs={'placeholder': "Введіть Прізвище Ім'я"}),
             'phone_number': TextInput(attrs={'placeholder': '+38XXXXXXXXXX'}),
             'email': TextInput(attrs={'placeholder': 'email@example.com '}),
+            'city': forms.HiddenInput(),
+            'driverschoolunit': forms.HiddenInput(),
+            'course': forms.HiddenInput(),
         }
 
     def clean_firstLast_name(self):
@@ -40,6 +41,7 @@ class CreateApplicationForm(ModelForm):
             return email
         else:
             raise ValidationError('Gmail введено не корректно')
+
 
 
 class PartnershipForm(ModelForm):

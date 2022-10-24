@@ -288,6 +288,9 @@ class Application(DataForHomeSearchFilterApp):
             if form.is_valid():
                 new_app = form.save(commit=False)
                 new_app.user = request.user
+                new_app.city = 'Чернівці'
+                new_app.driverschoolunit = 'Приватна автошкола "Сигнал-2"'
+                new_app.course = 'A - A1 2000грн'
                 new_app.save()
                 return redirect('home')
 

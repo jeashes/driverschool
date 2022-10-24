@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'smart_selects',
     'bootstrap3',
+    'dal',
+    'dal_select2',
 ]
 
 MIDDLEWARE = [
