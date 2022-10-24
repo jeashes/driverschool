@@ -58,7 +58,7 @@ class Search(DataForHomeSearchFilterApp):
                 'len_apps_partnership': len(Partnership.objects.all()), 'error': error}
 
     @classmethod
-    def search_city_or_school(cls, request, searched):
+    def search_area_or_school_city(cls, request, searched):
 
         django_search_city = DriverSchoolUnit.objects.filter(city_of_unit__name__contains=searched)
 
@@ -106,7 +106,7 @@ class Search(DataForHomeSearchFilterApp):
                     return cls.search_post_code(request, searched)
 
                 case _:
-                    return cls.search_city_or_school(request, searched)
+                    return cls.search_area_or_school_city(request, searched)
 
         home_dict = cls.django_home_dict('Будь ласка введіть запит')
         return render(request, 'school/home.html', home_dict)
@@ -119,7 +119,7 @@ class Search(DataForHomeSearchFilterApp):
                 return cls.search_post_code(request, searched)
 
             case _:
-                return cls.search_city_or_school(request, searched)
+                return cls.search_area_or_school_city(request, searched)
 
 
 class Filter(DataForHomeSearchFilterApp):
@@ -288,9 +288,6 @@ class Application(DataForHomeSearchFilterApp):
             if form.is_valid():
                 new_app = form.save(commit=False)
                 new_app.user = request.user
-                new_app.city = 'Чернівці'
-                new_app.driverschoolunit = 'Приватна автошкола "Сигнал-2"'
-                new_app.course = 'A - A1 2000грн'
                 new_app.save()
                 return redirect('home')
 

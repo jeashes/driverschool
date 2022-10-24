@@ -21,6 +21,10 @@
     overflow: hidden;
 }
 
+.footer__middle {
+    display: none;
+}
+
 /* ==============
    section 1
    ============== */

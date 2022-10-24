@@ -54,11 +54,18 @@
                         <a href="mailto:google89@gmail.com">google89@gmail.com</a>
                 </div>
 
-                <div class="footer__areas-wrapper">
+                <div class="footer__areas-wrapper">Чернівецька
                     <h6> Області </h6>
                     <div class="footer__areas">
                         {% for area in areas|slice:":24" %}
-                            <span>{{ area.name }}</span>
+                        {% if letter %}
+                            <span style="color: white;">{{ area.name }}</span>
+
+                        {% else %}
+                            <a href="{% url 'search_authoschool' area  %}" >
+                                <span style="color: white;">{{ area.name }}</span>
+                            </a>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>

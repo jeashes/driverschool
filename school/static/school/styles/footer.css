@@ -8,6 +8,7 @@
 .footer__top {
     display: flex;
     justify-content: space-between;
+    margin: 0 0 30px;
 }
 
 .brand__logo {

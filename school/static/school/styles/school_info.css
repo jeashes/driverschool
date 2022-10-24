@@ -4,6 +4,9 @@
     overflow: hidden;
 }
 
+.footer__middle {
+    display: none;
+}
 .headline {
     position: absolute;
     top: 255px;

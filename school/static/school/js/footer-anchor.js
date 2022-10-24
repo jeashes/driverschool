@@ -1,3 +1,7 @@
+const fullUrls = window.location.href;
+const urls = fullUrls.split("/");
+const urlPage = urls[urls.length - 1];
+
 let footerWrapper = document.getElementsByClassName("footer__areas")[0],
     areaWrapper = document.getElementsByClassName("areas-block")[0];
 
