@@ -62,7 +62,7 @@
                             <span style="color: white;">{{ area.name }}</span>
 
                         {% else %}
-                            <a href="{% url 'search_authoschool' area  %}" >
+                            <a>
                                 <span style="color: white;">{{ area.name }}</span>
                             </a>
                         {% endif %}
@@ -87,14 +87,35 @@
             <p>
                 З вами зв'яжуться, щоб допомогти підібрати автошколу
             </p>
-
-            <form action="{% url 'driver_app' %}" method="post">
+            {% if url_address or driver_app_school_on_home_page %}
+            <form action="{% url 'driver_app' %}" method="post" style="display: none;">
                 {% csrf_token %}
                 {% bootstrap_form create_application_form %}
                 {{ create_application_form.media }}
                 <button type="submit" class="modal__button button--submit">Відправити</button>
             </form>
 
+            <form action="{% url 'school_driver_app' %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form create_app_form_school %}
+                {{ create_app_form_school.media }}
+                <button type="submit" class="modal__button button--submit">Відправити</button>
+            </form>
+            {% else %}
+            <form action="{% url 'driver_app' %}" method="post" >
+                {% csrf_token %}
+                {% bootstrap_form create_application_form %}
+                {{ create_application_form.media }}
+                <button type="submit" class="modal__button button--submit">Відправити</button>
+            </form>
+
+            <form action="{% url 'school_driver_app' %}" method="post" style="display: none;">
+                {% csrf_token %}
+                {% bootstrap_form create_app_form_school %}
+                {{ create_app_form_school.media }}
+                <button type="submit" class="modal__button button--submit">Відправити</button>
+            </form>
+            {% endif %}
             <button class="button--close-modal" onclick="hideModal(0)">
                 <i class="fa-solid fa-x"></i>
             </button>

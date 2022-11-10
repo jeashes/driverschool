@@ -26,6 +26,7 @@ urlpatterns = [
 
     # forms
     path('create_driver_app', views.Application.create_driver_application, name='driver_app'),
+    path('school_page_app', views.Application.create_school_app, name='school_driver_app'),
     path('create_partnership_app', views.Application.create_partnership_app, name='partnership_app')
 
 ]

@@ -12,6 +12,7 @@
 <section class="headline">
     <h1>{{ school_unit.name }}</h1>
     <span>Автошколи міста {{ school_unit.city_of_unit.name }}</span>
+    <span id="autocomplete_city" style="display: none;">{{ school_unit.city_of_unit.id }}</span>
     <a class="button--back-home" href="{% url 'search_authoschool' school_unit.city_of_unit.name %}">
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
         <span>Назад</span>
@@ -23,6 +24,7 @@
     <div class="content--wrapper">
         <a class="breadcrumbs__home" href="/"> Головна </a>
         <a class="breadcrumbs__city" href="{% url 'search_authoschool' school_unit.city_of_unit.name %}"> > {{ school_unit.city_of_unit.name }}</a>
+
         <span class="breadcrumbs__school-name"> > {{ school_unit.name }}</span>
     </div>
 
@@ -123,6 +125,7 @@
                 <h3 class="school-name">
                     {{ school_unit.name }}
                 </h3>
+                <span id="autocomplete_school" style="display: none;">{{ school_unit.id }}</span>
 
                 <p class="school-description">
                     {{ school_unit.driverschool.description }}
@@ -159,11 +162,12 @@
                 <div class="course-info">
 
                     <b class="course-name"> {{ course.category.name }}</b>
+                    <span class="autocomplete_course" style="display: none;">{{ course.id }}</span>
                     <p class="course-description">{{ course.category.description }} </p>
 
                 </div>
 
-                <button class="button--submit button--price" onclick="showModal(0)">
+                <button class="button--submit button--price" onclick="showModal(0); Autocomplete({{ course.id }})">
                     <span>
                         <b> {{ course.price }} </b>
                         UAH

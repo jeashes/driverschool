@@ -6,7 +6,7 @@ function showModalError() {
     const urlPage = urls[urls.length - 1];
     const indexModul = parseInt(localStorage.getItem('numberModul'));
 
-    if (urlPage === "create_driver_app" || urlPage === "create_partnership_app") {
+    if (urlPage === "create_driver_app" || urlPage === "create_partnership_app" ||  urlPage === "school_page_app") {
         setTimeout(function () {
             showModal(indexModul)
         }, 10);
@@ -72,6 +72,12 @@ function PartnershipForm() {
         localStorage.removeItem("partnership")
     }
 
+}
+
+function Autocomplete(course_id) {
+    document.getElementById('id_school_page_city').value = parseInt(document.getElementById('autocomplete_city').textContent);
+    document.getElementById('id_school_page_driverschoolunit').value = parseInt(document.getElementById('autocomplete_school').textContent);
+    document.getElementById('id_school_page_course').value = course_id;
 }
 
 showModalError()

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Area, City, Category, Courses, DriverSchool, DriverSchoolUnit, Partnership, DriverApplication, \
-    Alphabet
+    Alphabet, SchoolDriverApp
 from django import forms
 from import_export.admin import ImportExportModelAdmin
 
@@ -62,7 +62,6 @@ class DriverSchoolAdmin(admin.ModelAdmin):
 
 
 class DriverSchoolUnitAdminForm(forms.ModelForm):
-
     class Meta:
         model = DriverSchoolUnit
         fields = '__all__'
@@ -108,6 +107,22 @@ class DriverApplicationAdmin(admin.ModelAdmin):
     fields = ('firstLast_name', 'phone_number', 'email', 'city', 'driverschoolunit', 'course')
 
 
+
+class SchoolDriverAppAdminForm(forms.ModelForm):
+    class Meta:
+        model = SchoolDriverApp
+        fields = '__all__'
+
+
+class SchoolDriverAppAdmin(admin.ModelAdmin):
+    form = SchoolDriverAppAdminForm
+    list_display = ('firstLast_name',)
+    list_display_links = ('firstLast_name',)
+    search_fields = ('firstLast_name',)
+    list_filter = ('driverschoolunit',)
+    fields = ('firstLast_name', 'phone_number', 'email', 'city', 'driverschoolunit', 'course')
+
+
 @admin.register(Alphabet)
 class AlphabetAdmin(ImportExportModelAdmin):
     fields = ('letter', 'city_of_alphabet')
@@ -122,5 +137,6 @@ admin.site.register(DriverSchool, DriverSchoolAdmin)
 admin.site.register(DriverSchoolUnit, DriverSchoolUnitAdmin)
 admin.site.register(Partnership, PartnershipAdmin)
 admin.site.register(DriverApplication, DriverApplicationAdmin)
+admin.site.register(SchoolDriverApp, SchoolDriverAppAdmin)
 
 # Register your models here.
