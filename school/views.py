@@ -86,8 +86,15 @@ class Search(DataForHomeSearchFilterApp):
                                                                                    '') and area.name == ua_area_or_letter:
                     ua_city += city
                     break
-
-        return ua_area_or_letter, ua_city
+        if ua_area_or_letter != '' and ua_city != '':
+            return ua_area_or_letter, ua_city
+        for area in areas:
+            for city in area.cities.split('|'):
+                # print(f'{area.name} -- {ua_area_or_letter}')
+                # print(f'{city_latin} -- {slugify(unidecode(city))}')
+                if city_latin.replace('-', '') == slugify(unidecode(city)).replace('-', ''):
+                    ua_city += city
+                    return area_or_letter_latin, ua_city
 
     @classmethod
     def search_area_city(cls, request, area_or_letter_latin, city_latin):
