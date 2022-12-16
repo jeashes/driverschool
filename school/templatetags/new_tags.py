@@ -1,4 +1,6 @@
 from django import template
+from django.template.defaultfilters import slugify
+from unidecode import unidecode
 
 register = template.Library()
 
@@ -7,3 +9,7 @@ register = template.Library()
 def split(value, splitter):
     return value.split(splitter)
 
+
+@register.filter(name='slug')
+def slug(value):
+    return slugify(unidecode(value))
