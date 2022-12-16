@@ -1,5 +1,7 @@
 
+
 {% extends 'school/base.html' %}
+{% load i18n %}
 {% block content %}
 
     <link rel="stylesheet" href="../../static/school/styles/simple-adaptive-slider.css">
@@ -14,10 +16,9 @@
     <div class="content--wrapper">
         <div class="search__content">
 
-            <h1 class="search__headline">Заголовок H1</h1>
+            <h1 class="search__headline">Знайти автошколу</h1>
 
-            <p> It is a long-established fact that a reader will be distracted </p>
-            <p> by the readable content of a page when looking at its layout </p>
+            <p> Знайдіть найкращу автошколу та отримайте водійське посвідчення! </p>
 
             <form  class="search__form" action="{% url 'search' %}" method="get">
 
@@ -44,10 +45,10 @@
             {{ error }}
             {% endif %}
 
-            <div class="site-politic">
+            <!--<div class="site-politic">
                 <i class="fa-solid fa-check"></i>
                 <span>Користувацька угода</span>
-            </div>
+            </div>-->
 
             <div class="search__letters-block">
                 <div class="letters-block__content">
@@ -66,7 +67,8 @@
                         <a href="{% url 'view_school' info.id %}">
                             {{ info.name }}
                         </a>
-                        <a href="{% url 'search_authoschool' info.city_of_unit.name %}">
+                        {% load new_tags %}
+                        <a href="{% url 'search_area_city' info.area.name|slug info.city_of_unit.name|slug %}">
                             {{ info.city_of_unit.name }} - {{ info.city_of_unit.post_code }}
                         </a>
                     </div>
@@ -84,20 +86,19 @@
             <div class="card">
                 <h3> Стати водієм у два кліка </h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nunc id nisi id justo malesuada pellentesque.
+                    Знайдіть автошколи у вашому районі. Порівняйте автошколи за ціною та відгуками.
+                    Легко записуйтеся та починайте навчання.
                 </p>
                 <button class="button--submit button--modal" onclick="showModal(0)">
                     <span> Стати водієм </span>
                     <i class="fa-solid fa-angle-right"></i>
                 </button>
             </div>
-                
+
             <div class="card">
                 <h3> Стати партнером у два кліка </h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nunc id nisi id justo malesuada pellentesque.
+                    Додайте свою автошколу, вказавши контактні дані, розклад, ціни та отримуйте запити від кандидатів, які шукають автошколу у вашому регіоні.
                 </p>
                 <button class="button--submit button--modal" onclick="showModal(1)">
                     <span> Стати партнером </span>
@@ -120,10 +121,10 @@
     <div class="content--wrapper">
         <div class="find-content">
             <div class="find-filter">
-                <h3> Знайди своє місто</h3>
+                <h3>Знайди своє місто</h3>
                 <p>
-                    Щоб здійснити пошук свого міста ви можете
-                    скористуватися пошуком по областях або літерах
+                    Для пошуку автошколи у своєму місті
+                    скористайтеся пошуком по областях або літерах
                 </p>
 
                 <div class="title-wrapper">
@@ -172,7 +173,7 @@
                                             {% load new_tags %}
 
                                             {% for lcity in area.cities|split:'|'|slice:":22" %}
-                                                <a href="{% url 'search_authoschool' lcity  %}">
+                                                <a href="{% url 'search_area_city' area.name|slug lcity|slug %}" >
                                                     <li>{{ lcity }}</li>
                                                 </a>
                                             {% endfor %}
@@ -183,7 +184,7 @@
                                             <div class="city-result">
                                                 {% load new_tags %}
                                                 {% for lcity in area.cities|split:'|'|slice:"22:44" %}
-                                                    <a href="{% url 'search_authoschool' lcity  %}">
+                                                    <a href="{% url 'search_area_city' area.name|slug lcity|slug %}">
                                                         <li>{{ lcity }}</li>
                                                     </a>
                                                 {% endfor %}
@@ -195,7 +196,7 @@
                                                <div class="city-result">
                                                     {% load new_tags %}
                                                     {% for lcity in area.cities|split:'|'|slice:"44:66" %}
-                                                        <a href="{% url 'search_authoschool' lcity  %}">
+                                                        <a href="{% url 'search_area_city' area.name|slug lcity|slug %}">
                                                             <li>{{ lcity }}</li>
                                                         </a>
                                                     {% endfor %}
@@ -224,7 +225,7 @@
                                     {% load new_tags %}
 
                                     {% for acity in letter.city_of_alphabet|split:'|'|slice:":22" %}
-                                        <a href="{% url 'search_authoschool' acity  %}">
+                                        <a href="{% url 'search_area_city' letter.letter|slug acity|slug %}">
                                             <li>{{ acity }}</li>
                                         </a>
                                     {% endfor %}
@@ -235,7 +236,7 @@
                                     <div class="city-result">
                                         {% load new_tags %}
                                         {% for acity in letter.city_of_alphabet|split:'|'|slice:"22:44" %}
-                                            <a href="{% url 'search_authoschool' acity  %}">
+                                            <a href="{% url 'search_area_city' letter.letter|slug acity|slug  %}">
                                                 <li>{{ acity }}</li>
                                             </a>
                                         {% endfor %}
@@ -247,7 +248,7 @@
                                        <div class="city-result">
                                             {% load new_tags %}
                                             {% for acity in letter.city_of_alphabet|split:'|'|slice:"44:66" %}
-                                                <a href="{% url 'search_authoschool' acity  %}">
+                                                <a href="{% url 'search_area_city' letter.letter|slug acity|slug  %}">
                                                     <li>{{ acity }}</li>
                                                 </a>
                                             {% endfor %}
@@ -259,7 +260,7 @@
                                        <div class="city-result">
                                             {% load new_tags %}
                                             {% for acity in letter.city_of_alphabet|split:'|'|slice:"66:88" %}
-                                                <a href="{% url 'search_authoschool' acity  %}">
+                                                <a href="{% url 'search_area_city' letter.letter|slug acity|slug  %}">
                                                     <li>{{ acity }}</li>
                                                 </a>
                                             {% endfor %}
@@ -276,7 +277,7 @@
 <!--                        <div class="city-result">
                             {% load new_tags %}
                             {% for acity in letter.city_of_alphabet|split:'|' %}
-                                <a href="{% url 'search_authoschool' acity  %}">
+                                <a href="{% url 'search_area_city' letter acity  %}">
                                     <li>{{ acity }}</li>
                                 </a>
                             {% endfor %}
@@ -320,7 +321,7 @@
     <div class="content--wrapper">
         <div class="catalog__content">
 
-            <img class="catalog__photo catalog__photo--desktop"
+            <!--<img class="catalog__photo catalog__photo--desktop"
                  src="{% static 'school/catalog__photo-desktop.png' %}"
                  alt="Not found" width="620px" height="587px">
 
@@ -330,22 +331,50 @@
 
             <img class="catalog__photo catalog__photo--mobile"
                  src="{% static 'school/catalog__photo-mobile.png' %}"
-                 alt="Not found" width="228px" height="187px">
+                 alt="Not found" width="228px" height="187px">-->
 
             <div class="catalog__text">
 
                 <div class="text--mobile">
 
-                    <h2> Каталог автошкіл по Україні </h2>
+                    <h2> Знайдіть найкращу автошколу поблизу </h2>
 
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Sed ornare, libero at mattis gravida, lacus libero maximus sem,
-                        in fringilla sapien tortor non magna. Vestibulum porttitor
-                        lacinia augue id gravida. Quisque venenatis consequat dictum.
+                        Ми допомагємо знайти автошколу, що відповідає вашим вимогам.
+                        З toDrive.com.ua у вас є пошукова система, за допомогою якої ви можете легко знайти свою автошколу. 
+                        Вам потрібна автошкола з найнижчою ціною навчання або накращими відгуками? 
+                        Незалежно від того, які у вас вимоги, за допомогою нашої пошукової системи ви зможете знайти саме свою серед безлічі автошкіл.
                     </p>
+                    
+                    <h2> Онлайн запис в автошколу </h2>
 
-                    <span class="text--more">Більше...</span>
+                    <p>
+                         Ви можете залишити заявку на навчання через наш сервіс з автоматичним відправленням заявки на e-mail обраної автошколи та   
+                         отриманням підтвердження у максимально короткий термін.
+                    </p>                    
+                    
+                    <h2>Перегляньте відгуки учнів</h2>
+
+                    <p>
+                        До інформації, наданої автошколами, на toDrive.com.ua ви також знайдете оцінки та рекомендації опубліковані учнями автошкіл. 
+                        Тут ви знайдете багато корисної інформації про те, як в автошколі викладають теоретичний матеріал та навчають водінню на практиці. 
+                        Кожен учень навчається по-своєму. 
+                        Особливою популярністю користуються інструктори з водіння, які можуть адаптуватися до потреб кожного окремого учня. 
+                        Це також відображається в оцінках, коли говориться, що інструктор з водіння підтримав учня-водія порадами та діями.
+                        Крім того, студенти також повідомляють про свої враження від стану автомобілів та інщих технічних засобів на яких навчаються і те, наскільки
+                        сучасними є пропоновані транспортні засоби. 
+                        Ваша думка також важлива. Під час або після отримання водійських прав ви також можете порекомендувати свою автошколу. 
+                        Ваша думка також стане в нагоді наступним учням у процесі прийняття рішення та допоможе автошколі стати ще кращою.
+                    </p>                    
+
+
+                    <!--<h2>Читайте наші Wiki</h2>
+
+                    <p>
+                        У нашій Wiki ви знайдете багато цікавої інформації про категорії водійських прав, випробувальний термін, водіння в супроводі, правила та багато іншого. 
+                        Останні законодавчі зміни та технічні новинки регулярно публікуються в нашій Wiki.
+                    </p> -->   
+                    <!--<span class="text--more">Більше...</span>
 
                     <p>
                         Mauris quis nisl auctor, laoreet libero a, ultrices mi.
@@ -353,11 +382,11 @@
                         Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                         Phasellus tempus lacinia orci at ullamcorper. Donec non hendrerit quam.
                         Aenean suscipit condimentum arcu at condimentum.
-                    </p>
+                    </p>-->
 
                 </div>
 
-                <div class="text--desktop">
+                <!--<div class="text--desktop">
 
                     <h3>Заголовок H3</h3>
 
@@ -369,7 +398,7 @@
                         pulvinar ullamcorper quam.
                     </p>
 
-                </div>
+                </div>-->
 
             </div>
         </div>
@@ -380,17 +409,16 @@
     <div class="content--wrapper add-school-wrapper">
         <div class="add-school__content">
 
-            <h2 class="add-school__headline"> Додати автошколу </h2>
+            <h2 class="add-school__headline">Ми поруч для вас особисто!</h2>
 
             <p class="add-school__description">
-                Якщо бажаєте додати школу якої нема на нашому
-                сайті присилайте дані на нашу електронну пошту.
+                Чи бажаєте ви пряму особисту консультацію або у вас є якісь запитання на конкретні теми? Тоді пишіть нам на e-mail
             </p>
 
             <a href="mailto:google89@gmail.com">google89@gmail.com</a>
 
             <p class="add-school__description">
-                Ми обов'язково перевіримо їх та розмістимо в нашій базі.
+                Ми з нетерпінням чекаємо від вас питання та пропозиції!
             </p>
 
         </div>
