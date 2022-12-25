@@ -1,14 +1,25 @@
 from django.contrib import admin
-from .models import Area, City, Category, Courses, DriverSchool, DriverSchoolUnit, Partnership, DriverApplication, \
-    Alphabet, SchoolDriverApp
+from .models import Area, City, Category, Courses, DriverSchool, DriverSchoolUnit, Partnership, DriverApplication, Alphabet
 from django import forms
 from import_export.admin import ImportExportModelAdmin
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
-@admin.register(Area)
-class AreaAdmin(ImportExportModelAdmin):
-    fields = ('name', 'cities')
 
+class AreaAdminForm(forms.ModelForm):
+    class Meta:
+        model = Area
+        fields = '__all__'
+
+
+class AreaAdmin(admin.ModelAdmin):
+    form = AreaAdminForm
+    list_display = ('name', 'cities',)
+    prepopulated_fields = {'slug': ('name',)}
+    list_display_links = ('name', 'cities')
+    search_fields = ('name',)
+
+    
 
 class CityAdminForm(forms.ModelForm):
     class Meta:
@@ -19,6 +30,7 @@ class CityAdminForm(forms.ModelForm):
 class CityAdmin(admin.ModelAdmin):
     form = CityAdminForm
     list_display = ('name', 'post_code',)
+    prepopulated_fields = {'slug': ('name',)}
     list_display_links = ('name', 'post_code')
     search_fields = ('name',)
     list_filter = ('area',)
@@ -44,6 +56,7 @@ class CoursesAdmin(admin.ModelAdmin):
 
 
 class DriverSchoolAdminForm(forms.ModelForm):
+   
     class Meta:
         model = DriverSchool
         fields = '__all__'
@@ -62,6 +75,7 @@ class DriverSchoolAdmin(admin.ModelAdmin):
 
 
 class DriverSchoolUnitAdminForm(forms.ModelForm):
+
     class Meta:
         model = DriverSchoolUnit
         fields = '__all__'
@@ -73,8 +87,9 @@ class DriverSchoolUnitAdmin(admin.ModelAdmin):
     list_display_links = ('name', 'address')
     search_fields = ('name', 'address',)
     list_filter = ('city_of_unit',)
+    prepopulated_fields = {'slug': ('name',)}
     fields = (
-        'name', 'address', 'driverschool', 'url', 'category', 'cources', 'contact', 'area',
+        'name', 'slug', 'address', 'driverschool', 'url', 'category', 'cources', 'contact', 'area',
         'city_of_unit')
 
 
@@ -105,38 +120,32 @@ class DriverApplicationAdmin(admin.ModelAdmin):
     search_fields = ('firstLast_name',)
     list_filter = ('driverschoolunit',)
     fields = ('firstLast_name', 'phone_number', 'email', 'city', 'driverschoolunit', 'course')
-
-
-
-class SchoolDriverAppAdminForm(forms.ModelForm):
+    
+class AlphabetAdminForm(forms.ModelForm):
     class Meta:
-        model = SchoolDriverApp
+        model = Alphabet
         fields = '__all__'
 
 
-class SchoolDriverAppAdmin(admin.ModelAdmin):
-    form = SchoolDriverAppAdminForm
-    list_display = ('firstLast_name',)
-    list_display_links = ('firstLast_name',)
-    search_fields = ('firstLast_name',)
-    list_filter = ('driverschoolunit',)
-    fields = ('firstLast_name', 'phone_number', 'email', 'city', 'driverschoolunit', 'course')
-
-
-@admin.register(Alphabet)
-class AlphabetAdmin(ImportExportModelAdmin):
-    fields = ('letter', 'city_of_alphabet')
+class AlphabetAdmin(admin.ModelAdmin):
+    form = AlphabetAdminForm
+    list_display = ('letter', 'city_of_alphabet',)
+    prepopulated_fields = {'slug': ('letter',)}
+    list_display_links = ('letter', 'city_of_alphabet')
+    search_fields = ('letter',)    
+    
 
 
 admin.site.site_title = "Адміністрування"
 admin.site.site_header = "Адміністрування"
 
+admin.site.register(Area, AreaAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(Courses, CoursesAdmin)
 admin.site.register(DriverSchool, DriverSchoolAdmin)
 admin.site.register(DriverSchoolUnit, DriverSchoolUnitAdmin)
 admin.site.register(Partnership, PartnershipAdmin)
 admin.site.register(DriverApplication, DriverApplicationAdmin)
-admin.site.register(SchoolDriverApp, SchoolDriverAppAdmin)
+admin.site.register(Alphabet, AlphabetAdmin)
 
 # Register your models here.

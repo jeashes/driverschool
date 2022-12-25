@@ -1,15 +1,20 @@
 from django.db import models
 from django import core
+from django.urls import reverse
 from smart_selects.db_fields import ChainedManyToManyField, ChainedForeignKey
 
 
 class Area(models.Model):
     name = models.CharField(max_length=50, verbose_name='Назва області')
+    slug = models.SlugField(max_length=50, verbose_name='URL', unique=True)    
     cities = models.CharField(max_length=1000, verbose_name='Міста області', blank=True)
     objects = models.Manager()
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('area', kwargs={"slug": self.slug})  
 
     class Meta:
         verbose_name = 'Область'
@@ -19,6 +24,7 @@ class Area(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=50, verbose_name='Назва міста')
+    slug = models.SlugField(max_length=50, verbose_name='URL', unique=True)
     post_code = models.CharField(max_length=16, verbose_name='Поштовий індекс')
     area = models.ForeignKey(Area, on_delete=models.CASCADE, verbose_name='Область')
     url = models.URLField(max_length=400, blank=True, verbose_name='Геопозиція міста')
@@ -26,6 +32,9 @@ class City(models.Model):
 
     def __str__(self):
         return self.name
+        
+    def get_absolute_url(self):
+        return reverse('city', kwargs={"slug": self.slug})                
 
     class Meta:
         verbose_name = 'Місто'
@@ -69,8 +78,7 @@ class DriverSchool(models.Model):
     contact = models.CharField(max_length=28, verbose_name='Контактний номер тел.')
     email = models.CharField(max_length=30, verbose_name='Контактний email', blank=True)
     area = models.ForeignKey(Area, on_delete=models.CASCADE, blank=True, verbose_name='Область')
-    city = ChainedForeignKey(City, chained_field='area', chained_model_field='area', on_delete=models.CASCADE,
-                             verbose_name='Місто')
+    city = ChainedForeignKey(City, chained_field='area', chained_model_field='area', on_delete=models.CASCADE, verbose_name='Місто')
     description = models.TextField(blank=True, verbose_name='Опис')
     image1 = models.ImageField(upload_to='school/images/', default='school/images/test-image.jpg',
                                verbose_name='Фото головне')
@@ -101,6 +109,9 @@ class DriverSchool(models.Model):
 class DriverSchoolUnit(models.Model):
     name = models.CharField(max_length=46, verbose_name='Назва філії')
     address = models.CharField(max_length=60, verbose_name='Адреса автошколи')
+    slug = models.SlugField(max_length=50, verbose_name='URL', unique=True)
+
+
     driverschool = models.ForeignKey(DriverSchool, on_delete=models.CASCADE, verbose_name='Головний офіс')
     url = models.URLField(max_length=1500, blank=True, verbose_name='Геопозиція автошколи')
     category = models.ManyToManyField(Category, verbose_name='Категорії', blank=True)
@@ -108,8 +119,7 @@ class DriverSchoolUnit(models.Model):
                                      verbose_name='Курси', blank='True')
     contact = models.CharField(max_length=28, verbose_name='Контактний номер тел.')
     area = models.ForeignKey(Area, on_delete=models.CASCADE, blank=True, verbose_name='Область')
-    city_of_unit = ChainedForeignKey(City, chained_field='area', chained_model_field='area', on_delete=models.CASCADE,
-                                     verbose_name='Місто')
+    city_of_unit = ChainedForeignKey(City, chained_field='area', chained_model_field='area', on_delete=models.CASCADE, verbose_name='Місто')
     objects = models.Manager()
 
     def __str__(self):
@@ -153,40 +163,22 @@ class DriverApplication(models.Model):
         return self.firstLast_name
 
     class Meta:
-        verbose_name = 'Головна Заявка'
-        verbose_name_plural = 'Головна Заявки'
-        ordering = ['firstLast_name']
-
-
-class SchoolDriverApp(models.Model):
-    city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Місто')
-    driverschoolunit = models.ForeignKey(DriverSchoolUnit,
-                                         on_delete=models.CASCADE, verbose_name='Філія автошколи')
-    firstLast_name = models.CharField(max_length=50, verbose_name='ПІБ')
-    phone_number = models.CharField(max_length=20, verbose_name='Контактний номер тел.')
-    email = models.CharField(max_length=100, verbose_name='Контактний email')
-    status = models.IntegerField(default=0, verbose_name='Статус')
-    course = models.ForeignKey(Courses,
-                               on_delete=models.CASCADE, verbose_name='Курс')
-    objects = models.Manager()
-
-    def __str__(self):
-        return self.firstLast_name
-
-    class Meta:
-        managed = False
-        verbose_name = 'Автошкола Заявка'
-        verbose_name_plural = 'Автошкола Заявки'
+        verbose_name = 'Заявка'
+        verbose_name_plural = 'Заявки'
         ordering = ['firstLast_name']
 
 
 class Alphabet(models.Model):
     letter = models.CharField(max_length=3, verbose_name='Літера')
+    slug = models.SlugField(max_length=50, verbose_name='URL', unique=True)  
     city_of_alphabet = models.CharField(max_length=1000, verbose_name='Міста за буквою')
     objects = models.Manager()
 
     def __str__(self):
         return self.letter
+        
+    def get_absolute_url(self):
+        return reverse('area', kwargs={"slug": self.slug})          
 
     class Meta:
         verbose_name = 'Алфавіт-Місто'
