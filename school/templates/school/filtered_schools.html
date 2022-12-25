@@ -50,7 +50,8 @@
             <div class="filter-result-wrapper">
 
                 <div class="filters">
-                    <form id="category" action="{% url 'filtered' searched %}" method="get">
+                                    {% load new_tags %}
+                    <form id="category" action="{% url 'filtered' searched|slug %}" method="get">
 
                         <div class="category-wrapper">
 
