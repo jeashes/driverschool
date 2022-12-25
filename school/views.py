@@ -95,7 +95,6 @@ class Search(DataForHomeSearchFilterApp):
 
     @classmethod
     def search_area_city(cls, request, area_or_letter_latin, city_latin):
-        # area_or_letter, city = cls.latin_to_ua(area_or_letter_latin, city_latin)
         schools_area = [DriverSchoolUnit.objects.filter(city_of_unit__slug__contains=city_latin),
                         DriverSchoolUnit.objects.filter(area__slug__contains=area_or_letter_latin)][
             len(area_or_letter_latin) > 1]
@@ -108,8 +107,9 @@ class Search(DataForHomeSearchFilterApp):
             return render(request, 'school/search_schools.html',
                           cls.django_dict_search(info=searched_city, searched=searched_city[0].city_of_unit.name,
                                                  cities_of_unit=cities_of_unit))
+
         return render(request, 'school/search_schools.html',
-                      cls.django_dict_search(info=searched_city, searched=searched_city[0].city_of_unit.name,
+                      cls.django_dict_search(info=searched_city, searched=city_latin,
                                              error='Not found, please input another word'))
 
     @classmethod
