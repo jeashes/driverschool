@@ -2,9 +2,6 @@ from typing import Any, Dict
 from slugify import slugify
 from django.shortcuts import render, get_object_or_404, redirect
 from unidecode import unidecode
-import cyrtranslit
-import translitua
-
 from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, Partnership
 from .forms import CreateApplicationForm, PartnershipForm
 from dataclasses import dataclass, field
@@ -69,47 +66,50 @@ class Search(DataForHomeSearchFilterApp):
                 'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
                 'len_apps_partnership': len(Partnership.objects.all()), 'error': error}
 
-    @classmethod
-    def latin_to_ua(cls, area_or_letter_latin, city_latin):
-        ua_city, ua_area_or_letter, areas = '', '', Area.objects.all()
-
-        for area in areas:
-            if area_or_letter_latin.replace('-', '') == slugify(unidecode(area.name)).replace('-', ''):
-                ua_area_or_letter += area.name
-                break
-
-        for area in areas:
-            for city in area.cities.split('|'):
-                # print(f'{area.name} -- {ua_area_or_letter}')
-                # print(f'{city_latin} -- {slugify(unidecode(city))}')
-                if city_latin.replace('-', '') == slugify(unidecode(city)).replace('-',
-                                                                                   '') and area.name == ua_area_or_letter:
-                    ua_city += city
-                    break
-        if ua_area_or_letter != '' and ua_city != '':
-            return ua_area_or_letter, ua_city
-        for area in areas:
-            for city in area.cities.split('|'):
-                # print(f'{area.name} -- {ua_area_or_letter}')
-                # print(f'{city_latin} -- {slugify(unidecode(city))}')
-                if city_latin.replace('-', '') == slugify(unidecode(city)).replace('-', ''):
-                    ua_city += city
-                    return area_or_letter_latin, ua_city
+    # @classmethod
+    # def latin_to_ua(cls, area_or_letter_latin, city_latin):
+    #     ua_city, ua_area_or_letter, areas = '', '', Area.objects.all()
+    #
+    #     for area in areas:
+    #         if area_or_letter_latin.replace('-', '') == slugify(unidecode(area.name)).replace('-', ''):
+    #             ua_area_or_letter += area.name
+    #             break
+    #
+    #     for area in areas:
+    #         for city in area.cities.split('|'):
+    #             # print(f'{area.name} -- {ua_area_or_letter}')
+    #             # print(f'{city_latin} -- {slugify(unidecode(city))}')
+    #             if city_latin.replace('-', '') == slugify(unidecode(city)).replace('-',
+    #                                                                                '') and area.name == ua_area_or_letter:
+    #                 ua_city += city
+    #                 break
+    #     if ua_area_or_letter != '' and ua_city != '':
+    #         return ua_area_or_letter, ua_city
+    #     for area in areas:
+    #         for city in area.cities.split('|'):
+    #             # print(f'{area.name} -- {ua_area_or_letter}')
+    #             # print(f'{city_latin} -- {slugify(unidecode(city))}')
+    #             if city_latin.replace('-', '') == slugify(unidecode(city)).replace('-', ''):
+    #                 ua_city += city
+    #                 return area_or_letter_latin, ua_city
 
     @classmethod
     def search_area_city(cls, request, area_or_letter_latin, city_latin):
-        area_or_letter, city = cls.latin_to_ua(area_or_letter_latin, city_latin)
-        schools_area = [DriverSchoolUnit.objects.filter(city_of_unit__name__contains=city),
-                        DriverSchoolUnit.objects.filter(area__name__contains=area_or_letter)][len(area_or_letter) > 1]
+        # area_or_letter, city = cls.latin_to_ua(area_or_letter_latin, city_latin)
+        schools_area = [DriverSchoolUnit.objects.filter(city_of_unit__slug__contains=city_latin),
+                        DriverSchoolUnit.objects.filter(area__slug__contains=area_or_letter_latin)][
+            len(area_or_letter_latin) > 1]
 
-        searched_city = schools_area.filter(city_of_unit__name__contains=city)
+        searched_city = schools_area.filter(city_of_unit__slug__contains=city_latin)
 
         if searched_city:
             cities_of_unit = [_.city_of_unit.name for _ in searched_city]
+
             return render(request, 'school/search_schools.html',
-                          cls.django_dict_search(info=searched_city, searched=city, cities_of_unit=cities_of_unit))
+                          cls.django_dict_search(info=searched_city, searched=searched_city[0].city_of_unit.name,
+                                                 cities_of_unit=cities_of_unit))
         return render(request, 'school/search_schools.html',
-                      cls.django_dict_search(info=searched_city, searched=city,
+                      cls.django_dict_search(info=searched_city, searched=searched_city[0].city_of_unit.name,
                                              error='Not found, please input another word'))
 
     @classmethod
@@ -236,7 +236,7 @@ class Filter(DataForHomeSearchFilterApp):
             case 'price-up-low':
 
                 ordered_schools = filter_item.filter(cources__category__name__contains=category).order_by(
-                    '-' + cls.filter_value_in_key[filters]).distinct(cls.filter_value_in_key[filters])
+                    '-' + cls.filter_value_in_key[filters]).distinct()
                 if ordered_schools:
                     cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
 
@@ -263,7 +263,7 @@ class Filter(DataForHomeSearchFilterApp):
             case _:
 
                 ordered_schools = filter_item.filter(cources__category__name__contains=category).order_by(
-                    cls.filter_value_in_key[filters]).distinct(cls.filter_value_in_key[filters])
+                    cls.filter_value_in_key[filters]).distinct()
 
                 if ordered_schools:
                     cities_of_unit = [_.city_of_unit.name for _ in ordered_schools]
