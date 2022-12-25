@@ -66,33 +66,7 @@ class Search(DataForHomeSearchFilterApp):
                 'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
                 'len_apps_partnership': len(Partnership.objects.all()), 'error': error}
 
-    # @classmethod
-    # def latin_to_ua(cls, area_or_letter_latin, city_latin):
-    #     ua_city, ua_area_or_letter, areas = '', '', Area.objects.all()
-    #
-    #     for area in areas:
-    #         if area_or_letter_latin.replace('-', '') == slugify(unidecode(area.name)).replace('-', ''):
-    #             ua_area_or_letter += area.name
-    #             break
-    #
-    #     for area in areas:
-    #         for city in area.cities.split('|'):
-    #             # print(f'{area.name} -- {ua_area_or_letter}')
-    #             # print(f'{city_latin} -- {slugify(unidecode(city))}')
-    #             if city_latin.replace('-', '') == slugify(unidecode(city)).replace('-',
-    #                                                                                '') and area.name == ua_area_or_letter:
-    #                 ua_city += city
-    #                 break
-    #     if ua_area_or_letter != '' and ua_city != '':
-    #         return ua_area_or_letter, ua_city
-    #     for area in areas:
-    #         for city in area.cities.split('|'):
-    #             # print(f'{area.name} -- {ua_area_or_letter}')
-    #             # print(f'{city_latin} -- {slugify(unidecode(city))}')
-    #             if city_latin.replace('-', '') == slugify(unidecode(city)).replace('-', ''):
-    #                 ua_city += city
-    #                 return area_or_letter_latin, ua_city
-
+  
     @classmethod
     def search_area_city(cls, request, area_or_letter_latin, city_latin):
         # area_or_letter, city = cls.latin_to_ua(area_or_letter_latin, city_latin)
