@@ -2,16 +2,16 @@ from typing import Any, Dict
 from slugify import slugify
 from django.shortcuts import render, get_object_or_404, redirect
 from unidecode import unidecode
-from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, Partnership
-from .forms import CreateApplicationForm, PartnershipForm
+from .models import DriverSchoolUnit, Alphabet, Area, DriverApplication, City, Partnership, SchoolDriverApp
+from .forms import CreateApplicationForm, PartnershipForm, CreateAppFormSchool
 from dataclasses import dataclass, field
 
 
 def home(request):
     data_home = DataForHomeSearchFilterApp
     dict_home = {'areas': data_home.areas, 'schools': DriverSchoolUnit.objects.all(), 'letters': data_home.letters,
-                 'create_application_form': CreateApplicationForm(),
-                 'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
+                 'create_application_form': CreateApplicationForm(),'create_app_form_school': CreateAppFormSchool(),
+                 'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()) + len(SchoolDriverApp.objects.all()),
                  'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
                  'len_apps_partnership': len(Partnership.objects.all())}
     return render(request, 'school/home.html', dict_home)
@@ -47,12 +47,14 @@ class Search(DataForHomeSearchFilterApp):
             case 'Not found, please input another word':
                 return {'areas': cls.areas, 'info': info, 'count': len(info),
                         'create_application_form': CreateApplicationForm(),
+                        'create_app_form_school': CreateAppFormSchool(),
                         'partnership_form': PartnershipForm(), 'searched': searched,
                         'error': 'Нічого не знайдено, будь ласка введіть інший запит'}
 
             case _:
                 return {'areas': cls.areas, 'info': info, 'count': len(info),
                         'create_application_form': CreateApplicationForm(),
+                        'create_app_form_school': CreateAppFormSchool(),
                         'partnership_form': PartnershipForm(), 'searched': searched,
                         'url_city': ''.join([cls.ukraine_map, info[0].city_of_unit.url][searched in cities_of_unit]),
                         'error': error}
@@ -62,7 +64,7 @@ class Search(DataForHomeSearchFilterApp):
 
         return {'areas': cls.areas, 'schools': DriverSchoolUnit.objects.all(), 'letters': cls.letters,
                 'create_application_form': CreateApplicationForm(),
-                'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()),
+                'partnership_form': PartnershipForm(), 'len_apps': len(DriverApplication.objects.all()) + len(SchoolDriverApp.objects.all()),
                 'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
                 'len_apps_partnership': len(Partnership.objects.all()), 'error': error}
 
@@ -182,6 +184,7 @@ class Filter(DataForHomeSearchFilterApp):
                         'count': len(info),
                         'url_city': cls.ukraine_map,
                         'create_application_form': CreateApplicationForm(),
+                        'create_app_form_school': CreateAppFormSchool(),
                         'partnership_form': PartnershipForm(), 'searched': city,
                         'error': 'Нічого не знайдено'}
 
@@ -191,6 +194,7 @@ class Filter(DataForHomeSearchFilterApp):
                         'url_city': ''.join([cls.ukraine_map, info[0].city_of_unit.url][
                                                 city in cities_of_unit]),
                         'create_application_form': CreateApplicationForm(),
+                        'create_app_form_school': CreateAppFormSchool(),
                         'partnership_form': PartnershipForm(), 'searched': city, 'error': error}
 
     @classmethod
@@ -294,7 +298,7 @@ def info_about_authoschool(request, school_pk):
     other_school = list(filter(lambda x: x.address != school_unit.address, other_school))
     return render(request, 'school/school_info.html',
                   {'areas': areas, 'school_unit': school_unit, 'url_address': school_unit.url,
-                   'create_application_form': app_form,
+                   'create_application_form': app_form,'create_app_form_school': CreateAppFormSchool(),
                    'partnership_form': partnership_form, 'other_school': other_school[:4]})
 
 
@@ -309,7 +313,7 @@ def footer(request):
     data_footer = DataForHomeSearchFilterApp
     create_application_form, partnership_form = CreateApplicationForm(), PartnershipForm()
     return render(request, 'school/footer.html',
-                  {'areas': data_footer.areas, 'create_application_form': CreateApplicationForm(),
+                  {'areas': data_footer.areas, 'create_application_form': CreateApplicationForm(),'create_app_form_school': CreateAppFormSchool(),
                    'partnership_form': partnership_form})
 
 
@@ -321,11 +325,13 @@ def error404(request):
 class Application(DataForHomeSearchFilterApp):
 
     @classmethod
-    def application(cls, driver_app=None, partnership=None):
+    def application(cls, driver_app=None, driver_app_school=None, partnership=None, driver_app_school_on_home_page=None):
         dict_app_hone = {'areas': cls.areas, 'schools': DriverSchoolUnit.objects.all(),
                          'letters': cls.letters,
-                         'create_application_form': driver_app,
-                         'partnership_form': partnership, 'len_apps': len(DriverApplication.objects.all()),
+                         'create_application_form': driver_app, 'create_app_form_school': driver_app_school,
+                         'partnership_form': partnership,
+                         'driver_app_school_on_home_page': driver_app_school_on_home_page,
+                         'len_apps': len(DriverApplication.objects.all()) + len(SchoolDriverApp.objects.all()),
                          'len_schools': len(DriverSchoolUnit.objects.all()), 'len_cities': len(City.objects.all()),
                          'len_apps_partnership': len(Partnership.objects.all())}
 
@@ -341,9 +347,24 @@ class Application(DataForHomeSearchFilterApp):
                 new_app.save()
                 return redirect('home')
 
-            return render(request, 'school/home.html', cls.application(form, PartnershipForm()))
+            return render(request, 'school/home.html', cls.application(form, CreateAppFormSchool(), PartnershipForm()))
 
-        return render(request, 'school/home.html', cls.application(CreateApplicationForm(), PartnershipForm()))
+        return render(request, 'school/home.html',
+                      cls.application(CreateApplicationForm(), CreateAppFormSchool(), PartnershipForm()))
+
+    @classmethod
+    def create_school_app(cls, request):
+        if request.method == 'POST':
+            form = CreateAppFormSchool(request.POST)
+            if form.is_valid():
+                new_school_app = form.save(commit=False)
+                new_school_app.user = request.user
+                new_school_app.save()
+                return redirect('home')
+            return render(request, 'school/home.html',
+                          cls.application(CreateApplicationForm(), form, PartnershipForm(), True))
+        return render(request, 'school/home.html',
+                      cls.application(CreateApplicationForm(), CreateAppFormSchool(), PartnershipForm(), True))
 
     @classmethod
     def create_partnership_app(cls, request):
@@ -355,6 +376,9 @@ class Application(DataForHomeSearchFilterApp):
                 new_app.save()
                 return redirect('home')
 
-            return render(request, 'school/home.html', cls.application(CreateApplicationForm(), form))
+            return render(request, 'school/home.html',
+                          cls.application(CreateApplicationForm(), CreateAppFormSchool(), form))
 
-        return render(request, 'school/home.html', cls.application(CreateApplicationForm(), PartnershipForm()))
+        return render(request, 'school/home.html',
+                      cls.application(CreateApplicationForm(), CreateAppFormSchool(), PartnershipForm()))
+

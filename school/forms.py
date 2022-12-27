@@ -1,12 +1,19 @@
-import re
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 
-from django.core.exceptions import ValidationError
 from django.forms import ModelForm, TextInput, Select
-
 from .models import DriverApplication, Partnership, SchoolDriverApp
+import re
+from django.core.exceptions import ValidationError
 
 
 class CreateApplicationForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['city'].empty_label = 'Оберіть місто'
+        self.fields['driverschoolunit'].empty_label = 'Drive school not chosen'
+        self.fields['course'].empty_label = 'Course not chosen'
+
     class Meta:
         model = DriverApplication
         fields = ['firstLast_name', 'phone_number', 'email', 'city', 'driverschoolunit', 'course']
