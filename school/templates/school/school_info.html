@@ -14,6 +14,7 @@
 <section class="headline">
     <h1>{{ school_unit.name }}</h1>
     <span>Автошколи міста {{ school_unit.city_of_unit.name }}</span>
+    <span id="autocomplete_city" style="display: none;">{{ school_unit.city_of_unit.id }}</span>
                             {% load new_tags %}
     <a class="button--back-home" href="{% url 'search_area_city' school_unit.area.name|slug school_unit.city_of_unit.name|slug %}">
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
@@ -127,7 +128,7 @@
                 <h3 class="school-name">
                     {{ school_unit.name }}
                 </h3>
-
+                <span id="autocomplete_school" style="display: none;">{{ school_unit.id }}</span>
                 <p class="school-description">
                     {{ school_unit.driverschool.description }}
                 </p>
@@ -161,13 +162,13 @@
             <div class="course-wrapper">
 
                 <div class="course-info">
-
+                    <span class="autocomplete_course" style="display: none;">{{ course.id }}</span>
                     <b class="course-name"> {{ course.category.name }}</b>
                     <p class="course-description">{{ course.category.description }} </p>
 
                 </div>
 
-                <button class="button--submit button--price" onclick="showModal(0)">
+                <button class="button--submit button--price" onclick="showModal(0); Autocomplete({{ course.id }})">
                     <span>
                         <b> {{ course.price }} </b>
                         UAH

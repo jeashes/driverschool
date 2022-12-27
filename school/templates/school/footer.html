@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 {% load bootstrap3 %}
 {% bootstrap_messages %}
@@ -54,7 +55,7 @@
                         <a href="mailto:google89@gmail.com">google89@gmail.com</a>
                 </div>
 
-                <div class="footer__areas-wrapper">Чернівецька
+                <div class="footer__areas-wrapper">
                     <h6> Області </h6>
                     <div class="footer__areas">
                         {% for area in areas|slice:":24" %}

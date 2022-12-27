@@ -171,32 +171,33 @@
                                     <div class="slide">
                                         <div class="city-result">
                                             {% load new_tags %}
+											
 
-                                            {% for lcity in area.cities|split:'|'|slice:":22" %}
-                                                <a href="{% url 'search_area_city' area.name|slug lcity|slug %}" >
+                                            {% for lcity in area.name|get_cities_for_area|slice:":22" %}
+                                                <a href="{% url 'search_area_city' area.slug lcity.slug %}" >
                                                     <li>{{ lcity }}</li>
                                                 </a>
                                             {% endfor %}
                                         </div>
                                     </div>
-                                {% if area.cities|split:'|'|length > 22 %}
+                                {% if area.name|get_cities_for_area|length > 22 %}
                                     <div class="slide">
                                             <div class="city-result">
                                                 {% load new_tags %}
-                                                {% for lcity in area.cities|split:'|'|slice:"22:44" %}
-                                                    <a href="{% url 'search_area_city' area.name|slug lcity|slug %}">
+                                                {% for lcity in area.name|get_cities_for_area|slice:"22:44" %}
+                                                    <a href="{% url 'search_area_city' area.slug lcity.slug %}">
                                                         <li>{{ lcity }}</li>
                                                     </a>
                                                 {% endfor %}
                                             </div>
                                     </div>
                                 {% endif %}
-                                 {% if area.cities|split:'|'|length > 44 %}
+                                 {% if area.name|get_cities_for_area|length > 44 %}
                                         <div class="slide">
                                                <div class="city-result">
                                                     {% load new_tags %}
-                                                    {% for lcity in area.cities|split:'|'|slice:"44:66" %}
-                                                        <a href="{% url 'search_area_city' area.name|slug lcity|slug %}">
+                                                    {% for lcity in area.name|get_cities_for_area|slice:"44:66" %}
+                                                        <a href="{% url 'search_area_city' area.slug lcity.slug %}">
                                                             <li>{{ lcity }}</li>
                                                         </a>
                                                     {% endfor %}
@@ -224,43 +225,43 @@
                                 <div class="city-result">
                                     {% load new_tags %}
 
-                                    {% for acity in letter.city_of_alphabet|split:'|'|slice:":22" %}
-                                        <a href="{% url 'search_area_city' letter.letter|slug acity|slug %}">
+                                    {% for acity in letter.letter|get_cities_for_letter|slice:":22" %}
+                                        <a href="{% url 'search_area_city' letter.slug acity.slug %}">
                                             <li>{{ acity }}</li>
                                         </a>
                                     {% endfor %}
                                 </div>
                             </div>
-                        {% if letter.city_of_alphabet|split:'|'|length > 22 %}
+                        {% if letter.letter|get_cities_for_letter|length > 22 %}
                             <div class="slide">
                                     <div class="city-result">
                                         {% load new_tags %}
-                                        {% for acity in letter.city_of_alphabet|split:'|'|slice:"22:44" %}
-                                            <a href="{% url 'search_area_city' letter.letter|slug acity|slug  %}">
+                                        {% for acity in letter.letter|get_cities_for_letter|slice:"22:44" %}
+                                            <a href="{% url 'search_area_city' letter.slug acity.slug  %}">
                                                 <li>{{ acity }}</li>
                                             </a>
                                         {% endfor %}
                                     </div>
                             </div>
                         {% endif %}
-                         {% if letter.city_of_alphabet|split:'|'|length > 44 %}
+                         {% if letter.letter|get_cities_for_letter|length > 44 %}
                             <div class="slide">
                                        <div class="city-result">
                                             {% load new_tags %}
-                                            {% for acity in letter.city_of_alphabet|split:'|'|slice:"44:66" %}
-                                                <a href="{% url 'search_area_city' letter.letter|slug acity|slug  %}">
+                                            {% for acity in letter.letter|get_cities_for_letter|slice:"44:66" %}
+                                                <a href="{% url 'search_area_city' letter.slug acity.slug  %}">
                                                     <li>{{ acity }}</li>
                                                 </a>
                                             {% endfor %}
                                         </div>
                                 </div>
                         {% endif %}
-                         {% if letter.city_of_alphabet|split:'|'|length > 66 %}
+                         {% if letter.letter|get_cities_for_letter|length > 66 %}
                             <div class="slide">
                                        <div class="city-result">
                                             {% load new_tags %}
-                                            {% for acity in letter.city_of_alphabet|split:'|'|slice:"66:88" %}
-                                                <a href="{% url 'search_area_city' letter.letter|slug acity|slug  %}">
+                                            {% for acity in letter.letter|get_cities_for_letter|slice:"66:88" %}
+                                                <a href="{% url 'search_area_city' letter.slug acity.slug  %}">
                                                     <li>{{ acity }}</li>
                                                 </a>
                                             {% endfor %}
